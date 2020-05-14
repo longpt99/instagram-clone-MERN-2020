@@ -1,0 +1,133 @@
+.auth {
+  margin-top: 60px;
+}
+
+.auth .form-login {
+  margin-top: 15px;
+  padding: 20px 40px;
+  border: thin solid #ddd;
+  width: 350px;
+  max-width: 350px;
+}
+
+.auth .form-login h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.auth .form-login .form-group label {
+  font-size: 12px;
+  width: 100%;
+  position: relative;
+}
+
+.auth .form-login .form-group label span {
+  position: absolute;
+  top: 50%;
+  transform: translate(15px, -50%);
+  color: #888;
+}
+
+.auth .form-login .form-group label input:invalid + span {
+  font-size: 10px;
+  margin-bottom: 5px;
+  top: 8px;
+}
+
+.auth .form-login .form-group:valid + .btn {
+  display: none;
+}
+
+.auth .form-login .btn {
+  display: block;
+  width: 100%;
+  padding: 2px;
+}
+
+.auth .form-login .form-group label input:invalid {
+  padding-top: 15px;
+}
+
+.auth .form-login .form-text {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #9c9a9a;
+  margin: 10px 0;
+}
+
+.auth .form-login .form-text::before,
+.auth .form-login .form-text::after {
+  content: "";
+  width: 100px;
+  border-top: thin solid;
+}
+
+.auth .form-login .my-facebook-button-class {
+  display: block;
+  margin: auto;
+  border: none;
+  background: none;
+  outline: none;
+  color: #385185;
+}
+
+.auth .form-login .my-facebook-button-class i {
+  margin-right: 10px;
+}
+
+.auth .form-login .btn-reset-pw {
+  display: block;
+  text-align: center;
+  font-size: 0.8rem;
+  margin-top: 10px;
+  color: #385185;
+}
+
+/* IMG */
+.img-login {
+  position: relative;
+  text-align: end;
+}
+
+.img-login img:nth-of-type(2) {
+  position: absolute;
+  right: 63px;
+  top: 100px;
+}
+
+/* REGISTER COMPONENT */
+.auth .register {
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.auth .register a {
+  margin-left: 5px;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+/* DOWNLOAD APP */
+.auth .download-app {
+  text-align: center;
+  width: 350px;
+}
+.auth .download-app span {
+  margin: 20px 0;
+  display: block;
+}
+
+.auth .download-app div {
+  display: flex;
+  justify-content: center;
+}
+
+.auth .download-app .download-link:nth-of-type(1) {
+  margin-right: 10px;
+}
+
+.auth .download-app .download-link img {
+  display: block;
+  width: 140px;
+}
