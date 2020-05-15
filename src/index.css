@@ -11,3 +11,17 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+a {
+  color: black !important;
+  text-decoration: none !important;
+}
+
+a:hover {
+  color: black !important;
+  text-decoration: none !important;
+}
+
+.body--modal-open {
+  overflow: hidden !important;
+}

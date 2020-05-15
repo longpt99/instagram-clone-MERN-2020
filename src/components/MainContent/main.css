@@ -1,0 +1,111 @@
+.btn-config {
+  display: inline-flex;
+  align-items: center;
+  outline: none !important;
+  border: none;
+  background: none;
+}
+
+.main-content {
+  margin-top: 50px;
+}
+
+/* POST CONTENT */
+
+.main-content .post-content {
+  margin-left: 5rem;
+  border: thin solid #ddd;
+  border-radius: 3px;
+  font-size: 0.8rem;
+  margin-bottom: 50px;
+}
+
+.post-content .post-header {
+  display: flex;
+  padding: 0.6rem 1rem;
+  align-items: center;
+}
+
+.post-content .post-header > a img {
+  display: block;
+  border-radius: 999px;
+}
+
+.post-content .post-header .post-option {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.post-content .post-header .post-option a {
+  margin-left: 1rem;
+  font-weight: 600;
+}
+
+/* -------------------------------------------------- */
+
+.post-content .post-main {
+  padding: 0 16px;
+}
+
+.post-main .post-reaction {
+  margin: 10px 0;
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.5rem;
+}
+
+.post-main .post-reaction .post-reaction--left {
+  display: flex;
+}
+
+.post-main .post-reaction .post-reaction--left button:nth-of-type(2) {
+  transform: rotate(270deg);
+}
+
+.post-main .post-count-like {
+  margin-left: 6px;
+}
+
+.post-main .post-count-like a img {
+  border-radius: 999px;
+}
+
+.post-main .post-count-like a span {
+  margin: 0 5px;
+  font-weight: 600;
+}
+
+.post-main .post-count-like button, .post-main .post-status > a {
+  font-weight: 600;
+}
+
+.post-main .post-status {
+  margin: 10px 6px;
+}
+
+.post-main .post-status > span {
+  margin-left: 5px;
+}
+/* ---------------------------------------------- */
+.post-content .post-comment {
+  position: relative;
+}
+
+.post-content .post-comment input {
+  width: 100%;
+  padding: 20px 22px;
+  border: none;
+  border-top: solid thin #ddd;
+  outline: none;
+}
+
+.post-content .post-comment button{
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #0095f6;
+  font-weight: 600;
+}
