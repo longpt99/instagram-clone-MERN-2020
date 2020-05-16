@@ -60,6 +60,10 @@
   display: flex;
 }
 
+.post-main .post-reaction .post-reaction--left .fillColorBtn {
+  color: red;
+}
+
 .post-main .post-reaction .post-reaction--left button:nth-of-type(2) {
   transform: rotate(270deg);
 }

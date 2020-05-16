@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 PostContent.propTypes = {
@@ -10,11 +10,17 @@ PostContent.defaultProps = {
 }
 
 function PostContent(props) {
+  const [likeImg, setLikeImg] = useState(false)
   const {modal} = props;
   
   function handleModal(value) {
     props.handleModal(value);
   }
+
+  function handleLikeButton(value){
+    setLikeImg(value);
+  }
+
   return (
     <div className='post-content'>
       <div className='post-header'>
@@ -37,8 +43,15 @@ function PostContent(props) {
       <div className='post-main'>
         <div className='post-reaction'>
           <div className='post-reaction--left'>
-            <button className='btn-config'>
-              <ion-icon name="heart-outline"></ion-icon>
+            <button 
+              className='btn-config'
+              onClick={()=>handleLikeButton(!likeImg)}
+              >
+              <ion-icon 
+                name={likeImg ? "heart-sharp" : "heart-outline"}
+                style={likeImg ? {color: "rgb(237, 73, 86)"} : null}
+                >
+                </ion-icon>
             </button>
             <button className='btn-config'>
               <ion-icon name="chatbubble-outline"></ion-icon>

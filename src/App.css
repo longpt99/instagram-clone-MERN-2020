@@ -56,7 +56,7 @@ body {
 }
 
 .modal-container .modal-content {
-  position: absolute;
+  position: fixed;
   display: flex;
   flex-direction: column;
   pointer-events: auto;
