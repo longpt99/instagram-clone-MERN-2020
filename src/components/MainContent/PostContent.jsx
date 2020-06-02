@@ -10,8 +10,9 @@ PostContent.defaultProps = {
 }
 
 function PostContent(props) {
-  const [likeImg, setLikeImg] = useState(false)
+  const textInput = React.createRef();
   const {modal} = props;
+  const [likeImg, setLikeImg] = useState(false)
   
   function handleModal(value) {
     props.handleModal(value);
@@ -19,6 +20,14 @@ function PostContent(props) {
 
   function handleLikeButton(value){
     setLikeImg(value);
+  }
+
+  function handleFocusComment() {
+    textInput.current.focus();
+  }
+
+  function handleLineBreak(event) {
+
   }
 
   return (
@@ -53,7 +62,7 @@ function PostContent(props) {
                 >
                 </ion-icon>
             </button>
-            <button className='btn-config'>
+            <button className='btn-config' onClick={handleFocusComment}>
               <ion-icon name="chatbubble-outline"></ion-icon>
             </button>
             <button className='btn-config'>
@@ -81,8 +90,15 @@ function PostContent(props) {
         </div>
       </div>
       <div className='post-comment'>
-        <input type="text" placeholder='Thêm bình luận...'/>
-        <button className='btn-config'>Đăng</button>
+        <form action="POST">
+          <textarea 
+            ref={textInput} 
+            type="text" 
+            placeholder='Thêm bình luận...'
+            onChange={handleLineBreak}
+            ></textarea>
+          <button className='btn-config'>Đăng</button>
+        </form>
       </div>
     </div>
   );

@@ -97,13 +97,14 @@
   position: relative;
 }
 
-.post-content .post-comment input {
+.post-content .post-comment textarea {
   width: 100%;
   padding: 20px 22px;
   border: none;
   border-top: solid thin #ddd;
   outline: none;
-}
+  resize: none;
+} 
 
 .post-content .post-comment button{
   position: absolute;
