@@ -1,51 +1,82 @@
-import React from "react";
+import React, {useState} from "react";
 import { Col, Button, Form, FormGroup, Label, Input } from "reactstrap";
 import { Link } from "react-router-dom";
 
+import {checkValueToShowBtn} from '../../../../utils';
+
 import Facebook from '../../Facebook'
+
+import './Login.scss';
 
 Login.propTypes = {};
 
 Login.defaultProps = {};
 
+
 export default function Login(props) {
-  function componentClicked() {
-    props.handelLoginState(true);
-    console.log("clicked");
+  const [showBtn, setShowBtn] = useState(false);
+  const [hidePassword, setHidePassword] = useState(true)
+  const initInfo = {
+    email: '',
+    password: '',
+  };
+  const [info, setInfo] = useState(initInfo);
+
+
+  function onHandleValueInput(e) {
+    const tempInfo = {...info}
+    const {name, value} = e.target;
+    tempInfo[name] = value;
+    setInfo(tempInfo);
+    const result = checkValueToShowBtn(tempInfo);
+    setShowBtn(result)
   }
 
-  function responseFacebook(res) {
-    console.log(res);
+  function onHandleSubmitForm(e) {
+    e.preventDefault();
+    props.onHandleInfo(info);
+  }
+
+  function onHandleHidePassword() {
+    setHidePassword(!hidePassword)
   }
 
   return (
-    <Col>
-      <Form>
+    <div className='login-form'>
+      <Form onSubmit={onHandleSubmitForm}>
         <h1>Instagram</h1>
         <FormGroup>
           <Label>
             <Input
-              type="email"
+              type="text"
               name="email"
-              // onFocus={handleFocus}
-              // onBlur={handleOutFocus}
+              value={info.email}
+              onChange={onHandleValueInput}
+              required
             />
-            <span>Số điện thoại, tên người đùng, hoặc email</span>
+            <span className='form-label__text'>Số điện thoại, tên người đùng, hoặc email</span>
           </Label>
         </FormGroup>
         <FormGroup>
           <Label>
-            <Input type="password" name="password" />
-            <span>Mật khẩu</span>
+            <Input
+              type={hidePassword ? "password" : 'text'}
+              name="password"  
+              value={info.password}
+              onChange={onHandleValueInput}
+              required
+            />
+            <span className='form-label__text'>Mật khẩu</span>
           </Label>
+          <ion-icon name={hidePassword ? "eye-outline" : "eye-off-outline"} onClick={onHandleHidePassword}></ion-icon>
         </FormGroup>
-        <Button color="primary">Đăng nhập</Button>
+        <Button color="primary" disabled={showBtn ? false : true }>Đăng nhập</Button>
         <span className="form-text">HOẶC</span>
-        <Facebook />
-        <Link className="btn-reset-pw" to="/accounts/password/reset/">
+        <Facebook registerForm={false}/>
+        <Link className="btn-reset-pw" to="/account/password/reset/">
           Quên mật khẩu?
         </Link>
       </Form>
-    </Col>
+    </div>
   );
 }

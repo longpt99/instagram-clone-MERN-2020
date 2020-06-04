@@ -1,25 +1,48 @@
 import React, { useState } from "react";
 import { Container, Row, Col, Button, Form, FormGroup, Label, Input } from "reactstrap";
 import { connect } from 'react-redux';
+import {
+  BrowserRouter,
+  Switch,
+} from "react-router-dom";
 
-import AuthImg from './components/Auth/Image'
+import './App.scss'
+
+import AuthImg from './components/Auth/Image';
+import ToggleForm from './components/Auth/ToggleForm';
+import DownloadApp from './components/Auth/Download/App';
 import Routes from "./routes";
 
 function App(props) {
   const { token } = props;
   return (
-    <Container>
-      <Row>
-        {!token && <AuthImg /> }
-        <Routes />
-      </Row>
-    </Container>
+    <BrowserRouter>
+      { !token &&
+        <div className='auth-page'>
+          <Container>
+            <Row>
+              <Col>
+                <AuthImg />
+              </Col>
+              <Col>
+                <Routes />
+                <ToggleForm />
+                <DownloadApp />
+              </Col>
+            </Row>
+          </Container>
+        </div>
+      }
+      {
+        token &&
+      <Routes />
+      }
+    </BrowserRouter>
   );
 }
 
 const mapStateToProps = state => {
   return {
-    authPage: state.authPage,
     token: state.token,
   }
 }

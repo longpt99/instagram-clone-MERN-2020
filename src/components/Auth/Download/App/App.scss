@@ -1,0 +1,23 @@
+.form-download {
+  width: 350px;
+  max-width: 100%;
+
+  span {
+    display: block;
+    text-align: center;
+    margin: 1.5rem 0;
+  }
+
+  .form-icon-download {
+    display: flex;
+    justify-content: center;
+  
+    .icon-download {
+      width: 130px;
+    }
+  
+    .icon-download:nth-of-type(1) {
+      margin-right: 5px;
+    }
+  }
+}

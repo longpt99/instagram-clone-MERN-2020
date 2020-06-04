@@ -1,8 +1,9 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 const PrivateRoute = ({component: Component, ...rest}) => {
-  const token = null;
+  const { token } = rest;
   return (
     <Route {...rest} render={props => 
       token 
@@ -11,4 +12,10 @@ const PrivateRoute = ({component: Component, ...rest}) => {
   )
 };
 
-export default PrivateRoute;
+const mapStateToProps = state => {
+  return {
+    token: state.token
+  }
+}
+
+export default connect(mapStateToProps, null)(PrivateRoute);

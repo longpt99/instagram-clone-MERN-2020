@@ -1,16 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import Register from '../../components/Auth/Register/Form'
+
 Register.propTypes = {
   
 };
 
-function Register(props) {
+function RegisterContainer(props) {
   return (
-    <div>
-      register
-    </div>
+    <Register />
   );
 }
 
-export default Register;
+export default RegisterContainer;

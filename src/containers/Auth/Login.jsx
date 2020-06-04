@@ -1,56 +1,47 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { connect, useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
 
-import { Route, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 
 import Login from '../../components/Auth/Login/Form';
 
-import {actShowAuthPage} from '../../actions'
-
+import { actFetchTokenRequest} from '../../actions';
 
 LoginContainer.propTypes = {
   
 };
 
 function LoginContainer(props) {
-  const { onShowAuthPage, token } = props;
-
-  useEffect(() => {
-    let i = 0;
-    const interval = setInterval(() => {
-      console.log('count down', i);
-      console.log('token', token)
-      i++;
-      onShowAuthPage();
-    }, 2000)
-    return () => {
-      clearInterval(interval);
-    }
-  }, [])
+  const { token } = props;
 
   if (token) {
     return <Redirect to='/'/>
   }
+  console.log(token)
+
+
+  function onHandleInfo(data) {
+    props.fetchToken(data);
+  }
 
   return (
-    <Login />
+    <Login onHandleInfo={onHandleInfo}/>
   );
 }
 
 const mapStateToProps = state => {
   return {
-    authPage: state.authPage,
     token: state.token,
   }
 }
 
 const mapDispatchToProps = (dispatch, props) => {
   return {
-    onShowAuthPage: () => {
-      dispatch(actShowAuthPage());
-    },
+    fetchToken : (data) => {
+      dispatch(actFetchTokenRequest(data));
+  },
   }
 }
 
