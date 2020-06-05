@@ -12,6 +12,7 @@ import AuthImg from './components/Auth/Image';
 import ToggleForm from './components/Auth/ToggleForm';
 import DownloadApp from './components/Auth/Download/App';
 import Routes from "./routes";
+import { Header } from './containers';
 
 function App(props) {
   const { token } = props;
@@ -34,8 +35,10 @@ function App(props) {
         </div>
       }
       {
-        token &&
-      <Routes />
+        token && 
+        <div className='header-section'>
+          <Header />
+        </div>
       }
     </BrowserRouter>
   );

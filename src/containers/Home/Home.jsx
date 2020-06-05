@@ -1,15 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import Navbar from '../../components/Header/Navbar'
+
 Home.propTypes = {
   
 };
 
 function Home(props) {
-  console.log(123)
   return (
     <div>
-      test
+      <Navbar />
     </div>
   );
 }
