@@ -15,8 +15,6 @@ export default function ToogleForm(props) {
     }
   }, []);
 
-  console.log(window.location.pathname)
-
   function onHandleChangeForm() {
     setLoginForm(!loginForm)
   }

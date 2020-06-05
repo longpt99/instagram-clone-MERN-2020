@@ -37,7 +37,7 @@ const mapStateToProps = state => {
   }
 }
 
-const mapDispatchToProps = (dispatch, props) => {
+const mapDispatchToProps = dispatch => {
   return {
     fetchToken : (data) => {
       dispatch(actFetchTokenRequest(data));

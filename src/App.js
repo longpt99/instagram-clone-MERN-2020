@@ -35,9 +35,11 @@ function App(props) {
         </div>
       }
       {
-        token && 
-        <div className='header-section'>
-          <Header />
+        token && <div>
+          <div className='header-section'>
+            <Header />
+          </div>
+          <Routes />
         </div>
       }
     </BrowserRouter>

@@ -11,10 +11,9 @@ import { Login, Register, Home } from '../containers';
 const Routes = () => {
   return (
     <Switch>
-      {/* <PublicRoute path='/' component={Login} /> */}
       <PublicRoute exact path='/login' component={Login} />
       <PublicRoute exact path='/register' component={Register} />
-      {/* <PrivateRoute path='/' component={Home} /> */}
+      <PrivateRoute path='/' component={Home} />
     </Switch>
   )
 }

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 const PublicRoute = ({component: Component, ...rest}) => {
   const {token} = rest;
+  console.log(token)
   return (
     <Route
       {...rest}
