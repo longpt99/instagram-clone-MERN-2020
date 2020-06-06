@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
@@ -7,13 +7,22 @@ import { Container, Row, Col, Button, Form, FormGroup, Label, Input } from "reac
 import Follow from '../../components/Home/Follow'
 import Post from '../../components/Home/Post'
 import Story from '../../components/Home/Story'
+import Modal from '../../components/Home/Modal'
 Home.propTypes = {
   
 };
 
 function Home(props) {
+  const [isHideModal, setHideModal] = useState(true);
+
+  function handleModal(value) {
+    setHideModal(!value)
+  }
   return (
     <div className='home-page'>
+      {
+        !isHideModal && <Modal handleModal={handleModal}/>
+      }
       <Container>
         <Row>
           <Col xs='8'>
@@ -24,7 +33,7 @@ function Home(props) {
             </Row>
             <Row>
               <Col>
-                <Post />
+                <Post handleModal={handleModal}/>
               </Col>
             </Row>
           </Col>

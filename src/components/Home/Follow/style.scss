@@ -1,0 +1,87 @@
+.follow-wrapper {
+  width: 22%;
+  position: fixed;
+  font-size: 0.9rem;
+
+  a {
+    color: black;
+    font-weight: 500;
+  }
+
+  a:hover {
+    @extend a;
+    text-decoration: none;
+  }
+
+  .user {
+    display: flex;
+    align-items: center;
+    padding: 1.5rem 0.5rem;
+
+    img {
+      height: 55px;
+      width: 55px;
+      border-radius: 999px;
+      margin-right: 0.5rem;
+    }
+
+    .user-info {
+      display: inline-flex;
+      flex-direction: column;
+      justify-content: center;
+      line-height: 1.2rem;
+
+      .user-name {
+        color: #888;
+        font-size: 0.8rem;
+      }
+    }
+  }
+
+  .follow-content {
+    .follow-title {
+      display: flex;
+      justify-content: space-between;
+
+      span {
+        font-weight: 500;
+        color: #888
+      }
+    }
+
+    .follow-user-list {
+      margin-top: 1rem;
+      .follow-user-info {
+        display: flex;
+        img {
+          height: 30px;
+          width: 30px;
+          border-radius: 999px;
+          margin-right: 0.5rem;
+        }
+
+        .follow-user-item {
+          display: flex;
+          justify-content: space-between;
+          width: 100%;
+          align-items: center;
+
+          button {
+            border: none;
+            outline: none;
+            background-color: transparent;
+            font-weight: 700;
+            color:#007bff;
+            font-size: 0.7rem;
+          }
+        }
+      }
+    }
+  }
+
+  .footer {
+    margin-top: 1rem;
+    font-size: 0.7rem;
+    color: #888;
+  }
+}
