@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { Col, Button, Form, FormGroup, Label, Input } from "reactstrap";
+import { Col, Button, Form, FormGroup, Label, Input, Alert } from "reactstrap";
 import { Link } from "react-router-dom";
 
 import {checkValueToShowBtn} from '../../../../utils';
@@ -14,12 +14,13 @@ Login.defaultProps = {};
 
 
 export default function Login(props) {
-  const [showBtn, setShowBtn] = useState(false);
-  const [hidePassword, setHidePassword] = useState(true)
+  const {error} = props;
   const initInfo = {
     email: '',
     password: '',
   };
+  const [showBtn, setShowBtn] = useState(false);
+  const [hidePassword, setHidePassword] = useState(true)
   const [info, setInfo] = useState(initInfo);
 
 
@@ -45,6 +46,11 @@ export default function Login(props) {
     <div className='login-form'>
       <Form onSubmit={onHandleSubmitForm}>
         <h1>Instagram</h1>
+        {
+          error && <Alert color="danger">
+          {error}
+        </Alert>
+        }
         <FormGroup>
           <Label>
             <Input

@@ -17,9 +17,18 @@ export const actShowAuthPage = () => {
 export const actFetchTokenRequest = (data) => {
   return dispatch => {
       return callApi('auth/login', 'POST', data).then(res => {
-          dispatch(actFetchToken(res.data));
+        dispatch(actFetchToken(res.data));
+      }).catch(err => {
+        dispatch(actSetLoginError(err.response.data))
       });
   };
+}
+
+export const actSetLoginError = (error) => {
+  return {
+    type: types.LOGIN_ERROR,
+    error,
+  }
 }
 
 
