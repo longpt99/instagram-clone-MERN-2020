@@ -1,11 +1,12 @@
 import React, {useState} from "react";
-import { Button, Form, FormGroup, Label, Input } from "reactstrap";
+import { Button, Form, FormGroup, Label, Input, Alert } from "reactstrap";
 import {checkValueToShowBtn} from '../../../../utils';
 
 import Facebook from '../../Facebook';
 import './Register.scss';
 
 export default function Register(props) {
+  const {error} = props;
   const initInfo = {
     name: '',
     email: '',
@@ -35,6 +36,11 @@ export default function Register(props) {
         <h1>Instagram</h1>
         <Facebook registerForm={true}/>
         <span className="form-text">HOẶC</span>
+        {
+          error && <Alert color="danger">
+          {error}
+        </Alert>
+        }
         <FormGroup>
           <Label>
             <Input

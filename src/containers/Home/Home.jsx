@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
@@ -8,16 +8,26 @@ import Follow from '../../components/Home/Follow'
 import Post from '../../components/Home/Post'
 import Story from '../../components/Home/Story'
 import Modal from '../../components/Home/Modal'
+
+import { actFetchUserRequest } from '../../store/actions';
+
+
 Home.propTypes = {
   
 };
 
 function Home(props) {
+  const {fetchUser, user} = props;
   const [isHideModal, setHideModal] = useState(true);
 
   function handleModal(value) {
     setHideModal(!value)
   }
+
+  useEffect(() => {
+    fetchUser();
+  }, [])
+
   return (
     <div className='home-page'>
       {
@@ -38,7 +48,7 @@ function Home(props) {
             </Row>
           </Col>
           <Col>
-            <Follow />
+            <Follow userInfo={user}/>
           </Col>
         </Row>
       </Container>
@@ -48,13 +58,15 @@ function Home(props) {
 
 const mapStateToProps = state => {
   return {
-
+    user: state.user
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    
+    fetchUser: () => {
+      dispatch(actFetchUserRequest());
+    } 
   }
 }
 

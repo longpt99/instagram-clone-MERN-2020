@@ -35,9 +35,6 @@ function Search(props) {
     // setIsFocus(false)
   }
 
-  console.log(textInput)
-
-
   return (
     <div className={cls.wrapper}>
       <Input 

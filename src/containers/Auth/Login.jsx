@@ -1,26 +1,29 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-
-import { Redirect } from 'react-router-dom';
-
+import { Alert } from 'reactstrap';
 
 import Login from '../../components/Auth/Login/Form';
-
-import { actFetchTokenRequest} from '../../actions';
-import { Alert } from 'reactstrap';
+import { actFetchTokenRequest, actSetLoginError} from '../../store/actions';
 
 LoginContainer.propTypes = {
   
 };
 
 function LoginContainer(props) {
-  const { token, error } = props;
+  const { error, setError } = props;
   console.log(error)
 
-  if (token) {
-    return <Redirect to='/'/>
-  }
+  // useEffect(() => {
+  //   const countdownErr = setTimeout(() => {
+  //     setError();
+  //   }, 5000)
+  //   console.log(1)
+
+  //   return () => {
+  //     clearTimeout(countdownErr);
+  //   }
+  // }, [error])
 
   function onHandleInfo(data) {
     props.fetchToken(data);
@@ -33,7 +36,6 @@ function LoginContainer(props) {
 
 const mapStateToProps = state => {
   return {
-    token: state.token,
     error: state.error,
   }
 }
@@ -42,7 +44,10 @@ const mapDispatchToProps = dispatch => {
   return {
     fetchToken : (data) => {
       dispatch(actFetchTokenRequest(data));
-  },
+    },
+    setError : () => {
+      dispatch(actSetLoginError(null))
+    }
   }
 }
 

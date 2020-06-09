@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
@@ -9,6 +9,16 @@ Follow.propTypes = {
 };
 
 function Follow(props) {
+  const { userInfo } = props;
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    setUser(userInfo)
+  }, [userInfo])
+
+  if(!user) {
+    return <h1>Loading</h1>
+  }
   return (
     <div className='follow-wrapper'>
       <header className='user'>
@@ -17,10 +27,10 @@ function Follow(props) {
         </a>
         <div className='user-info'>
           <a href="#" className='user-nickname'>
-            <span>name</span>
+            <span>{user.nickname}</span>
           </a>
           <span className='user-name'>
-            Phuong Thanh Long
+            {user.name}
           </span>
         </div>
       </header>

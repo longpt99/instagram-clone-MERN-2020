@@ -7,16 +7,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-import { createStore, applyMiddleware } from "redux";
 import { Provider } from 'react-redux';
-import appReducers from './reducers/index';
-import thunk from 'redux-thunk';
-
-export const store = createStore(
-  appReducers,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
-  applyMiddleware(thunk)
-  );
+import store from './store';
 
 ReactDOM.render(
   <Provider store={store}>

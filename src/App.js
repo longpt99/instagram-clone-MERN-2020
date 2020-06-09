@@ -36,9 +36,6 @@ function App(props) {
       }
       {
         token && <div>
-          <div className='header-section'>
-            <Header />
-          </div>
           <Routes />
         </div>
       }

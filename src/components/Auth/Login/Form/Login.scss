@@ -5,6 +5,10 @@
   width: 350px;
   max-width: 100%;
 
+  .alert {
+    transition: visibility 0s, opacity 0.5s linear;
+  }
+
   h1 {
     text-align: center;
     margin-bottom: 2rem;

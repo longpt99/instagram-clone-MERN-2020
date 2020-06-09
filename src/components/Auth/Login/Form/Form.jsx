@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { Col, Button, Form, FormGroup, Label, Input, Alert } from "reactstrap";
 import { Link } from "react-router-dom";
 
@@ -14,7 +14,7 @@ Login.defaultProps = {};
 
 
 export default function Login(props) {
-  const {error} = props;
+  let {error} = props;
   const initInfo = {
     email: '',
     password: '',
@@ -22,7 +22,6 @@ export default function Login(props) {
   const [showBtn, setShowBtn] = useState(false);
   const [hidePassword, setHidePassword] = useState(true)
   const [info, setInfo] = useState(initInfo);
-
 
   function onHandleValueInput(e) {
     const tempInfo = {...info}

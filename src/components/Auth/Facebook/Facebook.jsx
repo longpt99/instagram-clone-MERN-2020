@@ -11,7 +11,7 @@ function Facebook(props) {
   const {registerForm} = props;
 
   function componentClicked() {
-    props.handelLoginState(true);
+    // props.handelLoginState(true);
     console.log("clicked");
   }
 
@@ -22,7 +22,7 @@ function Facebook(props) {
   return (
     <FacebookLogin
       appId="1419046874968768"
-      autoLoad={true}
+      scope='public_profile'
       fields="name,email,picture"
       onClick={componentClicked}
       callback={responseFacebook}

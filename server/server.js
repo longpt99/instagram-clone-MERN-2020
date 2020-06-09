@@ -9,7 +9,7 @@ const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const passport = require('passport');
 
-const routes = require('./routers/index')
+const routes = require('./routes')
 
 mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true });
 app.use(passport.initialize());
