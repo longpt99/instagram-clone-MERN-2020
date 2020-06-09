@@ -7,7 +7,7 @@ const tokenReducer = (state = initialState, action) => {
   const { token } = action;
   switch(action.type) {
     case types.SET_TOKEN: localStorage.setItem('jwt', JSON.stringify(token)); return token;
-    case types.DELETE_TOKEN: return null;
+    case types.DELETE_TOKEN: localStorage.removeItem('jwt'); return null;
     default: return state;
   }
 };
