@@ -23,7 +23,7 @@ function Follow(props) {
     <div className='follow-wrapper'>
       <header className='user'>
         <a className='user-avatar' href="#">
-          <img src="https://loremflickr.com/30/30" alt="user"/>
+          <img src={userInfo.profilePictureUrl} alt="user"/>
         </a>
         <div className='user-info'>
           <a href="#" className='user-nickname'>

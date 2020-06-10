@@ -21,33 +21,36 @@ function Header(props) {
 
   return (
     <header className={styles.profile_header}>
-      <div>
+      <div className={styles.profile_avatar}>
         <img src={user.profilePictureUrl} alt="" srcset=""/>
         <div></div>
       </div>
-      <div>
-        <div>
+      <div className={styles.profile_primary}>
+        <div className={styles.profile_nickname}>
           <span>{user.nickname}</span>
-          <Link to='/accounts/setting'>
+          <Link to='/accounts/setting' title='chỉnh sửa trang cá nhân'>
             <ion-icon name="settings-outline"></ion-icon>
           </Link>
         </div>
-        <ul>
+        <ul className={styles.profile_title}>
           <li>
-            <span><span></span>bài viết</span>
+            <span><span className={styles.profile_common_title}>6 </span>bài viết</span>
           </li>
           <li>
-            <Link><span></span>người theo dõi</Link>
+            <Link><span className={styles.profile_common_title}>250 </span>người theo dõi</Link>
           </li>
           <li>
-            <Link>Đang theo dõi <span></span> người dùng</Link>
+            <Link>Đang theo dõi <span className={styles.profile_common_title}>100 </span>người dùng</Link>
           </li>
         </ul>
-        <div>
-          <h1>{user.name}</h1>
+        <div className={styles.profile_description}>
+          <span className={styles.profile_description_name}>{user.name}</span>
           <br />
           <span>
-            {user.bio}
+            Phương Thành Long | 🇻🇳
+            just be a good person/>
+            –––
+            ✉️ phuongthanhlong.99@gmail.com
           </span>
         </div>
       </div>

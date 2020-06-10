@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { Container, Row, Col, Button, Form, FormGroup, Label, Input } from "reactstrap";
+import { Container, Row, Col} from "reactstrap";
 
 import FollowerSuggestion from '../../components/Home/FollowerSuggestion'
 import Post from '../../components/Home/Post'

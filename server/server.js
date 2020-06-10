@@ -8,6 +8,7 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const passport = require('passport');
+const fileUpload = require('express-fileupload');
 
 const routes = require('./routes')
 
@@ -16,6 +17,7 @@ app.use(passport.initialize());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser(process.env.COOKIE_SECRET));
+app.use(fileUpload());
 app.use(express.static('public'));
 app.use(cors());
 

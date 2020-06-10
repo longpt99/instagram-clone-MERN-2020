@@ -1,0 +1,25 @@
+.nav_link {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  display: flex;
+  list-style-type: none;
+  padding: 0;
+  justify-content: center;
+  border-top: thin solid #ddd;
+
+  .nav_item {
+    display: flex;
+    align-items: center;
+    padding: 1rem 0;
+    margin: 0 2rem;
+    outline: none;
+
+    span {
+      margin-left: 0.3rem;
+    }
+  }
+
+  .nav_item__focus:focus {
+    border-top: thin solid black;
+  }
+}

@@ -1,0 +1,22 @@
+.profile_upload {
+  font-size: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2rem;
+
+  ion-icon {
+    padding: 20px;
+    border: thin solid;
+    border-radius: 999px;
+  }
+
+  .profile_upload_text {
+    margin: 1rem 0;
+  }
+  .profile_upload_link {
+    border: thin solid;
+    border-radius: 5px;
+  }
+  
+}
