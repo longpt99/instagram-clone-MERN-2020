@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styles from './styles.module.scss';
 import classNames from 'classnames';
@@ -10,6 +10,16 @@ import Search from '../Search/';
 
 function TopNav(props) {
   const [option, setOption] = useState(false);
+  const { userInfo } = props;
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    setUser(userInfo)
+  }, [userInfo])
+
+  if(!user) {
+    return <h1>Loading</h1>
+  }
 
   function handleClick(e) {
     console.log(e.target.value)
@@ -58,7 +68,7 @@ function TopNav(props) {
               </button>
               {
                 option && <div className={styles.header_option}>
-                  <Link to='/account' className={styles.header_option_item}>
+                  <Link to={`/${user.nickname}`} className={styles.header_option_item}>
                     <ion-icon name="person-circle-outline"></ion-icon>
                     <span>Trang cá nhân</span>
                   </Link>

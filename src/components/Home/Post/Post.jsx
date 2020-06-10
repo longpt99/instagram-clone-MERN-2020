@@ -10,7 +10,9 @@ Post.propTypes = {
 
 function Post(props) {
   const textInput = React.createRef();
+  const { userInfo } = props;
   const [likeImg, setLikeImg] = useState(false);
+  const [cmt, setCmt] = useState('');
   
   function handleShowModal(value) {
     props.handleModal(true)
@@ -22,6 +24,16 @@ function Post(props) {
 
   function handleFocusComment() {
     textInput.current.focus();
+  }
+
+  function handleChangeTextInput(e) {
+    const {value} = e.target;
+    setCmt(value);
+  }
+
+  function hanldeSubmitCmt(e) {
+    e.preventDefault();
+    console.log(cmt);
   }
 
   return (
@@ -39,7 +51,7 @@ function Post(props) {
           </button>
         </div>
       </header>
-      <div className='post-imgage'>
+      <div className='post-imgage' onDoubleClick={handleClickButton}>
         <img className='img-fluid' src="https://instagram.fhan5-2.fna.fbcdn.net/v/t51.2885-15/e35/p1080x1080/97194763_544936269527882_3057431829789631607_n.jpg?_nc_ht=instagram.fhan5-2.fna.fbcdn.net&_nc_cat=102&_nc_ohc=Xt26O9M2pckAX_UXy_w&oh=675cc69d5e505a368d438517858b0e94&oe=5EE61DF0" />
       </div>
       <div className='post-primary'>
@@ -81,11 +93,12 @@ function Post(props) {
         </div>
       </div>
       <div className='post-comment'>
-        <form className='post-comment__form'>
+        <form className='post-comment__form' onSubmit={hanldeSubmitCmt}>
           <textarea
             ref={textInput} 
             type="text" 
             placeholder='Thêm bình luận...'
+            onChange={handleChangeTextInput}
           >
           </textarea>
           <button className='btn-config'>Đăng</button>

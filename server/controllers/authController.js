@@ -49,6 +49,7 @@ module.exports.postRegister = async (req, res) => {
         email,
         nickname,
         password: hash,
+        profilePictureUrl: `https://api.adorable.io/avatars/55/${userId}`,
       },
       () => {
         const payload = { id: userId };

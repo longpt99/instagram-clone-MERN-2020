@@ -2,12 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import Register from '../../components/Auth/Register/Form';
+import RegisterForm from '../../components/Auth/Register/Form';
 import { actCreateNewAccount } from '../../store/actions';
-
-Register.propTypes = {
-  
-};
 
 function RegisterContainer(props) {
   const {error, createAccount} = props;
@@ -17,7 +13,7 @@ function RegisterContainer(props) {
   }
 
   return (
-    <Register onHandleInfo={onHandleInfo} error={error}/>
+    <RegisterForm onHandleInfo={onHandleInfo} error={error}/>
   );
 }
 

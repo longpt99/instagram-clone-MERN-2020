@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Alert } from 'reactstrap';
 
-import Login from '../../components/Auth/Login/Form';
+import LoginForm from '../../components/Auth/Login/Form';
 import { actFetchTokenRequest, actSetLoginError} from '../../store/actions';
 
 LoginContainer.propTypes = {
@@ -30,7 +30,7 @@ function LoginContainer(props) {
   }
 
   return (
-    <Login onHandleInfo={onHandleInfo} error={error}/>
+    <LoginForm onHandleInfo={onHandleInfo} error={error}/>
   );
 }
 

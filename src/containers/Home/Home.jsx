@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import { Container, Row, Col, Button, Form, FormGroup, Label, Input } from "reactstrap";
 
-import Follow from '../../components/Home/Follow'
+import FollowerSuggestion from '../../components/Home/FollowerSuggestion'
 import Post from '../../components/Home/Post'
 import Story from '../../components/Home/Story'
 import Modal from '../../components/Home/Modal'
@@ -12,11 +12,11 @@ import Modal from '../../components/Home/Modal'
 import { actFetchUserRequest } from '../../store/actions';
 
 
-Home.propTypes = {
+HomeContainer.propTypes = {
   
 };
 
-function Home(props) {
+function HomeContainer(props) {
   const {fetchUser, user} = props;
   const [isHideModal, setHideModal] = useState(true);
 
@@ -24,9 +24,9 @@ function Home(props) {
     setHideModal(!value)
   }
 
-  useEffect(() => {
-    fetchUser();
-  }, [])
+  // useEffect(() => {
+  //   fetchUser();
+  // }, [])
 
   return (
     <div className='home-page'>
@@ -43,12 +43,12 @@ function Home(props) {
             </Row>
             <Row>
               <Col>
-                <Post handleModal={handleModal}/>
+                <Post handleModal={handleModal} userInfo={user}/>
               </Col>
             </Row>
           </Col>
           <Col>
-            <Follow userInfo={user}/>
+            <FollowerSuggestion userInfo={user}/>
           </Col>
         </Row>
       </Container>
@@ -70,4 +70,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(HomeContainer);

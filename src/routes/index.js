@@ -7,7 +7,7 @@ import {
 import PublicRoute from './publicRoute';
 import PrivateRoute from './privateRoute';
 
-import { Login, Register, Home, Header, Account } from '../containers';
+import { Login, Register, Home, Header, Profile } from '../containers';
 
 const Routes = () => {
   return (
@@ -17,7 +17,7 @@ const Routes = () => {
       <Route component={Header}>
         <Header />
         <PrivateRoute exact path='/' component={Home} />
-        <PrivateRoute exact path='/account' component={Account} />
+        <PrivateRoute exact path='/:nickname' component={Profile} />
       </Route>
     </Switch>
   )

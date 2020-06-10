@@ -7,8 +7,9 @@ const userSchema = new mongoose.Schema(
     password: String,
     name: String,
     nickname: String,
-    friendsId: Array,
-    profilePictureUrl: String
+    followersId: Array,
+    followingId: Array,
+    profilePictureUrl: String,
   },
   {
     timestamps: true,
