@@ -40,13 +40,13 @@ function Search(props) {
       <Input 
         id='input' 
         className={cls.input}
-        placeholder={isFocus ? 'Tìm kiếm' : false}
+        placeholder={isFocus ? 'Tìm kiếm' : ''}
         value={textInput}
         onChange={handleChange}
         onFocus={handleOnFocus}
         onBlur={handleOnBlur}
       />
-      <label className={!isFocus ? cls.text : cls.text_edit} for='input'>
+      <label className={!isFocus ? cls.text : cls.text_edit} htmlFor='input'>
         <span >
           <ion-icon name="search-outline"></ion-icon>
         </span>

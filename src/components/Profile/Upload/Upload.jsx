@@ -11,7 +11,7 @@ Upload.propTypes = {
 function Upload(props) {
 
   function handleShowModal() {
-    props.handleShowModal();
+    props.handleModal();
   }
   return (
     <div className={styles.profile_upload}>

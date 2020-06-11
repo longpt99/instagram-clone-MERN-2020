@@ -22,19 +22,42 @@ function Upload(props) {
     const {value} = e.target;
     setCaption(value)
   }
-  console.log(files)
+
+  function handleHideModal(e) {
+    const {value} = e.target;
+    if (value === undefined) {
+      props.handleModal();
+      return;
+    }
+    console.log(value)
+  }
   
   return (
-    <div className='modal_upload'>
+    <div className='modal_upload' onDoubleClick={handleHideModal}>
       <div className='modal_file'>
         <FilePond 
           files={files}
           onupdatefiles={setFiles}
-          allowMultiple ={ true}
-          maxFiles = {3}
-          // instantUpload={false}
-          name={"images"}
-          server = '/users/postImage'
+          instantUpload={false}
+          name={"file"}
+          server = {{
+            process: {
+                url: '/users/postImage',
+                method: 'POST',
+                withCredentials: false,
+                headers: {
+                  Authorization: `Bearer ${JSON.parse(localStorage.getItem('jwt'))}`
+                },
+                // timeout: 7000,
+                onload: null,
+                onerror: null,
+                ondata: (formData) => {
+                  formData.append('caption', caption)
+                  return formData
+                }
+            }
+          }
+          }
           labelIdle='Kéo hoặc thả ảnh'
         />
       </div>

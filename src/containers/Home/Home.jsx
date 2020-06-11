@@ -17,16 +17,13 @@ HomeContainer.propTypes = {
 };
 
 function HomeContainer(props) {
-  const {fetchUser, user} = props;
+  const {admin} = props;
   const [isHideModal, setHideModal] = useState(true);
 
   function handleModal(value) {
     setHideModal(!value)
   }
 
-  // useEffect(() => {
-  //   fetchUser();
-  // }, [])
 
   return (
     <div className='home-page'>
@@ -43,12 +40,12 @@ function HomeContainer(props) {
             </Row>
             <Row>
               <Col>
-                <Post handleModal={handleModal} userInfo={user}/>
+                <Post handleModal={handleModal} userInfo={admin}/>
               </Col>
             </Row>
           </Col>
           <Col>
-            <FollowerSuggestion userInfo={user}/>
+            <FollowerSuggestion userInfo={admin}/>
           </Col>
         </Row>
       </Container>
@@ -58,16 +55,9 @@ function HomeContainer(props) {
 
 const mapStateToProps = state => {
   return {
-    user: state.user
+    admin: state.admin
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    fetchUser: () => {
-      dispatch(actFetchUserRequest());
-    } 
-  }
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomeContainer);
+export default connect(mapStateToProps, null)(HomeContainer);

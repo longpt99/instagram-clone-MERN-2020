@@ -14,7 +14,7 @@ const Routes = () => {
     <Switch>
       <PublicRoute exact path='/login' component={Login} />
       <PublicRoute exact path='/register' component={Register} />
-      <Route component={Header}>
+      <Route>
         <Header />
         <PrivateRoute exact path='/' component={Home} />
         <PrivateRoute exact path='/:nickname' component={Profile} />

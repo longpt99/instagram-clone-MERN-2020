@@ -41,55 +41,55 @@ function Follow(props) {
         </div>
         <div className='follow-user-list'>
           <div className='follow-user-info'>
-            <Link>
+            <Link to='#'>
               <img src="https://loremflickr.com/30/30" alt="user"/>
             </Link>
             <div className='follow-user-item'>
-              <Link>nickname</Link>
+              <Link to='#'>nickname</Link>
               <button>Theo dõi</button>
             </div>
           </div>
         </div>
         <div className='follow-user-list'>
           <div className='follow-user-info'>
-            <Link>
+            <Link to='#'>
               <img src="https://loremflickr.com/30/30" alt="user"/>
             </Link>
             <div className='follow-user-item'>
-              <Link>nickname</Link>
+              <Link to='#'>nickname</Link>
               <button>Theo dõi</button>
             </div>
           </div>
         </div>
         <div className='follow-user-list'>
           <div className='follow-user-info'>
-            <Link>
+            <Link to='#'>
               <img src="https://loremflickr.com/30/30" alt="user"/>
             </Link>
             <div className='follow-user-item'>
-              <Link>nickname</Link>
+              <Link to='#'>nickname</Link>
               <button>Theo dõi</button>
             </div>
           </div>
         </div>
         <div className='follow-user-list'>
           <div className='follow-user-info'>
-            <Link>
+            <Link to='#'>
               <img src="https://loremflickr.com/30/30" alt="user"/>
             </Link>
             <div className='follow-user-item'>
-              <Link>nickname</Link>
+              <Link to='#'>nickname</Link>
               <button>Theo dõi</button>
             </div>
           </div>
         </div>
         <div className='follow-user-list'>
           <div className='follow-user-info'>
-            <Link>
+            <Link to='#'>
               <img src="https://loremflickr.com/30/30" alt="user"/>
             </Link>
             <div className='follow-user-item'>
-              <Link>nickname</Link>
+              <Link to='#'>nickname</Link>
               <button>Theo dõi</button>
             </div>
           </div>

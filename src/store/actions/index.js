@@ -2,47 +2,56 @@ import * as types from '../../constants/ActionType';
 import * as apis from '../../constants/Api';
 import callApi from "../../utils/apiCaller";
 
-export const users = (users) => {
-  return {
-    type: types.USER_LIST,
-    users,
-  }
-}
-
-export const actShowAuthPage = () => {
-  return {
-    type: types.AUTH_PAGE,
-  }
-}
+// CALL API
 
 export const actFetchTokenRequest = (data) => {
   return dispatch => {
-      return callApi(apis.LOGIN_API, 'POST', data).then(res => {
-        dispatch(actFetchToken(res.data));
-      }).catch(err => {
-        dispatch(actSetLoginError(err.response.data))
-      });
+    return callApi(apis.LOGIN_API, 'POST', data)
+    .then(res => {
+      dispatch(actFetchToken(res.data));
+    }).catch(err => {
+      dispatch(actSetLoginError(err.response.data))
+    });
   };
 }
 
 export const actCreateNewAccount = (data) => {
   return dispatch => {
-      return callApi(apis.REGISTER_API, 'POST', data).then(res => {
-        dispatch(actFetchToken(res.data));
-      }).catch(err => {
-        dispatch(actSetLoginError(err.response.data))
-      });
+    return callApi(apis.REGISTER_API, 'POST', data)
+    .then(res => {
+      dispatch(actFetchToken(res.data));
+    }).catch(err => {
+      dispatch(actSetLoginError(err.response.data))
+    });
   };
 }
 
-export const actFetchUserRequest = () => {
+export const actFetchUserProfileRequest = (data) => {
   return dispatch => {
-    return callApi('users/getUser', 'GET', null, {Authorization: `Bearer ${JSON.parse(localStorage.getItem('jwt'))}`}).then(res => {
-      dispatch(actFetchUser(res.data));
+    return callApi(apis.USER_PROFILE_API, 'GET', null, null,{nickname: data})
+    .then(res => {
+      dispatch(actFetchUser(res.data))
     }).catch(err => {
-      console.log(err.message)});
+      dispatch(actSetLoginError(err.response.data))
+    })
   }
 }
+
+
+export const actFetchAdminRequest = () => {
+  return dispatch => {
+    return callApi(apis.ADMIN_API, 'GET', null, {Authorization: `Bearer ${JSON.parse(localStorage.getItem('jwt'))}`})
+    .then(res => {
+      dispatch(actFetchAdmin(res.data));
+    })
+    .catch(err => {
+      console.log(err.message)
+    });
+  }
+}
+
+
+// ---------------------------------------------------------------------------------
 
 export const actSetLoginError = (error) => {
   return {
@@ -59,15 +68,29 @@ export const actFetchToken = (token) => {
   }
 }
 
+export const actFetchProfile = (data) => {
+  return {
+    type: types.USER_INFO,
+    profile: data,
+  }
+}
+
 export const actDeleteToken = () => {
   return {
     type: types.DELETE_TOKEN,
   }
 }
 
+export const actFetchAdmin = (data) => {
+  return {
+    type: types.ADMIN_INFO,
+    payload: data,
+  }
+}
+
 export const actFetchUser = (data) => {
   return {
     type: types.USER_INFO,
-    user: data,
+    payload: data,
   }
 }

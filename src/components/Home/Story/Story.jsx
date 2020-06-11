@@ -94,9 +94,9 @@ function Story(props) {
     <div className={cls.wrapper}>
       <Slider {...settings}>
         {
-          users.map(user => (
-            <div className={cls.info}>
-              <img src={user.imgUrl}/>
+          users.map((user,index) => (
+            <div className={cls.info} key={index}>
+              <img src={user.imgUrl} alt='user_image'/>
               <span className={cls.name} >{user.name}</span>
             </div>
           ))

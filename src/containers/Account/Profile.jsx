@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useParams } from "react-router-dom";
 import {connect} from 'react-redux';
@@ -9,35 +9,48 @@ import Navigation from '../../components/Profile/Navigation';
 import Post from '../../components/Profile/Post';
 import Upload from '../../components/Profile/Upload';
 import UploadModal from '../../components/Profile/Modal/Upload';
+import { actFetchUserProfileRequest } from '../../store/actions';
 
 Account.propTypes = {
   
 };
 
 function Account(props) {
-  const postList = [1,2,3,4,5,6,7];
-  const [showModal, setShowModal] = useState(false)
+  const [showModal, setShowModal] = useState(false);
+  const [userPofile, setUserProfile] = useState(null);
   const {nickname} = useParams();
-  const {user} = props;
+  const {user, fetchUser } = props;
   const [component, setComponent] = useState(1);
 
   function handleChangeComponent(value) {
     setComponent(value);
   }
 
-  function handleShowModal() {
-    setShowModal(true)
+  function handleModal() {
+    setShowModal(!showModal)
+  }
+
+  useEffect(() => {
+    fetchUser(nickname);
+  }, [])
+
+  useEffect(() => {
+    setUserProfile(user)
+  }, [user])
+
+  if (!userPofile) {
+    return <h1>Loading</h1>
   }
 
   return (
     <div className='profile-page'>
       {
-        showModal && <UploadModal />
+        showModal && <UploadModal handleModal={handleModal}/>
       }
       <Container>
         <Row>
           <Col>
-            <Header userInfo={user}/>
+            <Header userInfo={user.user}/>
           </Col>
         </Row>
         <Row>
@@ -48,9 +61,9 @@ function Account(props) {
         {
           component === 1 && <Row>
             { 
-              postList.map(post => (
+              user.images.map((image,index) => (
                 <Col xs='4'>
-                  <Post />
+                  <Post image={image} key={index}/>
                 </Col>
               ))
             }
@@ -59,7 +72,7 @@ function Account(props) {
         {
           component === 2 && <Row>
             <Col>
-              <Upload handleShowModal={handleShowModal}/>
+              <Upload handleModal={handleModal}/>
             </Col>
           </Row>
         }
@@ -70,8 +83,16 @@ function Account(props) {
 
 const mapStateToProps = state => {
   return {
-    user: state.user
+    user: state.user,
   }
 }
 
-export default connect(mapStateToProps, null)(Account);
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchUser: (data) => {
+      dispatch(actFetchUserProfileRequest(data))
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Account);

@@ -1,13 +1,12 @@
 const express = require('express');
-const multer = require('multer');
 
 const router = express.Router();
 const controller = require('../controllers/userController');
 const passport = require('../middlewares/passportMiddleware');
 
-router.get('/getUser', passport.authenticate('jwt', { session: false }), controller.getUser);
-router.post('/postImage', controller.postImage);
+router.get('/admin', passport.authenticate('jwt', { session: false }), controller.getAdmin);
+router.post('/admin/image', passport.authenticate('jwt', { session: false }), controller.postImage);
 
-
+router.get('/user/profile', controller.getUserProfile);
 
 module.exports = router;

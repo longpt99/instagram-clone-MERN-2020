@@ -9,25 +9,16 @@ Header.propTypes = {
 
 function Header(props) {
   const {userInfo} = props;
-  const [user, setUser] = useState(null);
-
-  useEffect(() => {
-    setUser(userInfo)
-  }, [userInfo])
-
-  if(!user) {
-    return <h1>Loading</h1>
-  }
 
   return (
     <header className={styles.profile_header}>
       <div className={styles.profile_avatar}>
-        <img src={user.profilePictureUrl} alt="" srcset=""/>
+        <img src={userInfo.profilePictureUrl} alt="profile_picture" />
         <div></div>
       </div>
       <div className={styles.profile_primary}>
         <div className={styles.profile_nickname}>
-          <span>{user.nickname}</span>
+          <span>{userInfo.nickname}</span>
           <Link to='/accounts/setting' title='chỉnh sửa trang cá nhân'>
             <ion-icon name="settings-outline"></ion-icon>
           </Link>
@@ -44,7 +35,7 @@ function Header(props) {
           </li>
         </ul>
         <div className={styles.profile_description}>
-          <span className={styles.profile_description_name}>{user.name}</span>
+          <span className={styles.profile_description_name}>{userInfo.name}</span>
           <br />
           <span>
             Phương Thành Long | 🇻🇳

@@ -1,13 +1,15 @@
 import { combineReducers } from 'redux';
 
-import user from './userReducer';
+import admin from './adminReducer';
 import token from './tokenReducer';
 import error from './errorReducer';
+import user from './userReducer';
 
 const appReducers = combineReducers({
-  user,
+  admin,
   token,
   error,
+  user,
 })
 
 export default appReducers;
