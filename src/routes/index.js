@@ -7,6 +7,8 @@ import {
 import PublicRoute from './publicRoute';
 import PrivateRoute from './privateRoute';
 
+import NavigationProfile from '../components/Profile/Navigation';
+
 import { Login, Register, Home, Header, Profile } from '../containers';
 
 const Routes = () => {
@@ -17,7 +19,7 @@ const Routes = () => {
       <Route>
         <Header />
         <PrivateRoute exact path='/' component={Home} />
-        <PrivateRoute exact path='/:nickname' component={Profile} />
+        <PrivateRoute path='/:nickname' component={Profile}/>
       </Route>
     </Switch>
   )

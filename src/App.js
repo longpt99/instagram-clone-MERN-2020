@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Button, Form, FormGroup, Label, Input } from "reactstrap";
 import { connect } from 'react-redux';
 import {
@@ -14,8 +14,21 @@ import DownloadApp from './components/Auth/Download/App';
 import Routes from "./routes";
 import { Header } from './containers';
 
+import { actFetchAdminRequest } from './store/actions';
+
 function App(props) {
-  const { token } = props;
+  const {fetchAdmin, admin, token} = props;
+
+  useEffect(() => {
+    fetchAdmin();
+  }, [token]);
+
+  if (token) {
+    if(!admin) {
+      return <h1>Loading</h1>
+    }
+  }
+  
   return (
     <BrowserRouter>
       { !token &&
@@ -46,11 +59,15 @@ function App(props) {
 const mapStateToProps = state => {
   return {
     token: state.token,
+    admin: state.admin,
   }
 }
 
 const mapDispatchToProps = (dispatch, props) => {
   return {
+    fetchAdmin: () => {
+      dispatch(actFetchAdminRequest())
+    }
   }
 }
 

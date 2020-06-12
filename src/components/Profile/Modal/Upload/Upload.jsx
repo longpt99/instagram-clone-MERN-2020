@@ -7,6 +7,7 @@ import FilePondPluginImagePreview from 'filepond-plugin-image-preview'
 import FilePondPluginImageResize from 'filepond-plugin-image-resize';
 import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css'
 import { FilePond, registerPlugin } from 'react-filepond';
+import * as apis from '../../../../constants/Api';
 
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview, FilePondPluginImageResize)
 
@@ -42,13 +43,12 @@ function Upload(props) {
           name={"file"}
           server = {{
             process: {
-                url: '/users/postImage',
+                url: apis.ADMIN_UPLOAD_IMAGE_API,
                 method: 'POST',
                 withCredentials: false,
                 headers: {
                   Authorization: `Bearer ${JSON.parse(localStorage.getItem('jwt'))}`
                 },
-                // timeout: 7000,
                 onload: null,
                 onerror: null,
                 ondata: (formData) => {

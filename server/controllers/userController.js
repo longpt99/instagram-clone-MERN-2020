@@ -45,5 +45,4 @@ module.exports.getUserProfile = async (req, res) => {
   const user = await User.findOne({nickname});
   const images = await Post.find({userId: user.id});
   res.json({images, user});
-  // const images = await Post.findOne({userId: });
 }

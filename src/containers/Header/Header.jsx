@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Navbar from '../../components/Header/Navbar';
 
-import {actDeleteToken, actFetchAdminRequest} from '../../store/actions'
+import {actDeleteToken} from '../../store/actions'
 
 HeaderContainer.propTypes = {
   
@@ -17,12 +17,8 @@ function HeaderContainer(props) {
     deleteToken();
   }
 
-  useEffect(() => {
-    fetchAdmin();
-  }, [])
-
   return (
-    <Navbar handleLogout={handleLogout} userInfo={admin}/>
+    <Navbar handleLogout={handleLogout} adminInfo={admin}/>
   );
 }
 
@@ -37,10 +33,6 @@ const mapDispatchToProps = dispatch => {
     deleteToken: () => {
       dispatch(actDeleteToken());
     },
-
-    fetchAdmin: () => {
-      dispatch(actFetchAdminRequest());
-    }
   }
 }
 

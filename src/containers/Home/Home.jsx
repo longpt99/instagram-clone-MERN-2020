@@ -24,7 +24,6 @@ function HomeContainer(props) {
     setHideModal(!value)
   }
 
-
   return (
     <div className='home-page'>
       {
@@ -45,7 +44,7 @@ function HomeContainer(props) {
             </Row>
           </Col>
           <Col>
-            <FollowerSuggestion userInfo={admin}/>
+            <FollowerSuggestion adminInfo={admin}/>
           </Col>
         </Row>
       </Container>

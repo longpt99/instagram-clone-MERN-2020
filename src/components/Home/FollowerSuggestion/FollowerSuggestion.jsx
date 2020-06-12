@@ -9,28 +9,20 @@ Follow.propTypes = {
 };
 
 function Follow(props) {
-  const { userInfo } = props;
-  const [user, setUser] = useState(null);
+  const { adminInfo } = props;
 
-  useEffect(() => {
-    setUser(userInfo)
-  }, [userInfo])
-
-  if(!user) {
-    return <h1>Loading</h1>
-  }
   return (
     <div className='follow-wrapper'>
       <header className='user'>
-        <a className='user-avatar' href="#">
-          <img src={userInfo.profilePictureUrl} alt="user"/>
-        </a>
+        <Link className='user-avatar' to={`/${adminInfo.nickname}`}>
+          <img src={adminInfo.profilePictureUrl} alt="user"/>
+        </Link>
         <div className='user-info'>
-          <a href="#" className='user-nickname'>
-            <span>{user.nickname}</span>
-          </a>
+          <Link to={`/${adminInfo.nickname}`} className='user-nickname'>
+            <span>{adminInfo.nickname}</span>
+          </Link>
           <span className='user-name'>
-            {user.name}
+            {adminInfo.name}
           </span>
         </div>
       </header>

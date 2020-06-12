@@ -19,7 +19,7 @@ function Account(props) {
   const [showModal, setShowModal] = useState(false);
   const [userPofile, setUserProfile] = useState(null);
   const {nickname} = useParams();
-  const {user, fetchUser } = props;
+  const {user, fetchUser, admin } = props;
   const [component, setComponent] = useState(1);
 
   function handleChangeComponent(value) {
@@ -55,7 +55,7 @@ function Account(props) {
         </Row>
         <Row>
           <Col>
-            <Navigation handleChangeComponent={handleChangeComponent}/>
+            <Navigation handleChangeComponent={handleChangeComponent} adminUrl={admin.nickname}/>
           </Col>
         </Row>
         {
@@ -84,6 +84,7 @@ function Account(props) {
 const mapStateToProps = state => {
   return {
     user: state.user,
+    admin: state.admin,
   }
 }
 
