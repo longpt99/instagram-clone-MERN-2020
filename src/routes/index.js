@@ -4,22 +4,21 @@ import {
   Route
 } from "react-router-dom";
 
-import PublicRoute from './publicRoute';
-import PrivateRoute from './privateRoute';
+import PublicRoute from './PublicRoute';
+import PrivateRoute from './PrivateRoute';
 
-import NavigationProfile from '../components/Profile/Navigation';
-
-import { Login, Register, Home, Header, Profile } from '../containers';
+import { Home, HeaderContainer, AuthPageContainer, ProfilePageContainer } from '../containers';
+// import {AuthPage, ProfilePage} from '../pages';
 
 const Routes = () => {
   return (
     <Switch>
-      <PublicRoute exact path='/login' component={Login} />
-      <PublicRoute exact path='/register' component={Register} />
+      <PublicRoute exact path='/login' component={AuthPageContainer} />
+      <PublicRoute exact path='/register' component={AuthPageContainer} />
       <Route>
-        <Header />
+        <HeaderContainer />
         <PrivateRoute exact path='/' component={Home} />
-        <PrivateRoute path='/:nickname' component={Profile}/>
+        <PrivateRoute path='/:nickname' component={ProfilePageContainer}/>
       </Route>
     </Switch>
   )

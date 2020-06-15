@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Container, Row, Col, Button, Form, FormGroup, Label, Input } from "reactstrap";
+import { Container, Row, Col} from "reactstrap";
 import { connect } from 'react-redux';
 import {
   BrowserRouter,
@@ -8,11 +8,7 @@ import {
 
 import './App.scss'
 
-import AuthImg from './components/Auth/Image';
-import ToggleForm from './components/Auth/ToggleForm';
-import DownloadApp from './components/Auth/Download/App';
 import Routes from "./routes";
-import { Header } from './containers';
 
 import { actFetchAdminRequest } from './store/actions';
 
@@ -23,6 +19,9 @@ function App(props) {
     fetchAdmin();
   }, [token]);
 
+  // if (true) {
+  // }
+
   if (token) {
     if(!admin) {
       return <h1>Loading</h1>
@@ -31,27 +30,7 @@ function App(props) {
   
   return (
     <BrowserRouter>
-      { !token &&
-        <div className='auth-page'>
-          <Container>
-            <Row>
-              <Col>
-                <AuthImg />
-              </Col>
-              <Col>
-                <Routes />
-                <ToggleForm />
-                <DownloadApp />
-              </Col>
-            </Row>
-          </Container>
-        </div>
-      }
-      {
-        token && <div>
-          <Routes />
-        </div>
-      }
+      <Routes />
     </BrowserRouter>
   );
 }

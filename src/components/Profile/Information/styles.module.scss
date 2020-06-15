@@ -1,0 +1,45 @@
+.profile_header {
+  display: flex;
+  padding: 2rem 4rem;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+
+  .profile_avatar {
+    img {
+      width: 150px;
+      height: 150px;
+      margin-right: 4rem;
+      border-radius: 999px;
+    }
+  }
+
+  .profile_primary {
+    width: 100%;
+    .profile_nickname {
+      display: flex;
+      font-size: 1.5rem;
+      a {
+        margin-left: 1rem;
+        display: inline-flex;
+        align-items: center;
+      }
+    }
+
+    .profile_title {
+      list-style-type: none;
+      display: flex;
+      justify-content: space-between;
+      padding: 0;
+      margin: 0.5rem 0;
+
+      .profile_common_title {
+        font-weight: 500;
+      }
+    }
+    .profile_description {
+      .profile_description_name {
+        font-weight: 500;
+      }
+    }
+  }
+}

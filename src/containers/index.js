@@ -1,5 +1,5 @@
-export { default as Login } from './Auth/Login';
-export { default as Register } from './Auth/Register';
+export { default as AuthPageContainer } from './Pages/Auth';
+export { default as ProfilePageContainer} from './Pages/Profile';
+
+export { default as HeaderContainer} from './Header/Header';
 export { default as Home } from './Home/Home';
-export { default as Header} from './Header/Header';
-export { default as Profile} from './Account/Profile';

@@ -1,8 +1,7 @@
 import React, {useState, useEffect} from "react";
-import { Col, Button, Form, FormGroup, Label, Input, Alert } from "reactstrap";
+import { Button, Form, FormGroup, Label, Input, Alert } from "reactstrap";
 import { Link } from "react-router-dom";
 
-import {checkValueToShowBtn} from '../../../../utils';
 
 import Facebook from '../../Facebook'
 
@@ -14,36 +13,11 @@ Login.defaultProps = {};
 
 
 export default function Login(props) {
-  let {error} = props;
-  const initInfo = {
-    email: '',
-    password: '',
-  };
-  const [showBtn, setShowBtn] = useState(false);
-  const [hidePassword, setHidePassword] = useState(true)
-  const [info, setInfo] = useState(initInfo);
-
-  function onHandleValueInput(e) {
-    const tempInfo = {...info}
-    const {name, value} = e.target;
-    tempInfo[name] = value;
-    setInfo(tempInfo);
-    const result = checkValueToShowBtn(tempInfo);
-    setShowBtn(result)
-  }
-
-  function onHandleSubmitForm(e) {
-    e.preventDefault();
-    props.onHandleInfo(info);
-  }
-
-  function onHandleHidePassword() {
-    setHidePassword(!hidePassword)
-  }
+  const {error, info, hidePassword, showBtn} = props;
 
   return (
     <div className='login-form'>
-      <Form onSubmit={onHandleSubmitForm}>
+      <Form onSubmit={props.onHandleSubmitForm}>
         <h1>Instagram</h1>
         {
           error && <Alert color="danger">
@@ -56,7 +30,7 @@ export default function Login(props) {
               type="text"
               name="email"
               value={info.email}
-              onChange={onHandleValueInput}
+              onChange={props.onHandleValueInput}
               required
             />
             <span className='form-label__text'>Số điện thoại, tên người đùng, hoặc email</span>
@@ -68,12 +42,12 @@ export default function Login(props) {
               type={hidePassword ? "password" : 'text'}
               name="password"  
               value={info.password}
-              onChange={onHandleValueInput}
+              onChange={props.onHandleValueInput}
               required
             />
             <span className='form-label__text'>Mật khẩu</span>
           </Label>
-          <ion-icon name={hidePassword ? "eye-outline" : "eye-off-outline"} onClick={onHandleHidePassword}></ion-icon>
+          <ion-icon name={hidePassword ? "eye-outline" : "eye-off-outline"} onClick={props.onHandleClickHidePassword}></ion-icon>
         </FormGroup>
         <Button color="primary" disabled={showBtn ? false : true }>Đăng nhập</Button>
         <span className="form-text">HOẶC</span>

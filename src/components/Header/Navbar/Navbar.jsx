@@ -17,19 +17,6 @@ function TopNav(props) {
     setOption(!option)
   }
 
-  function handleOutsideClick(e) {
-    // const {value} = e.target;
-    // console.log(value)
-    // if (value.length === 0) {
-      // setOption(!option)
-    //   return;
-    // }
-  }
-
-  function handleLogout() {
-    props.handleLogout();
-  }
-
   return (
     <div className={styles.header_nav}>
       <Container>
@@ -67,7 +54,7 @@ function TopNav(props) {
                     <ion-icon name="settings-outline"></ion-icon>
                     <span>Cài đặt</span>
                   </Link>
-                  <button value='btn' className={`${styles.btn_logout} ${styles.header_option_item}`} onClick={handleLogout} >
+                  <button value='btn' className={`${styles.btn_logout} ${styles.header_option_item}`} onClick={props.handleLogout} >
                     Đăng xuất
                   </button>
                 </div>
