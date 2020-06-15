@@ -1,39 +1,36 @@
 import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { connect, useSelector, useDispatch } from 'react-redux';
 import Navbar from '../../components/Header/Navbar';
 
 import {actDeleteToken} from '../../store/actions'
+import { useState } from 'react';
 
 HeaderContainer.propTypes = {
   
 };
 
 function HeaderContainer(props) {
-  const {deleteToken, admin, fetchAdmin} = props;
-  console.log(admin)
+  const admin = useSelector(state => state.users.admin);
+  const dispatch = useDispatch();
+  const [showOption, setShowOption] = useState(false);
 
-  function handleLogout() {
-    deleteToken();
+  function handleLogoutClick() {
+    dispatch(actDeleteToken());
+  }
+
+  function handleOptionClick() {
+    setShowOption(!showOption)
   }
 
   return (
-    <Navbar handleLogout={handleLogout} adminInfo={admin}/>
+    <Navbar
+      handleLogoutClick={handleLogoutClick}
+      handleOptionClick={handleOptionClick}
+      adminInfo={admin}
+      showOption={showOption}
+    />
   );
 }
 
-const mapStateToProps = state => {
-  return {
-    admin: state.admin
-  }
-}
-
-const mapDispatchToProps = dispatch => {
-  return {
-    deleteToken: () => {
-      dispatch(actDeleteToken());
-    },
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(HeaderContainer);
+export default HeaderContainer;

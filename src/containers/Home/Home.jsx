@@ -9,7 +9,7 @@ import Post from '../../components/Home/Post'
 import Story from '../../components/Home/Story'
 import Modal from '../../components/Home/Modal'
 
-import { actFetchUserRequest } from '../../store/actions';
+import { actFectchSuggestedUsersRequest } from '../../store/actions';
 
 
 HomeContainer.propTypes = {
@@ -17,12 +17,23 @@ HomeContainer.propTypes = {
 };
 
 function HomeContainer(props) {
-  const {admin} = props;
+  const {admin, fetchSuggestedUsers, suggestedUsers} = props;
+  const [suggestedUserList, setSuggestedUserList] = useState(suggestedUsers)
   const [isHideModal, setHideModal] = useState(true);
 
   function handleModal(value) {
     setHideModal(!value)
   }
+
+  useEffect(() => {
+    fetchSuggestedUsers();
+  }, [])
+
+  useEffect(() => {
+    setSuggestedUserList(suggestedUsers)
+  }, [suggestedUsers])
+
+  console.log(suggestedUserList)
 
   return (
     <div className='home-page'>
@@ -54,9 +65,18 @@ function HomeContainer(props) {
 
 const mapStateToProps = state => {
   return {
-    admin: state.admin
+    admin: state.admin,
+    suggestedUsers: state.suggestedUsers,
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchSuggestedUsers: () => {
+      dispatch(actFectchSuggestedUsersRequest())
+    }
   }
 }
 
 
-export default connect(mapStateToProps, null)(HomeContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(HomeContainer);

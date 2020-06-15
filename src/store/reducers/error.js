@@ -1,9 +1,9 @@
 import * as types from '../../constants/ActionType';
 
 const errorReducer = (state = null, action) => {
-  const { error } = action;
+  const { payload } = action;
   switch(action.type) {
-    case types.LOGIN_ERROR: return error;
+    case types.LOGIN_ERROR: return payload;
     default: return state;
   }
 };

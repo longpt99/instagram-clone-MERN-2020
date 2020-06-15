@@ -1,4 +1,4 @@
-import React from "react";
+import React, {lazy} from "react";
 import {
   Switch,
   Route
@@ -7,8 +7,11 @@ import {
 import PublicRoute from './PublicRoute';
 import PrivateRoute from './PrivateRoute';
 
-import { Home, HeaderContainer, AuthPageContainer, ProfilePageContainer } from '../containers';
-// import {AuthPage, ProfilePage} from '../pages';
+import { HeaderContainer} from '../containers';
+
+const HomePageContainer = lazy(() => import('../containers/Pages/Home'));
+const AuthPageContainer = lazy(() => import('../containers/Pages/Auth'));
+const ProfilePageContainer = lazy(() => import('../containers/Pages/Profile'));
 
 const Routes = () => {
   return (
@@ -17,7 +20,7 @@ const Routes = () => {
       <PublicRoute exact path='/register' component={AuthPageContainer} />
       <Route>
         <HeaderContainer />
-        <PrivateRoute exact path='/' component={Home} />
+        <PrivateRoute exact path='/' component={HomePageContainer} />
         <PrivateRoute path='/:nickname' component={ProfilePageContainer}/>
       </Route>
     </Switch>

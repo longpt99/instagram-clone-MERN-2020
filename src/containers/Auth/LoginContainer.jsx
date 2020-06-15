@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import {checkValueToShowBtn} from '../../utils';
 import LoginForm from '../../components/Auth/Login/Form';
-import { actFetchTokenRequest, actSetLoginError} from '../../store/actions';
+import { actFetchTokenRequest } from '../../store/actions';
 
 LoginContainer.propTypes = {
   
 };
 
 function LoginContainer(props) {
-  const { error } = props;
+  const error = useSelector(state => state.error)
+  const dispatch = useDispatch();
+
   const initInfo = {
     email: '',
     password: '',
@@ -32,8 +34,7 @@ function LoginContainer(props) {
 
   function onHandleSubmitForm(e) {
     e.preventDefault();
-    props.fetchToken(info);
-
+    dispatch(actFetchTokenRequest(info))
   }
 
   function onHandleClickHidePassword() {
@@ -54,21 +55,4 @@ function LoginContainer(props) {
   );
 }
 
-const mapStateToProps = state => {
-  return {
-    error: state.error,
-  }
-}
-
-const mapDispatchToProps = dispatch => {
-  return {
-    fetchToken : (data) => {
-      dispatch(actFetchTokenRequest(data));
-    },
-    setError : () => {
-      dispatch(actSetLoginError(null))
-    }
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(LoginContainer);
+export default LoginContainer;

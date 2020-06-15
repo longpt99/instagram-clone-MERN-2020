@@ -17,24 +17,10 @@ Upload.propTypes = {
 
 function Upload(props) {
   const [files, setFiles] = useState([])
-  const [caption, setCaption] = useState('');
-
-  function handleChangeInput(e) {
-    const {value} = e.target;
-    setCaption(value)
-  }
-
-  function handleHideModal(e) {
-    const {value} = e.target;
-    if (value === undefined) {
-      props.handleModal();
-      return;
-    }
-    console.log(value)
-  }
+  const {caption} = props;
   
   return (
-    <div className='modal_upload' onDoubleClick={handleHideModal}>
+    <div className='modal_upload' onDoubleClick={props.handleClickToHideModal}>
       <div className='modal_file'>
         <FilePond 
           files={files}
@@ -61,7 +47,7 @@ function Upload(props) {
           labelIdle='Kéo hoặc thả ảnh'
         />
       </div>
-      <textarea onChange={handleChangeInput}>
+      <textarea onChange={props.handleGetValueCaption}>
       </textarea>
     </div>
   );

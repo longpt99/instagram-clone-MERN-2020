@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, Suspense } from "react";
 import { Container, Row, Col} from "reactstrap";
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import {
   BrowserRouter,
   Switch,
@@ -9,45 +9,30 @@ import {
 import './App.scss'
 
 import Routes from "./routes";
-
 import { actFetchAdminRequest } from './store/actions';
 
 function App(props) {
-  const {fetchAdmin, admin, token} = props;
+  const admin = useSelector(state => state.users.admin);
+  const token = useSelector(state => state.token);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    fetchAdmin();
+    dispatch(actFetchAdminRequest());
   }, [token]);
-
-  // if (true) {
-  // }
 
   if (token) {
     if(!admin) {
-      return <h1>Loading</h1>
+      return <></>
     }
   }
   
   return (
-    <BrowserRouter>
-      <Routes />
-    </BrowserRouter>
+    <Suspense fallback={<div>Loading...</div>}>
+      <BrowserRouter>
+        <Routes />
+      </BrowserRouter>
+    </Suspense>
   );
 }
 
-const mapStateToProps = state => {
-  return {
-    token: state.token,
-    admin: state.admin,
-  }
-}
-
-const mapDispatchToProps = (dispatch, props) => {
-  return {
-    fetchAdmin: () => {
-      dispatch(actFetchAdminRequest())
-    }
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;

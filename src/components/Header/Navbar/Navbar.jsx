@@ -1,22 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styles from './styles.module.scss';
-import classNames from 'classnames';
 
-import { Container, Row, Col, Button } from "reactstrap";
+import { Container, Row, Col } from "reactstrap";
 
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import Search from '../Search/';
 
 function TopNav(props) {
-  const [option, setOption] = useState(false);
-  const { adminInfo } = props;
-
-  function handleClick(e) {
-    console.log(e.target.value)
-    setOption(!option)
-  }
-
+  const { adminInfo, showOption } = props;
+  console.log(adminInfo)
   return (
     <div className={styles.header_nav}>
       <Container>
@@ -41,11 +34,15 @@ function TopNav(props) {
               <Link to="/account/activity/">
                 <ion-icon name="heart-outline"></ion-icon>
               </Link>
-              <button onClick={handleClick} className={styles.btn_config}>
+              <button 
+                onClick={props.handleOptionClick}
+                onDoubleClick={props.handleDbOptionClick}
+                className={styles.btn_config}
+              >
                 <ion-icon name="person-circle-outline"></ion-icon>
               </button>
               {
-                option && <div className={styles.header_option}>
+                showOption && <div className={styles.header_option}>
                   <Link to={`/${adminInfo.nickname}`} className={styles.header_option_item}>
                     <ion-icon name="person-circle-outline"></ion-icon>
                     <span>Trang cá nhân</span>
@@ -54,7 +51,7 @@ function TopNav(props) {
                     <ion-icon name="settings-outline"></ion-icon>
                     <span>Cài đặt</span>
                   </Link>
-                  <button value='btn' className={`${styles.btn_logout} ${styles.header_option_item}`} onClick={props.handleLogout} >
+                  <button value='btn' className={`${styles.btn_logout} ${styles.header_option_item}`} onClick={props.handleLogoutClick} >
                     Đăng xuất
                   </button>
                 </div>

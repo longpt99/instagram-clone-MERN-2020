@@ -8,51 +8,41 @@ Navigation.propTypes = {
 };
 
 function Navigation(props) {
-  const {url , path} = useRouteMatch();
-  console.log(url, path)
-  const userUrl = useParams();
-  const postItem = useRef();
-  const {adminUrl} = props;
-  const [isFocus, setIsFocus] = useState(1);
-
-
-  function handleClickItem(value) {
-    setIsFocus(value)
-    props.handleChangeComponent(value)
-  }
+  const focus = useRef()
+  const {userUrl, adminUrl, subPage} = props;
 
   useEffect(() => {
-    postItem.current.focus();
+    focus.current.focus();
   }, [])
 
   return (
     <ul className={styles.nav_link}>
-      <li onClick={()=>handleClickItem(1)}> 
-        <Link to={`${url}`} className={`${styles.nav_item} ${isFocus === 1 ? styles.nav_item__focus : ''}`} ref={postItem}>
+      <li onClick={()=>props.handleClickItem(1)}> 
+        <Link to='#' className={`${styles.nav_item} ${subPage === 1 ? styles.nav_item__focus : ''}`} ref={focus}>
           <ion-icon name="grid-outline"></ion-icon>
           <span>Bài viết</span>
         </Link>
       </li>
       {
-        userUrl.nickname === adminUrl && <li onClick={()=>handleClickItem(2)}>
-          <Link to={`${url}/upload`} className={`${styles.nav_item} ${isFocus === 2 ? styles.nav_item__focus : ''}`}>
+        userUrl === adminUrl && <li onClick={()=>props.handleClickItem(2)}>
+          <Link to='#' className={`${styles.nav_item} ${subPage === 2 ? styles.nav_item__focus : ''}`}>
             <ion-icon name="cloud-upload-outline"></ion-icon>
             <span>Upload</span>
           </Link>
         </li>
       }
-      <li onClick={()=>handleClickItem(3)}>
-        <Link to={`${url}/saved`} className={`${styles.nav_item} ${isFocus === 3 ? styles.nav_item__focus : ''}`}>
+      <li onClick={()=>props.handleClickItem(3)}>
+        <Link to='#' className={`${styles.nav_item} ${subPage === 3 ? styles.nav_item__focus : ''}`}>
           <ion-icon name="bookmark-outline"></ion-icon>
           <span>Đã lưu</span>
         </Link>
       </li>
-      <li onClick={()=>handleClickItem(4)}>
-        <Link to={`${url}/tagged`} className={`${styles.nav_item} ${isFocus === 4 ? styles.nav_item__focus : ''}`}>
+      <li onClick={()=>props.handleClickItem(4)}>
+        <Link to='#' className={`${styles.nav_item} ${subPage === 4 ? styles.nav_item__focus : ''}`}>
           <ion-icon name="people-outline"></ion-icon>
           <span>Được tag</span>
         </Link>
-      </li>
+       </li>
     </ul>
   );
 }

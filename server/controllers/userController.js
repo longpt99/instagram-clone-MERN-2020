@@ -46,3 +46,13 @@ module.exports.getUserProfile = async (req, res) => {
   const images = await Post.find({userId: userInfo.id});
   res.json({images, userInfo});
 }
+
+module.exports.getSuggestedUsers = async (req, res) => {
+  const {followingId, id} = req.user;
+  await User.find((err, result) => {
+    const filterUsers = result.filter(user => {
+      if (!(followingId.includes(user.id)) && id !== user.id) return user; 
+    })
+    res.json(filterUsers.slice(0,5));
+  });
+}
