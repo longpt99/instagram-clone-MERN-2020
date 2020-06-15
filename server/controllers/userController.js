@@ -42,7 +42,7 @@ module.exports.postImage = async (req, res) => {
 
 module.exports.getUserProfile = async (req, res) => {
   const {nickname} = req.query;
-  const user = await User.findOne({nickname});
-  const images = await Post.find({userId: user.id});
-  res.json({images, user});
+  const userInfo = await User.findOne({nickname});
+  const images = await Post.find({userId: userInfo.id});
+  res.json({images, userInfo});
 }
