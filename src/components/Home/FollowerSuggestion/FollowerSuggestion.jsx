@@ -9,8 +9,8 @@ Follow.propTypes = {
 };
 
 function Follow(props) {
-  const { adminInfo } = props;
-
+  const { adminInfo, suggestedUsers } = props;
+  debugger;
   return (
     <div className='follow-wrapper'>
       <header className='user'>
@@ -31,61 +31,21 @@ function Follow(props) {
           <span>Gợi ý cho bạn</span>
           <Link to='/explore/people/'>Xem tất cả</Link>
         </div>
-        <div className='follow-user-list'>
-          <div className='follow-user-info'>
-            <Link to='#'>
-              <img src="https://loremflickr.com/30/30" alt="user"/>
-            </Link>
-            <div className='follow-user-item'>
-              <Link to='#'>nickname</Link>
-              <button>Theo dõi</button>
+        {
+          suggestedUsers.map((user, index) => (
+            <div className='follow-user-list'>
+              <div className='follow-user-info'>
+                <Link to={`/${user.nickname}`}>
+                  <img src={user.profilePictureUrl} alt="user"/>
+                </Link>
+                <div className='follow-user-item'>
+                  <Link to={`/${user.nickname}`}>{user.nickname}</Link>
+                  <button>Theo dõi</button>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-        <div className='follow-user-list'>
-          <div className='follow-user-info'>
-            <Link to='#'>
-              <img src="https://loremflickr.com/30/30" alt="user"/>
-            </Link>
-            <div className='follow-user-item'>
-              <Link to='#'>nickname</Link>
-              <button>Theo dõi</button>
-            </div>
-          </div>
-        </div>
-        <div className='follow-user-list'>
-          <div className='follow-user-info'>
-            <Link to='#'>
-              <img src="https://loremflickr.com/30/30" alt="user"/>
-            </Link>
-            <div className='follow-user-item'>
-              <Link to='#'>nickname</Link>
-              <button>Theo dõi</button>
-            </div>
-          </div>
-        </div>
-        <div className='follow-user-list'>
-          <div className='follow-user-info'>
-            <Link to='#'>
-              <img src="https://loremflickr.com/30/30" alt="user"/>
-            </Link>
-            <div className='follow-user-item'>
-              <Link to='#'>nickname</Link>
-              <button>Theo dõi</button>
-            </div>
-          </div>
-        </div>
-        <div className='follow-user-list'>
-          <div className='follow-user-info'>
-            <Link to='#'>
-              <img src="https://loremflickr.com/30/30" alt="user"/>
-            </Link>
-            <div className='follow-user-item'>
-              <Link to='#'>nickname</Link>
-              <button>Theo dõi</button>
-            </div>
-          </div>
-        </div>
+          ))
+        }
       </div>
       <footer className='footer'>
         <span>

@@ -56,3 +56,12 @@ module.exports.getSuggestedUsers = async (req, res) => {
     res.json(filterUsers.slice(0,5));
   });
 }
+
+module.exports.sendFollowUser = async (req, res) => {
+  // const idAdmin = req.user;
+  // const {idUser} = req.body
+  // await User.findByIdAndUpdate(idAdmin, {
+  //   followingId: 
+  // })
+  console.log('test');
+}

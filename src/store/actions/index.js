@@ -60,6 +60,17 @@ export const actFectchSuggestedUsersRequest = () => {
   }
 }
 
+export const actSendFollowUserRequest = (id) => {
+  return dispatch => {
+    return callApi(apis.SEND_FOLLOW_USER, 'POST', id, {Authorization: `Bearer ${JSON.parse(localStorage.getItem('jwt'))}`})
+    .then(res => {
+      console.log(res.response.data)
+    })
+    .catch(err => {
+      console.log(err.message)
+    })
+  }
+}
 
 
 

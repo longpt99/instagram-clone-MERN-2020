@@ -8,6 +8,7 @@ router.get('/admin', passport.authenticate('jwt', { session: false }), controlle
 router.post('/admin/image', passport.authenticate('jwt', { session: false }), controller.postImage);
 
 router.get('/user/profile', controller.getUserProfile);
-router.get('/suggested', passport.authenticate('jwt', { session: false }),controller.getSuggestedUsers)
+router.get('/suggested', passport.authenticate('jwt', { session: false }),controller.getSuggestedUsers);
+router.post('/user/send-request', passport.authenticate('jwt', { session: false }),controller.sendFollowUser);
 
 module.exports = router;

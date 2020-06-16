@@ -1,38 +1,15 @@
 import React, {useState} from "react";
 import { Button, Form, FormGroup, Label, Input, Alert } from "reactstrap";
-import {checkValueToShowBtn} from '../../../../utils';
 
 import Facebook from '../../Facebook';
 import './Register.scss';
 
 export default function Register(props) {
-  const {error} = props;
-  const initInfo = {
-    name: '',
-    email: '',
-    nickname: '',
-    password: '',
-  };
-  const [info, setInfo] = useState(initInfo);
-  const [showBtn, setShowBtn] = useState(false);
-
-  function onHandleValueInput(e) {
-    const tempInfo = {...info}
-    const {name, value} = e.target;
-    tempInfo[name] = value;
-    setInfo(tempInfo);
-    const result = checkValueToShowBtn(tempInfo);
-    setShowBtn(result)
-  }
-  
-  function onHandleSubmitForm(e) {
-    e.preventDefault();
-    props.onHandleInfo(info);
-  }
+  const {error, showBtn, info} = props;
   
   return (
     <div className='login-form'>
-      <Form onSubmit={onHandleSubmitForm}>
+      <Form onSubmit={props.handleSubmitForm}>
         <h1>Instagram</h1>
         <Facebook registerForm={true}/>
         <span className="form-text">HOẶC</span>
@@ -48,7 +25,7 @@ export default function Register(props) {
               type="text"
               name="email"
               value={info.email}
-              onChange={onHandleValueInput}
+              onChange={props.handleValueInput}
             />
             <span className='form-label__text'>Số di động hoặc email</span>
           </Label>
@@ -60,7 +37,7 @@ export default function Register(props) {
               type="text" 
               name="name"  
               value={info.name}
-              onChange={onHandleValueInput}
+              onChange={props.handleValueInput}
             />
             <span className='form-label__text'>Tên đầy đủ</span>
           </Label>
@@ -72,7 +49,7 @@ export default function Register(props) {
               type="text" 
               name="nickname"  
               value={info.nickname}
-              onChange={onHandleValueInput}
+              onChange={props.handleValueInput}
             />
             <span className='form-label__text'>Tên người dùng</span>
           </Label>
@@ -84,7 +61,7 @@ export default function Register(props) {
               type="password" 
               name="password"  
               value={info.password}
-              onChange={onHandleValueInput}
+              onChange={props.handleValueInput}
             />
             <span className='form-label__text'>Mật khẩu</span>
           </Label>

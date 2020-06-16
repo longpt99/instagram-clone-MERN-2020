@@ -4,6 +4,7 @@ var initialState = {
   admin: null,
   user: null,
   list: [],
+  suggestion: [],
 };
 
 var userReducer = (state = initialState, action) => {
@@ -16,6 +17,11 @@ var userReducer = (state = initialState, action) => {
       userList.push(payload);
       return {...state, list: userList}
     };
+    case types.SUGGESTED_USER: {
+      let suggestedUsers = [...state.suggestion];
+      suggestedUsers = [...payload];
+      return {...state, suggestion: suggestedUsers}
+    }
     default: return state;
   }
 }

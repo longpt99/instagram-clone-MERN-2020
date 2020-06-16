@@ -8,7 +8,7 @@ Information.propTypes = {
 };
 
 function Information(props) {
-  const {userInfo} = props;
+  const {userInfo, countPost} = props;
 
   return (
     <header className={styles.profile_header}>
@@ -25,13 +25,13 @@ function Information(props) {
         </div>
         <ul className={styles.profile_title}>
           <li>
-            <span><span className={styles.profile_common_title}>6 </span>bài viết</span>
+            <span><span className={styles.profile_common_title}>{countPost} </span>bài viết</span>
           </li>
           <li>
-            <Link><span className={styles.profile_common_title}>250 </span>người theo dõi</Link>
+            <Link><span className={styles.profile_common_title}>{userInfo.followersId.length} </span>người theo dõi</Link>
           </li>
           <li>
-            <Link>Đang theo dõi <span className={styles.profile_common_title}>100 </span>người dùng</Link>
+            <Link>Đang theo dõi <span className={styles.profile_common_title}>{userInfo.followingId.length} </span>người dùng</Link>
           </li>
         </ul>
         <div className={styles.profile_description}>

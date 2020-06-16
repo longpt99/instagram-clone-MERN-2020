@@ -5,4 +5,5 @@ export const USER_API = 'users/user';
 export const ADMIN_UPLOAD_IMAGE_API = 'users/admin/image';
 export const USER_PROFILE_API = 'users/user/profile';
 export const SUGGESTED_USERS = 'users/suggested';
+export const SEND_FOLLOW_USER = 'users/user/send-request';
 

@@ -9,7 +9,7 @@ InformationContainer.propTypes = {
 
 function InformationContainer(props) {
   const user = useSelector(state => state.users.user)
-  return <ProfileInformation userInfo={user.userInfo}/>
+  return <ProfileInformation userInfo={user.userInfo} countPost={user.images.length}/>
 }
 
 export default InformationContainer;
