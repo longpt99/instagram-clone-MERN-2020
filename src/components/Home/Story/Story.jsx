@@ -17,69 +17,69 @@ function NextButton({ onClick }) {
 }
 
 function Story(props) {
-  const users = [
+  // const users = [
     
-    {
-      name: 'Long',
-      imgUrl: 'https://instagram.fhan5-4.fna.fbcdn.net/v/t51.2885-19/s150x150/91239910_211424973256450_2989229025345404928_n.jpg?_nc_ht=instagram.fhan5-4.fna.fbcdn.net&_nc_ohc=UEBKyj07fnEAX8ZR0h_&oh=fcb687970cccf8916d8ae72a4965d92f&oe=5F02434C'
-    },
-    {
-      name: 'Long',
-      imgUrl: 'https://instagram.fhan5-4.fna.fbcdn.net/v/t51.2885-19/s150x150/91239910_211424973256450_2989229025345404928_n.jpg?_nc_ht=instagram.fhan5-4.fna.fbcdn.net&_nc_ohc=UEBKyj07fnEAX8ZR0h_&oh=fcb687970cccf8916d8ae72a4965d92f&oe=5F02434C'
-    },
-    {
-      name: 'Long',
-      imgUrl: 'https://instagram.fhan5-4.fna.fbcdn.net/v/t51.2885-19/s150x150/91239910_211424973256450_2989229025345404928_n.jpg?_nc_ht=instagram.fhan5-4.fna.fbcdn.net&_nc_ohc=UEBKyj07fnEAX8ZR0h_&oh=fcb687970cccf8916d8ae72a4965d92f&oe=5F02434C'
-    },
-    {
-      name: 'Long',
-      imgUrl: 'https://instagram.fhan5-4.fna.fbcdn.net/v/t51.2885-19/s150x150/91239910_211424973256450_2989229025345404928_n.jpg?_nc_ht=instagram.fhan5-4.fna.fbcdn.net&_nc_ohc=UEBKyj07fnEAX8ZR0h_&oh=fcb687970cccf8916d8ae72a4965d92f&oe=5F02434C'
-    },
-    {
-      name: 'Long',
-      imgUrl: 'https://instagram.fhan5-4.fna.fbcdn.net/v/t51.2885-19/s150x150/91239910_211424973256450_2989229025345404928_n.jpg?_nc_ht=instagram.fhan5-4.fna.fbcdn.net&_nc_ohc=UEBKyj07fnEAX8ZR0h_&oh=fcb687970cccf8916d8ae72a4965d92f&oe=5F02434C'
-    },
-    {
-      name: 'Long',
-      imgUrl: 'https://instagram.fhan5-4.fna.fbcdn.net/v/t51.2885-19/s150x150/91239910_211424973256450_2989229025345404928_n.jpg?_nc_ht=instagram.fhan5-4.fna.fbcdn.net&_nc_ohc=UEBKyj07fnEAX8ZR0h_&oh=fcb687970cccf8916d8ae72a4965d92f&oe=5F02434C'
-    },
-    {
-      name: 'Long',
-      imgUrl: 'https://instagram.fhan5-4.fna.fbcdn.net/v/t51.2885-19/s150x150/91239910_211424973256450_2989229025345404928_n.jpg?_nc_ht=instagram.fhan5-4.fna.fbcdn.net&_nc_ohc=UEBKyj07fnEAX8ZR0h_&oh=fcb687970cccf8916d8ae72a4965d92f&oe=5F02434C'
-    },
-    {
-      name: 'Long',
-      imgUrl: 'https://instagram.fhan5-4.fna.fbcdn.net/v/t51.2885-19/s150x150/91239910_211424973256450_2989229025345404928_n.jpg?_nc_ht=instagram.fhan5-4.fna.fbcdn.net&_nc_ohc=UEBKyj07fnEAX8ZR0h_&oh=fcb687970cccf8916d8ae72a4965d92f&oe=5F02434C'
-    },
-    {
-      name: 'Long',
-      imgUrl: 'https://instagram.fhan5-4.fna.fbcdn.net/v/t51.2885-19/s150x150/91239910_211424973256450_2989229025345404928_n.jpg?_nc_ht=instagram.fhan5-4.fna.fbcdn.net&_nc_ohc=UEBKyj07fnEAX8ZR0h_&oh=fcb687970cccf8916d8ae72a4965d92f&oe=5F02434C'
-    },
-    {
-      name: 'Long',
-      imgUrl: 'https://instagram.fhan5-4.fna.fbcdn.net/v/t51.2885-19/s150x150/91239910_211424973256450_2989229025345404928_n.jpg?_nc_ht=instagram.fhan5-4.fna.fbcdn.net&_nc_ohc=UEBKyj07fnEAX8ZR0h_&oh=fcb687970cccf8916d8ae72a4965d92f&oe=5F02434C'
-    },
-    {
-      name: 'Long',
-      imgUrl: 'https://instagram.fhan5-4.fna.fbcdn.net/v/t51.2885-19/s150x150/91239910_211424973256450_2989229025345404928_n.jpg?_nc_ht=instagram.fhan5-4.fna.fbcdn.net&_nc_ohc=UEBKyj07fnEAX8ZR0h_&oh=fcb687970cccf8916d8ae72a4965d92f&oe=5F02434C'
-    },
-    {
-      name: 'Long',
-      imgUrl: 'https://instagram.fhan5-4.fna.fbcdn.net/v/t51.2885-19/s150x150/91239910_211424973256450_2989229025345404928_n.jpg?_nc_ht=instagram.fhan5-4.fna.fbcdn.net&_nc_ohc=UEBKyj07fnEAX8ZR0h_&oh=fcb687970cccf8916d8ae72a4965d92f&oe=5F02434C'
-    },
-    {
-      name: 'Long',
-      imgUrl: 'https://instagram.fhan5-4.fna.fbcdn.net/v/t51.2885-19/s150x150/91239910_211424973256450_2989229025345404928_n.jpg?_nc_ht=instagram.fhan5-4.fna.fbcdn.net&_nc_ohc=UEBKyj07fnEAX8ZR0h_&oh=fcb687970cccf8916d8ae72a4965d92f&oe=5F02434C'
-    },
-    {
-      name: 'Long',
-      imgUrl: 'https://instagram.fhan5-4.fna.fbcdn.net/v/t51.2885-19/s150x150/91239910_211424973256450_2989229025345404928_n.jpg?_nc_ht=instagram.fhan5-4.fna.fbcdn.net&_nc_ohc=UEBKyj07fnEAX8ZR0h_&oh=fcb687970cccf8916d8ae72a4965d92f&oe=5F02434C'
-    },
-    {
-      name: 'Long',
-      imgUrl: 'https://instagram.fhan5-4.fna.fbcdn.net/v/t51.2885-19/s150x150/91239910_211424973256450_2989229025345404928_n.jpg?_nc_ht=instagram.fhan5-4.fna.fbcdn.net&_nc_ohc=UEBKyj07fnEAX8ZR0h_&oh=fcb687970cccf8916d8ae72a4965d92f&oe=5F02434C'
-    },
-  ];
+  //   {
+  //     name: 'Long',
+  //     imgUrl: 'https://instagram.fhan5-4.fna.fbcdn.net/v/t51.2885-19/s150x150/91239910_211424973256450_2989229025345404928_n.jpg?_nc_ht=instagram.fhan5-4.fna.fbcdn.net&_nc_ohc=UEBKyj07fnEAX8ZR0h_&oh=fcb687970cccf8916d8ae72a4965d92f&oe=5F02434C'
+  //   },
+  //   {
+  //     name: 'Long',
+  //     imgUrl: 'https://instagram.fhan5-4.fna.fbcdn.net/v/t51.2885-19/s150x150/91239910_211424973256450_2989229025345404928_n.jpg?_nc_ht=instagram.fhan5-4.fna.fbcdn.net&_nc_ohc=UEBKyj07fnEAX8ZR0h_&oh=fcb687970cccf8916d8ae72a4965d92f&oe=5F02434C'
+  //   },
+  //   {
+  //     name: 'Long',
+  //     imgUrl: 'https://instagram.fhan5-4.fna.fbcdn.net/v/t51.2885-19/s150x150/91239910_211424973256450_2989229025345404928_n.jpg?_nc_ht=instagram.fhan5-4.fna.fbcdn.net&_nc_ohc=UEBKyj07fnEAX8ZR0h_&oh=fcb687970cccf8916d8ae72a4965d92f&oe=5F02434C'
+  //   },
+  //   {
+  //     name: 'Long',
+  //     imgUrl: 'https://instagram.fhan5-4.fna.fbcdn.net/v/t51.2885-19/s150x150/91239910_211424973256450_2989229025345404928_n.jpg?_nc_ht=instagram.fhan5-4.fna.fbcdn.net&_nc_ohc=UEBKyj07fnEAX8ZR0h_&oh=fcb687970cccf8916d8ae72a4965d92f&oe=5F02434C'
+  //   },
+  //   {
+  //     name: 'Long',
+  //     imgUrl: 'https://instagram.fhan5-4.fna.fbcdn.net/v/t51.2885-19/s150x150/91239910_211424973256450_2989229025345404928_n.jpg?_nc_ht=instagram.fhan5-4.fna.fbcdn.net&_nc_ohc=UEBKyj07fnEAX8ZR0h_&oh=fcb687970cccf8916d8ae72a4965d92f&oe=5F02434C'
+  //   },
+  //   {
+  //     name: 'Long',
+  //     imgUrl: 'https://instagram.fhan5-4.fna.fbcdn.net/v/t51.2885-19/s150x150/91239910_211424973256450_2989229025345404928_n.jpg?_nc_ht=instagram.fhan5-4.fna.fbcdn.net&_nc_ohc=UEBKyj07fnEAX8ZR0h_&oh=fcb687970cccf8916d8ae72a4965d92f&oe=5F02434C'
+  //   },
+  //   {
+  //     name: 'Long',
+  //     imgUrl: 'https://instagram.fhan5-4.fna.fbcdn.net/v/t51.2885-19/s150x150/91239910_211424973256450_2989229025345404928_n.jpg?_nc_ht=instagram.fhan5-4.fna.fbcdn.net&_nc_ohc=UEBKyj07fnEAX8ZR0h_&oh=fcb687970cccf8916d8ae72a4965d92f&oe=5F02434C'
+  //   },
+  //   {
+  //     name: 'Long',
+  //     imgUrl: 'https://instagram.fhan5-4.fna.fbcdn.net/v/t51.2885-19/s150x150/91239910_211424973256450_2989229025345404928_n.jpg?_nc_ht=instagram.fhan5-4.fna.fbcdn.net&_nc_ohc=UEBKyj07fnEAX8ZR0h_&oh=fcb687970cccf8916d8ae72a4965d92f&oe=5F02434C'
+  //   },
+  //   {
+  //     name: 'Long',
+  //     imgUrl: 'https://instagram.fhan5-4.fna.fbcdn.net/v/t51.2885-19/s150x150/91239910_211424973256450_2989229025345404928_n.jpg?_nc_ht=instagram.fhan5-4.fna.fbcdn.net&_nc_ohc=UEBKyj07fnEAX8ZR0h_&oh=fcb687970cccf8916d8ae72a4965d92f&oe=5F02434C'
+  //   },
+  //   {
+  //     name: 'Long',
+  //     imgUrl: 'https://instagram.fhan5-4.fna.fbcdn.net/v/t51.2885-19/s150x150/91239910_211424973256450_2989229025345404928_n.jpg?_nc_ht=instagram.fhan5-4.fna.fbcdn.net&_nc_ohc=UEBKyj07fnEAX8ZR0h_&oh=fcb687970cccf8916d8ae72a4965d92f&oe=5F02434C'
+  //   },
+  //   {
+  //     name: 'Long',
+  //     imgUrl: 'https://instagram.fhan5-4.fna.fbcdn.net/v/t51.2885-19/s150x150/91239910_211424973256450_2989229025345404928_n.jpg?_nc_ht=instagram.fhan5-4.fna.fbcdn.net&_nc_ohc=UEBKyj07fnEAX8ZR0h_&oh=fcb687970cccf8916d8ae72a4965d92f&oe=5F02434C'
+  //   },
+  //   {
+  //     name: 'Long',
+  //     imgUrl: 'https://instagram.fhan5-4.fna.fbcdn.net/v/t51.2885-19/s150x150/91239910_211424973256450_2989229025345404928_n.jpg?_nc_ht=instagram.fhan5-4.fna.fbcdn.net&_nc_ohc=UEBKyj07fnEAX8ZR0h_&oh=fcb687970cccf8916d8ae72a4965d92f&oe=5F02434C'
+  //   },
+  //   {
+  //     name: 'Long',
+  //     imgUrl: 'https://instagram.fhan5-4.fna.fbcdn.net/v/t51.2885-19/s150x150/91239910_211424973256450_2989229025345404928_n.jpg?_nc_ht=instagram.fhan5-4.fna.fbcdn.net&_nc_ohc=UEBKyj07fnEAX8ZR0h_&oh=fcb687970cccf8916d8ae72a4965d92f&oe=5F02434C'
+  //   },
+  //   {
+  //     name: 'Long',
+  //     imgUrl: 'https://instagram.fhan5-4.fna.fbcdn.net/v/t51.2885-19/s150x150/91239910_211424973256450_2989229025345404928_n.jpg?_nc_ht=instagram.fhan5-4.fna.fbcdn.net&_nc_ohc=UEBKyj07fnEAX8ZR0h_&oh=fcb687970cccf8916d8ae72a4965d92f&oe=5F02434C'
+  //   },
+  //   {
+  //     name: 'Long',
+  //     imgUrl: 'https://instagram.fhan5-4.fna.fbcdn.net/v/t51.2885-19/s150x150/91239910_211424973256450_2989229025345404928_n.jpg?_nc_ht=instagram.fhan5-4.fna.fbcdn.net&_nc_ohc=UEBKyj07fnEAX8ZR0h_&oh=fcb687970cccf8916d8ae72a4965d92f&oe=5F02434C'
+  //   },
+  // ];
   var settings = {
     speed: 500,
     slidesToShow: 8,
@@ -93,14 +93,14 @@ function Story(props) {
   return (
     <div className={cls.wrapper}>
       <Slider {...settings}>
-        {
+        {/* {
           users.map((user,index) => (
             <div className={cls.info} key={index}>
               <img src={user.imgUrl} alt='user_image'/>
               <span className={cls.name} >{user.name}</span>
             </div>
           ))
-        }
+        } */}
       </Slider>
     </div>
   );

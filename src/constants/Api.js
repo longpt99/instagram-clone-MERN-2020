@@ -6,4 +6,6 @@ export const ADMIN_UPLOAD_IMAGE_API = 'users/admin/image';
 export const USER_PROFILE_API = 'users/user/profile';
 export const SUGGESTED_USERS = 'users/suggested';
 export const SEND_FOLLOW_USER = 'users/user/send-request';
-
+export const FOLLOWING_POSTS = 'users/admin/following/posts';
+export const POST_COMMENT = 'users/user/post/comment';
+export const COMMENT_POST = 'users/user/post/comment';

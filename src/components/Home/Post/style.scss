@@ -37,6 +37,10 @@
     }
   }
 
+  .post-image { 
+    text-align: center;
+  }
+
   .post-primary {
     padding: 0.5rem 1rem;
     font-size: 1rem;
@@ -71,6 +75,10 @@
       }
     }
 
+  }
+
+  .post-cmt {
+    word-break: break-all;
   }
 
   .post-comment {

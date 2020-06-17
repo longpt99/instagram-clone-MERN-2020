@@ -1,32 +1,31 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import { Container, Row, Col} from "reactstrap";
 
-import FollowerSuggestionCotainer from '../Home/FollowerSuggestionCotainer';
-import { actFectchSuggestedUsersRequest } from '../../store/actions';
+import {HomePost } from '../../components'
+import {FollowerSuggestionCotainer, StoryContainer, PostContainer} from '../Home';
+import { } from '../../store/actions';
 
 HomeContainer.propTypes = {
   
 };
 
 function HomeContainer(props) {
-  const {admin, fetchSuggestedUsers, suggestedUsers} = props;
+  
+  const [isHideModal, setHideModal] = useState(true);
   return (
     <div className='home-page'>
-      {/* {
-        !isHideModal && <Modal handleModal={handleModal}/>
-      } */}
       <Container>
         <Row>
           <Col xs='8'>
             <Row>
               <Col>
-                {/* <Story /> */}
+                <StoryContainer />
               </Col>
             </Row>
             <Row>
               <Col>
-                {/* <Post handleModal={handleModal} userInfo={admin}/> */}
+                <PostContainer />
               </Col>
             </Row>
           </Col>

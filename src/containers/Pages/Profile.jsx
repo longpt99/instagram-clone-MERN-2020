@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useRouteMatch } from 'react-router-dom';
 
 import {ProfileNavigation, ProfilePost , ProfileUpload, ProfileModalUpload} from '../../components'
-import {InformationContainer, ModalUploadContainer, PostContainer } from '../Profile';
+import {InformationContainer } from '../Profile';
 import {actFetchUserProfileRequest} from '../../store/actions'
 import { useState } from 'react';
 

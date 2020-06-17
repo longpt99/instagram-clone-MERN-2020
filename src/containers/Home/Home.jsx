@@ -19,7 +19,7 @@ HomeContainer.propTypes = {
 function HomeContainer(props) {
   const {admin, fetchSuggestedUsers, suggestedUsers} = props;
   const [suggestedUserList, setSuggestedUserList] = useState(suggestedUsers)
-  const [isHideModal, setHideModal] = useState(true);
+
 
   function handleModal(value) {
     setHideModal(!value)

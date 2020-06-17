@@ -10,7 +10,6 @@ Follow.propTypes = {
 
 function Follow(props) {
   const { adminInfo, suggestedUsers } = props;
-  debugger;
   return (
     <div className='follow-wrapper'>
       <header className='user'>
@@ -40,7 +39,7 @@ function Follow(props) {
                 </Link>
                 <div className='follow-user-item'>
                   <Link to={`/${user.nickname}`}>{user.nickname}</Link>
-                  <button>Theo dõi</button>
+                  <button onClick={()=> props.handleClickFollowButton(user._id)}>Theo dõi</button>
                 </div>
               </div>
             </div>

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
 import PropTypes from 'prop-types';
 import './style.scss';
 
@@ -9,101 +9,115 @@ Post.propTypes = {
 };
 
 function Post(props) {
-  const textInput = React.createRef();
-  const { userInfo } = props;
-  const [likeImg, setLikeImg] = useState(false);
-  const [cmt, setCmt] = useState('');
-  
-  function handleShowModal(value) {
-    props.handleModal(true)
-  }
+  const textInput = useRef();
+  const {posts, isLiked, comment} = props;
 
-  function handleClickButton(value){
-    setLikeImg(!likeImg);
-  }
-
-  function handleFocusComment() {
+  function handleClickFocusComment() {
     textInput.current.focus();
   }
 
-  function handleChangeTextInput(e) {
-    const {value} = e.target;
-    setCmt(value);
-  }
-
-  function hanldeSubmitCmt(e) {
-    e.preventDefault();
-    console.log(cmt);
-  }
-
   return (
-    <div className='post-content'>
-      <header className='post-user'>
-        <a className='post-user-avatar' href="#">
-          <img src="https://loremflickr.com/30/30" alt="user"/>
-        </a>
-        <div className='post-user-option'>
-          <a href="#" className='post-user-nickname'>
-            <span>name</span>
-          </a>
-          <button className='btn-config' onClick={handleShowModal}>
-            <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
-          </button>
-        </div>
-      </header>
-      <div className='post-imgage' onDoubleClick={handleClickButton}>
-        <img className='img-fluid' src="https://instagram.fhan5-2.fna.fbcdn.net/v/t51.2885-15/e35/p1080x1080/97194763_544936269527882_3057431829789631607_n.jpg?_nc_ht=instagram.fhan5-2.fna.fbcdn.net&_nc_cat=102&_nc_ohc=Xt26O9M2pckAX_UXy_w&oh=675cc69d5e505a368d438517858b0e94&oe=5EE61DF0" />
-      </div>
-      <div className='post-primary'>
-        <div className='post-reaction'>
-          <div className='post-reaction--left'>
-            <button className='btn-config'>
-              <ion-icon 
-                name={likeImg ? "heart-sharp" : "heart-outline"}
-                style={likeImg ? {color: "rgb(237, 73, 86)"} : null}
-                onClick={handleClickButton}
+    <div>
+      {
+        posts.map((post, index) => (
+          <div className='post-content'>
+            <header className='post-user'>
+              <a className='post-user-avatar' href="#">
+                <img src={post.userInfo.profilePictureUrl} alt="user"/>
+              </a>
+              <div className='post-user-option'>
+                <a href={`/${post.userInfo.nickname}`} className='post-user-nickname'>
+                  <span>{post.userInfo.nickname}</span>
+                </a>
+                <button className='btn-config' onClick={props.handleShowModal}>
+                  <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
+                </button>
+              </div>
+            </header>
+            <div className='post-image' onDoubleClick={props.handleClickLikeImage}>
+              <img className='img-fluid' src={post.imageUrl} alt='img'/>
+            </div>
+            <div className='post-primary'>
+              <div className='post-reaction'>
+                <div className='post-reaction--left'>
+                  <button className='btn-config'>
+                    <ion-icon 
+                      name={isLiked ? "heart-sharp" : "heart-outline"}
+                      style={isLiked ? {color: "rgb(237, 73, 86)"} : null}
+                      onClick={props.handleClickLikeImage}
+                      >
+                      </ion-icon>
+                  </button>
+                  <button className='btn-config'>
+                    <ion-icon name="chatbubble-outline" onClick={handleClickFocusComment}></ion-icon>
+                  </button>
+                  <button className='btn-config'>
+                    <ion-icon name="paper-plane-outline"></ion-icon>
+                  </button>
+                </div>
+                <button className='btn-config post-reaction--right'>
+                  <ion-icon name="bookmark-outline"></ion-icon>
+                </button>
+              </div>
+              <div className='post-count-like'>
+                <a href='#'>
+                  <img src="https://loremflickr.com/20/20"/>
+                  <span>user_name</span>
+                </a>
+                <span>và</span>
+                <button className='btn-config'>total_like</button>
+                <span>đã thích</span>
+              </div>
+              <div className='post'>
+                <div className='post-caption'>
+                  <a href={`/${post.userInfo.nickname}`}>
+                    <span>{post.userInfo.nickname}</span>
+                  </a>
+                  <span>{post.caption}</span>
+                </div>
+                {
+                  post.comments.length >= 4 
+                  ? <div>
+                      <a href='#'>Xem tất cả</a>
+                      {post.comments.reverse().slice(0,2).map(comment => (
+                          <div className='post-cmt'>
+                            <a href={`/${post.userInfo.nickname}`}>
+                              <span>{post.userInfo.nickname}</span>
+                            </a>
+                            <span>{comment.content}</span>
+                          </div>
+                        ))
+                      } 
+                    </div>
+                  : post.comments.slice(0,4).map(comment => (
+                    <div className='post-cmt'>
+                      <a href={`/${post.userInfo.nickname}`}>
+                        <span>{post.userInfo.nickname}</span>
+                      </a>
+                      <span>{comment.content}</span>
+                    </div>
+                  ))
+                }
+              </div>
+            </div>
+            <div className='post-comment'>
+              <form className='post-comment__form' onSubmit={props.hanldeSubmitComment}>
+                <textarea
+                  required
+                  ref={textInput} 
+                  type="text" 
+                  value={comment}
+                  placeholder='Thêm bình luận...'
+                  onChange={props.handleChangeCommmentInput}
+                  onFocus={()=>props.handleFocusTextarea(post._id)}
                 >
-                </ion-icon>
-            </button>
-            <button className='btn-config'>
-              <ion-icon name="chatbubble-outline" onClick={handleFocusComment}></ion-icon>
-            </button>
-            <button className='btn-config'>
-              <ion-icon name="paper-plane-outline"></ion-icon>
-            </button>
+                </textarea>
+                <button className='btn-config'>Đăng</button>
+              </form>
+            </div>
           </div>
-          <button className='btn-config post-reaction--right'>
-            <ion-icon name="bookmark-outline"></ion-icon>
-          </button>
-        </div>
-        <div className='post-count-like'>
-          <a href='#'>
-            <img src="https://loremflickr.com/20/20"/>
-            <span>user_name</span>
-          </a>
-          <span>và</span>
-          <button className='btn-config'>total_like</button>
-          <span>đã thích</span>
-        </div>
-        <div className='post-caption'>
-          <a href='#'>
-            <span>user_name</span>
-          </a>
-          <span>user_status</span>
-        </div>
-      </div>
-      <div className='post-comment'>
-        <form className='post-comment__form' onSubmit={hanldeSubmitCmt}>
-          <textarea
-            ref={textInput} 
-            type="text" 
-            placeholder='Thêm bình luận...'
-            onChange={handleChangeTextInput}
-          >
-          </textarea>
-          <button className='btn-config'>Đăng</button>
-        </form>
-      </div>
+        ))
+      }
     </div>
   );
 }

@@ -9,4 +9,6 @@ export {default as ProfileModalUpload} from './Profile/Modal/Upload';
 
 export {default as HomeStory} from './Home/Story';
 export {default as HomeFollowerSuggestion} from './Home/FollowerSuggestion';
+export {default as HomeModal} from './Home/Modal';
+export {default as HomePost} from './Home/Post';
 

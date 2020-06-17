@@ -9,7 +9,6 @@ import Search from '../Search/';
 
 function TopNav(props) {
   const { adminInfo, showOption } = props;
-  console.log(adminInfo)
   return (
     <div className={styles.header_nav}>
       <Container>

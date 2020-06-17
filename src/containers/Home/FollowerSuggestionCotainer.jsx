@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import {HomeFollowerSuggestion} from '../../components';
-import {actFectchSuggestedUsersRequest, actSendFollowUserRequest} from '../../store/actions'
+import {actFetchSuggestedUsersRequest, actSendFollowUserRequest} from '../../store/actions'
 
 FollowerSuggestionCotainer.propTypes = {
   
@@ -14,17 +14,18 @@ function FollowerSuggestionCotainer(props) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(actFectchSuggestedUsersRequest());
-  }, [])
+    dispatch(actFetchSuggestedUsersRequest());
+  }, [suggestion])
 
-  function handleClickToFollow() {
-    dispatch(actSendFollowUserRequest());
+
+  function handleClickFollowButton(id) {
+    dispatch(actSendFollowUserRequest(id));
   }
 
   return <HomeFollowerSuggestion
           adminInfo={admin}
-          suggestedUsers={suggestion}
-          handleClickToFollow={handleClickToFollow}
+          suggestedUsers={suggestion.slice(0,5)}
+          handleClickFollowButton={handleClickFollowButton}
         />
 }
 

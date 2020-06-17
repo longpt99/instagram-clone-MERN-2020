@@ -48,7 +48,7 @@ export const actFetchAdminRequest = () => {
   }
 }
 
-export const actFectchSuggestedUsersRequest = () => {
+export const actFetchSuggestedUsersRequest = () => {
   return dispatch => {
     return callApi(apis.SUGGESTED_USERS, 'GET', null, {Authorization: `Bearer ${JSON.parse(localStorage.getItem('jwt'))}`})
     .then(res => {
@@ -62,8 +62,9 @@ export const actFectchSuggestedUsersRequest = () => {
 
 export const actSendFollowUserRequest = (id) => {
   return dispatch => {
-    return callApi(apis.SEND_FOLLOW_USER, 'POST', id, {Authorization: `Bearer ${JSON.parse(localStorage.getItem('jwt'))}`})
+    return callApi(apis.SEND_FOLLOW_USER, 'POST', {userId: id}, {Authorization: `Bearer ${JSON.parse(localStorage.getItem('jwt'))}`})
     .then(res => {
+      debugger;
       console.log(res.response.data)
     })
     .catch(err => {
@@ -71,6 +72,44 @@ export const actSendFollowUserRequest = (id) => {
     })
   }
 }
+
+export const actFetchFollowingPostsRequest = () => {
+  return dispatch => {
+    return callApi(apis.FOLLOWING_POSTS, 'GET', null, {Authorization: `Bearer ${JSON.parse(localStorage.getItem('jwt'))}`})
+    .then(res => {
+      dispatch(actFetchFollowingPosts(res.data));
+    })
+    .catch(err => {
+      console.log(err.message)
+    })
+  }
+}
+
+export const actPostCommentRequest = (data) => {
+  return dispatch => {
+    return callApi(apis.POST_COMMENT, 'POST', data, {Authorization: `Bearer ${JSON.parse(localStorage.getItem('jwt'))}`})
+    .then(res => {
+      console.log(res.data.status)
+    })
+    .catch(err => {
+      console.log(err.message)
+    })
+  }
+}
+
+export const actFetchCommentPostRequest = () => {
+  return dispatch => {
+    return callApi(apis.COMMENT_POST, 'GET')
+    .then(res => {
+
+      console.log('123')
+    })
+    .catch(err => {
+      console.log('123')
+    })
+  }
+}
+
 
 
 
@@ -119,3 +158,11 @@ export const actFetchUser = (data) => {
     payload: data,
   }
 }
+
+export const actFetchFollowingPosts = (data) => {
+  return {
+    type: types.FOLLOWING_POST,
+    payload: data,
+  }
+}
+
