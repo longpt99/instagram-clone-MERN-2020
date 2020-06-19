@@ -11,7 +11,6 @@ HomeContainer.propTypes = {
 };
 
 function HomeContainer(props) {
-  
   const [isHideModal, setHideModal] = useState(true);
   return (
     <div className='home-page'>
@@ -38,17 +37,4 @@ function HomeContainer(props) {
   );
 }
 
-// const mapStateToProps = state => {
-//   return {
-//   }
-// }
-
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     fetchSuggestedUsers: () => {
-//       dispatch(actFectchSuggestedUsersRequest())
-//     }
-//   }
-// }
-
-export default HomeContainer;
+export default React.memo(HomeContainer);

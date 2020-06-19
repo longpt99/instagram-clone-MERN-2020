@@ -10,6 +10,7 @@ import './App.scss'
 
 import Routes from "./routes";
 import { actFetchAdminRequest } from './store/actions';
+import { HeaderContainer } from "containers";
 
 function App(props) {
   const admin = useSelector(state => state.users.admin);
@@ -29,6 +30,7 @@ function App(props) {
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <BrowserRouter>
+        {token && <HeaderContainer />}
         <Routes />
       </BrowserRouter>
     </Suspense>

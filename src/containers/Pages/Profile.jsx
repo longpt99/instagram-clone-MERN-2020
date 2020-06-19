@@ -40,7 +40,7 @@ function ProfileContainer(props) {
   }
 
   if (!user) {
-    return <h1>Loading</h1>
+    return <h1>12312312312</h1>
   }
 
   return (

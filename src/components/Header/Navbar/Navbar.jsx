@@ -4,7 +4,7 @@ import styles from './styles.module.scss';
 
 import { Container, Row, Col } from "reactstrap";
 
-import { Link, Redirect } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import Search from '../Search/';
 
 function TopNav(props) {
@@ -14,14 +14,14 @@ function TopNav(props) {
       <Container>
         <Row className='align-items-center'>
           <Col>
-            <Link to="/">Instagram</Link>
+            <NavLink to="/" onClick={props.handleBackToHomePage}>Instagram</NavLink>
           </Col>
           <Col>
             <Search />
           </Col>
           <Col>
             <div className={styles.header_right}>
-              <Link to="/">
+              <Link to="/" onClick={props.handleBackToHomePage}>
                 <ion-icon name="home-sharp"></ion-icon>
               </Link>
               <Link to="/direct/">
@@ -35,13 +35,12 @@ function TopNav(props) {
               </Link>
               <button 
                 onClick={props.handleOptionClick}
-                onDoubleClick={props.handleDbOptionClick}
                 className={styles.btn_config}
               >
                 <ion-icon name="person-circle-outline"></ion-icon>
               </button>
               {
-                showOption && <div className={styles.header_option}>
+                <div className={styles.header_option}>
                   <Link to={`/${adminInfo.nickname}`} className={styles.header_option_item}>
                     <ion-icon name="person-circle-outline"></ion-icon>
                     <span>Trang cá nhân</span>

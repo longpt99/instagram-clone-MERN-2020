@@ -110,9 +110,14 @@ export const actFetchCommentPostRequest = () => {
   }
 }
 
-
-
-
+export const actFetchPostRequest = (id) => {
+  return dispatch => {
+    return callApi(`${apis.POST_API}/${id}`, 'GET')
+    .then(res => {
+      dispatch(actFetchPost(res.data))
+    })
+  }
+}
 // ---------------------------------------------------------------------------------
 
 export const actSetLoginError = (error) => {
@@ -166,3 +171,9 @@ export const actFetchFollowingPosts = (data) => {
   }
 }
 
+export const actFetchPost = (data) => {
+  return { 
+    type: types.POST_CONTENT,
+    payload: data
+  }
+}

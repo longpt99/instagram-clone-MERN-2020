@@ -9,3 +9,4 @@ export const SEND_FOLLOW_USER = 'users/user/send-request';
 export const FOLLOWING_POSTS = 'users/admin/following/posts';
 export const POST_COMMENT = 'users/user/post/comment';
 export const COMMENT_POST = 'users/user/post/comment';
+export const POST_API = 'posts';

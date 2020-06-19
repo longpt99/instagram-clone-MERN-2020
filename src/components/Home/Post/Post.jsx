@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import './style.scss';
 
 import Modal from '../Modal';
+import { Link } from 'react-router-dom';
 
 Post.propTypes = {
   
@@ -78,21 +79,21 @@ function Post(props) {
                 {
                   post.comments.length >= 4 
                   ? <div>
-                      <a href='#'>Xem tất cả</a>
-                      {post.comments.reverse().slice(0,2).map(comment => (
+                      <Link to={`/post/${post._id}`}>Xem tất cả</Link>
+                      {post.comments.slice(0,3).reverse().map(comment => (
                           <div className='post-cmt'>
-                            <a href={`/${post.userInfo.nickname}`}>
-                              <span>{post.userInfo.nickname}</span>
+                            <a href={`/${comment.userInfo.nickname}`}>
+                              <span>{comment.userInfo.nickname}</span>
                             </a>
                             <span>{comment.content}</span>
                           </div>
                         ))
                       } 
                     </div>
-                  : post.comments.slice(0,4).map(comment => (
+                  : post.comments.slice(0,4).reverse().map(comment => (
                     <div className='post-cmt'>
-                      <a href={`/${post.userInfo.nickname}`}>
-                        <span>{post.userInfo.nickname}</span>
+                      <a href={`/${comment.userInfo.nickname}`}>
+                        <span>{comment.userInfo.nickname}</span>
                       </a>
                       <span>{comment.content}</span>
                     </div>
@@ -110,6 +111,7 @@ function Post(props) {
                   placeholder='Thêm bình luận...'
                   onChange={props.handleChangeCommmentInput}
                   onFocus={()=>props.handleFocusTextarea(post._id)}
+                  onKeyDown={props.hanldeEnterSubmitComment}
                 >
                 </textarea>
                 <button className='btn-config'>Đăng</button>

@@ -10,7 +10,7 @@ function Post(props) {
   const {image} = props;
   return (
     <div className={styles.profile_post}>
-      <Link>
+      <Link to={`/post/${image._id}`}>
         <img className='img-fluid' src={image.imageUrl} />
       </Link>
     </div>
