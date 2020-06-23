@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import styles from './styles.module.scss';
 import { Link } from 'react-router-dom';
 
@@ -38,10 +38,10 @@ function Information(props) {
           <span className={styles.profile_description_name}>{userInfo.name}</span>
           <br />
           <span>
-            Phương Thành Long | 🇻🇳
+            Phương Thành Long
             just be a good person/>
             –––
-            ✉️ phuongthanhlong.99@gmail.com
+            {/* ✉️ phuongthanhlong.99@gmail.com */}
           </span>
         </div>
       </div>

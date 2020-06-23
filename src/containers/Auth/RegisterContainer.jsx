@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
-import PropTypes from 'prop-types';
+import React, {useState, useEffect} from 'react';
+// import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 
-import RegisterForm from '../../components/Auth/Register/Form';
-import { actCreateNewAccount } from '../../store/actions';
-import {checkValueToShowBtn} from '../../utils';
+import { RegisterForm } from 'components/Auth';
+import { checkValueToShowBtn } from 'utils';
+import { actCreateNewAccount, actResetErr } from 'store/actions';
 
 function RegisterContainer(props) {
   const initInfo = {
@@ -17,6 +17,15 @@ function RegisterContainer(props) {
   const [showBtn, setShowBtn] = useState(false);
   const error = useSelector(state => state.error);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    const resetErr = setTimeout(() => {
+      dispatch(actResetErr())
+    }, 5000)
+    return () => {
+      clearTimeout(resetErr)
+    }
+  }, [dispatch, error])
   
   function handleValueInput(e) {
     const tempInfo = {...info}
@@ -33,7 +42,7 @@ function RegisterContainer(props) {
   }
 
   return (
-    <RegisterForm 
+    <RegisterForm
       info={info}
       showBtn={showBtn}
       error={error}

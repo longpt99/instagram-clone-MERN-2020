@@ -1,12 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './styles.module.scss';
-import {Link} from 'react-router-dom';
 import {Button} from 'reactstrap';
 
 Upload.propTypes = {
-  
+  onHandleClickToShowModal: PropTypes.func,
 };
+
+Upload.defaultProps = {
+  onHandleClickToShowModal: null,
+}
 
 function Upload(props) {
   return (

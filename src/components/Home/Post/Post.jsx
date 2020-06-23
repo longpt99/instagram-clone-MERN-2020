@@ -1,8 +1,7 @@
-import React, {useState, useRef} from 'react';
-import PropTypes from 'prop-types';
+import React, {useRef} from 'react';
+// import PropTypes from 'prop-types';
 import './style.scss';
 
-import Modal from '../Modal';
 import { Link } from 'react-router-dom';
 
 Post.propTypes = {
@@ -11,7 +10,7 @@ Post.propTypes = {
 
 function Post(props) {
   const textInput = useRef();
-  const {posts, isLiked, comment} = props;
+  const {posts, comment, adminId} = props;
 
   function handleClickFocusComment() {
     textInput.current.focus();
@@ -23,9 +22,9 @@ function Post(props) {
         posts.map((post, index) => (
           <div className='post-content'>
             <header className='post-user'>
-              <a className='post-user-avatar' href="#">
+              <Link className='post-user-avatar' to=''>
                 <img src={post.userInfo.profilePictureUrl} alt="user"/>
-              </a>
+              </Link>
               <div className='post-user-option'>
                 <a href={`/${post.userInfo.nickname}`} className='post-user-nickname'>
                   <span>{post.userInfo.nickname}</span>
@@ -35,7 +34,13 @@ function Post(props) {
                 </button>
               </div>
             </header>
-            <div className='post-image' onDoubleClick={props.handleClickLikeImage}>
+            <div 
+              className='post-image'
+              onDoubleClick={()=> 
+                post.reactions.some(x => x.userId === adminId)
+                ? props.handleClickUnlikeImage(post._id)
+                : props.handleClickLikeImage(post._id)
+              }>
               <img className='img-fluid' src={post.imageUrl} alt='img'/>
             </div>
             <div className='post-primary'>
@@ -43,11 +48,14 @@ function Post(props) {
                 <div className='post-reaction--left'>
                   <button className='btn-config'>
                     <ion-icon 
-                      name={isLiked ? "heart-sharp" : "heart-outline"}
-                      style={isLiked ? {color: "rgb(237, 73, 86)"} : null}
-                      onClick={props.handleClickLikeImage}
-                      >
-                      </ion-icon>
+                      name={post.reactions.some(x => x.userId === adminId) ? "heart-sharp" : "heart-outline"}
+                      style={post.reactions.some(x => x.userId === adminId) ? {color: "rgb(237, 73, 86)"} : null}
+                      onClick={()=>
+                        post.reactions.some(x => x.userId === adminId)
+                        ? props.handleClickUnlikeImage(post._id)
+                        : props.handleClickLikeImage(post._id)
+                      }>
+                    </ion-icon>
                   </button>
                   <button className='btn-config'>
                     <ion-icon name="chatbubble-outline" onClick={handleClickFocusComment}></ion-icon>
@@ -61,13 +69,7 @@ function Post(props) {
                 </button>
               </div>
               <div className='post-count-like'>
-                <a href='#'>
-                  <img src="https://loremflickr.com/20/20"/>
-                  <span>user_name</span>
-                </a>
-                <span>và</span>
-                <button className='btn-config'>total_like</button>
-                <span>đã thích</span>
+                <span>{post.reactions.length ? `${post.reactions.length} người  đã thích` : ''}</span>
               </div>
               <div className='post'>
                 <div className='post-caption'>
@@ -79,7 +81,7 @@ function Post(props) {
                 {
                   post.comments.length >= 4 
                   ? <div>
-                      <Link to={`/post/${post._id}`}>Xem tất cả</Link>
+                      <Link to={{pathname:`/post/${post._id}`, state: { modal: true }}}>Xem tất cả</Link>
                       {post.comments.slice(0,3).reverse().map(comment => (
                           <div className='post-cmt'>
                             <a href={`/${comment.userInfo.nickname}`}>

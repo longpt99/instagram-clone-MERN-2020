@@ -1,6 +1,7 @@
 import * as types from '../../constants/ActionType';
 import * as apis from '../../constants/Api';
 import callApi from "../../utils/apiCaller";
+import {getBearerJWT} from '../../utils';
 
 // CALL API
 export const actFetchTokenRequest = (data) => {
@@ -38,7 +39,7 @@ export const actFetchUserProfileRequest = (data) => {
 
 export const actFetchAdminRequest = () => {
   return dispatch => {
-    return callApi(apis.ADMIN_API, 'GET', null, {Authorization: `Bearer ${JSON.parse(localStorage.getItem('jwt'))}`})
+    return callApi(apis.ADMIN_API, 'GET', null, getBearerJWT())
     .then(res => {
       dispatch(actFetchAdmin(res.data));
     })
@@ -50,7 +51,7 @@ export const actFetchAdminRequest = () => {
 
 export const actFetchSuggestedUsersRequest = () => {
   return dispatch => {
-    return callApi(apis.SUGGESTED_USERS, 'GET', null, {Authorization: `Bearer ${JSON.parse(localStorage.getItem('jwt'))}`})
+    return callApi(apis.SUGGESTED_USERS, 'GET', null, getBearerJWT())
     .then(res => {
       dispatch(actFetchSuggestedUsers(res.data));
     })
@@ -62,7 +63,7 @@ export const actFetchSuggestedUsersRequest = () => {
 
 export const actSendFollowUserRequest = (id) => {
   return dispatch => {
-    return callApi(apis.SEND_FOLLOW_USER, 'POST', {userId: id}, {Authorization: `Bearer ${JSON.parse(localStorage.getItem('jwt'))}`})
+    return callApi(apis.SEND_FOLLOW_USER, 'POST', {userId: id}, getBearerJWT())
     .then(res => {
       debugger;
       console.log(res.response.data)
@@ -75,7 +76,7 @@ export const actSendFollowUserRequest = (id) => {
 
 export const actFetchFollowingPostsRequest = () => {
   return dispatch => {
-    return callApi(apis.FOLLOWING_POSTS, 'GET', null, {Authorization: `Bearer ${JSON.parse(localStorage.getItem('jwt'))}`})
+    return callApi(apis.FOLLOWING_POSTS, 'GET', null, getBearerJWT())
     .then(res => {
       dispatch(actFetchFollowingPosts(res.data));
     })
@@ -87,7 +88,7 @@ export const actFetchFollowingPostsRequest = () => {
 
 export const actPostCommentRequest = (data) => {
   return dispatch => {
-    return callApi(apis.POST_COMMENT, 'POST', data, {Authorization: `Bearer ${JSON.parse(localStorage.getItem('jwt'))}`})
+    return callApi(apis.POST_COMMENT, 'POST', data, )
     .then(res => {
       console.log(res.data.status)
     })
@@ -97,18 +98,18 @@ export const actPostCommentRequest = (data) => {
   }
 }
 
-export const actFetchCommentPostRequest = () => {
-  return dispatch => {
-    return callApi(apis.COMMENT_POST, 'GET')
-    .then(res => {
+// export const actFetchCommentPostRequest = () => {
+//   return dispatch => {
+//     return callApi(apis.COMMENT_POST, 'GET')
+//     .then(res => {
 
-      console.log('123')
-    })
-    .catch(err => {
-      console.log('123')
-    })
-  }
-}
+//       console.log('123')
+//     })
+//     .catch(err => {
+//       console.log('123')
+//     })
+//   }
+// }
 
 export const actFetchPostRequest = (id) => {
   return dispatch => {
@@ -118,6 +119,32 @@ export const actFetchPostRequest = (id) => {
     })
   }
 }
+
+export const actReactionPostRequest = (id) => {
+  return dispatch => {
+    return callApi(`${apis.POST_API}/${id}/reaction`, 'POST', null,  getBearerJWT())
+    .then(res => {
+      console.log(res.data)
+    })
+    .catch(err => {
+      console.log(err);
+    })
+  }
+}
+
+export const actUnlikePostRequest = (id) => {
+  return dispatch => {
+    return callApi(`${apis.POST_API}/${id}/reaction`, 'DELETE', null,  getBearerJWT())
+    .then(res => {
+      console.log(res.data)
+    })
+    .catch(err => {
+      console.log(err);
+    })
+  }
+}
+
+
 // ---------------------------------------------------------------------------------
 
 export const actSetLoginError = (error) => {
@@ -175,5 +202,11 @@ export const actFetchPost = (data) => {
   return { 
     type: types.POST_CONTENT,
     payload: data
+  }
+}
+
+export const actResetErr = () => {
+  return {
+    type: types.RESET_ERROR,
   }
 }

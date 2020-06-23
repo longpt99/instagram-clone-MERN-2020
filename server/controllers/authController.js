@@ -9,14 +9,14 @@ module.exports.postLogin = async (req, res) => {
   const user = await User.findOne({ email });
 
   if (!user) {
-    res.status(404).json('User not found')
+    res.status(404).json('User not found');
     return;
   }
 
   const valid = await bcrypt.compare(password, user.password);
-  
+
   if (!valid) {
-    res.status(404).json('Wrong password')
+    res.status(404).json('Wrong password');
     return;
   }
 
@@ -30,13 +30,13 @@ module.exports.postRegister = async (req, res) => {
 
   const validUserEmail = await User.findOne({ email });
   if (validUserEmail) {
-    res.status(404).json('Email has existed')
+    res.status(404).json('Email has existed');
     return;
   }
 
   const validUserNickname = await User.findOne({ nickname });
   if (validUserNickname) {
-    res.status(404).json('Nickname has existed')
+    res.status(404).json('Nickname has existed');
     return;
   }
 
@@ -58,5 +58,4 @@ module.exports.postRegister = async (req, res) => {
       }
     );
   });
-}
-
+};

@@ -1,11 +1,10 @@
-import React, {useEffect} from 'react';
-import PropTypes from 'prop-types';
+import React, {useState} from 'react';
+// import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
-import Navbar from '../../components/Header/Navbar';
+import { useRouteMatch } from 'react-router-dom';
 
-import {actDeleteToken} from '../../store/actions'
-import { useState } from 'react';
-import { useRouteMatch, Redirect } from 'react-router-dom';
+import Navbar from '../../components/Header/Navbar';
+import { actDeleteToken } from 'store/actions';
 
 HeaderContainer.propTypes = {
   

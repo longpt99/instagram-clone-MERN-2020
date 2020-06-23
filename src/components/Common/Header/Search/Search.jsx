@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { Input } from 'reactstrap';
 
 import cls from './style.module.scss';

@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 
-import {checkValueToShowBtn} from '../../utils';
-import LoginForm from '../../components/Auth/Login/Form';
-import { actFetchTokenRequest } from '../../store/actions';
+import { LoginForm } from 'components/Auth';
+import { checkValueToShowBtn } from 'utils';
+import { actFetchTokenRequest, actResetErr } from 'store/actions';
+import { useEffect } from 'react';
 
 LoginContainer.propTypes = {
   
@@ -18,10 +19,18 @@ function LoginContainer(props) {
     email: '',
     password: '',
   };
-
   const [showBtn, setShowBtn] = useState(false);
   const [hidePassword, setHidePassword] = useState(true)
   const [info, setInfo] = useState(initInfo);
+
+  useEffect(() => {
+    const resetErr = setTimeout(() => {
+      dispatch(actResetErr())
+    }, 5000)
+    return () => {
+      clearTimeout(resetErr)
+    }
+  }, [dispatch, error])
 
   function onHandleValueInput(e) {
     const tempInfo = {...info}

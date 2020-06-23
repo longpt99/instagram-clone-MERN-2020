@@ -5,7 +5,7 @@ const commentSchema = new mongoose.Schema(
     _id: mongoose.Types.ObjectId,
     postId: mongoose.Types.ObjectId,
     userId: mongoose.Types.ObjectId,
-    content: String
+    content: String,
   },
   {
     timestamps: true,

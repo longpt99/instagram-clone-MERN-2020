@@ -5,7 +5,7 @@ const postSchema = new mongoose.Schema(
     _id: mongoose.Types.ObjectId,
     imageUrl: String,
     caption: String,
-    userId: mongoose.Types.ObjectId
+    userId: mongoose.Types.ObjectId,
   },
   {
     timestamps: true,

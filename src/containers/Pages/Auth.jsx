@@ -1,8 +1,9 @@
 import React from 'react';
 import { Container, Row, Col} from "reactstrap";
-import {ImageListContainer, LoginContainer, RegisterContainer, ToggleFormContainer}  from '../Auth';
-import {AuthDownloadApp} from '../../components';  
 import { useRouteMatch } from 'react-router-dom';
+
+import {ImageListContainer, LoginContainer, RegisterContainer, ToggleFormContainer}  from 'containers/Auth';
+import { DownloadApp } from 'components/Auth';
 
 function AuthContainer(props) {
   const {url} = useRouteMatch();
@@ -20,7 +21,7 @@ function AuthContainer(props) {
               : <RegisterContainer />
             }
             <ToggleFormContainer />
-            <AuthDownloadApp />
+            <DownloadApp />
           </Col>
         </Row>
       </Container>

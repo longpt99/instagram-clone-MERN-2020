@@ -1,18 +1,15 @@
-import React, {useState, useEffect} from "react";
+import React from "react";
 import { Button, Form, FormGroup, Label, Input, Alert } from "reactstrap";
 import { Link } from "react-router-dom";
 
-
-import Facebook from '../../Facebook'
-
 import './Login.scss';
+import {Facebook} from "components/Auth";
 
-Login.propTypes = {};
+LoginForm.propTypes = {};
 
-Login.defaultProps = {};
+LoginForm.defaultProps = {};
 
-
-export default function Login(props) {
+export default function LoginForm(props) {
   const {error, info, hidePassword, showBtn} = props;
 
   return (

@@ -1,10 +1,19 @@
-import React, {useState} from "react";
+import React from "react";
+import PropTypes from 'prop-types';
 import { Button, Form, FormGroup, Label, Input, Alert } from "reactstrap";
 
-import Facebook from '../../Facebook';
+import {Facebook} from 'components/Auth';
 import './Register.scss';
 
-export default function Register(props) {
+RegisterForm.propTypes = {
+  error: PropTypes.bool,
+  showBtn: PropTypes.bool,
+  info: PropTypes.object,
+  handleSubmitForm: PropTypes.func,
+  handleValueInput: PropTypes.func,
+}
+
+export default function RegisterForm(props) {
   const {error, showBtn, info} = props;
   
   return (

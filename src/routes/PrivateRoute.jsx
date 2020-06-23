@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 
 const PrivateRoute = ({component: Component, ...rest}) => {
   const token = useSelector(state => state.token);
+  console.log(rest)
   return (
     <Route {...rest} render={props => 
       token 

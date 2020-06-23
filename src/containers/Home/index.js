@@ -1,3 +1,3 @@
-export { default as FollowerSuggestionCotainer} from './FollowerSuggestionCotainer'
-export { default as StoryContainer} from './StoryContainer'
-export { default as PostContainer} from './PostContainer'
+export { default as FollowerSuggestionContainer} from './FollowerSuggestion'
+export { default as StoryContainer} from './Story'
+export { default as PostContainer} from './Post'

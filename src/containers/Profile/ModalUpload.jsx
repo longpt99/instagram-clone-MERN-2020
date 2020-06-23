@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import {ProfileModalUpload} from '../../components'
+// import PropTypes from 'prop-types';
+
+import { ModalUpload } from 'components/Profile';
 
 ModalUploadContainer.propTypes = {
   
@@ -14,7 +15,7 @@ function ModalUploadContainer(props) {
     setCaption(value)
   }
 
-  return <ProfileModalUpload 
+  return <ModalUpload
           handleGetValueCaption={handleGetValueCaption}
           caption={caption}
         />

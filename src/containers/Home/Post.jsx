@@ -1,17 +1,16 @@
-import React, {useState} from 'react';
-import PropTypes from 'prop-types';
+import React, {useState, useEffect} from 'react';
+// import PropTypes from 'prop-types';
 
-import {actFetchFollowingPostsRequest, actPostCommentRequest, actFetchCommentPostRequest} from '../../store/actions'
+import {actFetchFollowingPostsRequest, actPostCommentRequest, actReactionPostRequest, actUnlikePostRequest} from 'store/actions'
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
-import Post from 'components/Home/Post';
+import { Post } from 'components/Home';
 
 PostContianer.propTypes = {
   
 };
 
 function PostContianer(props) {
-  const [isLiked, setLiked] = useState(false);
+  const adminId = useSelector(state => state.users.admin._id);
   const [comment, setComment] = useState('');
   const posts = useSelector(state => state.posts.followingPost);
   const [postId, setPostId] = useState('');
@@ -19,14 +18,14 @@ function PostContianer(props) {
   
   useEffect(() => {
     dispatch(actFetchFollowingPostsRequest());
-  }, [posts])
+  }, [dispatch, posts])
 
-  const handleShowModal = (value) => {
-    props.handleModal(true)
+  const handleClickLikeImage = (id) => {
+    dispatch(actReactionPostRequest(id))
   }
 
-  const handleClickLikeImage = () => {
-    setLiked(!isLiked);
+  const handleClickUnlikeImage = (id) => {
+    dispatch(actUnlikePostRequest(id));
   }
 
   const handleChangeCommmentInput = (e) => {
@@ -58,10 +57,11 @@ function PostContianer(props) {
 
 
   return <Post
+    adminId={adminId}
     posts={posts}
-    isLiked={isLiked}
     comment={comment}
     handleClickLikeImage={handleClickLikeImage}
+    handleClickUnlikeImage={handleClickUnlikeImage}
     hanldeSubmitComment={hanldeSubmitComment}
     handleChangeCommmentInput={handleChangeCommmentInput}
     handleFocusTextarea={handleFocusTextarea}

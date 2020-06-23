@@ -1,13 +1,14 @@
-import React from 'react';
-// import PropTypes from 'prop-types';
-import { Link, NavLink } from 'react-router-dom';
-import { Container, Row, Col } from "reactstrap";
+import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import styles from './styles.module.scss';
 
+import { Container, Row, Col } from "reactstrap";
+
+import { Link, NavLink } from 'react-router-dom'
 import Search from '../Search/';
 
 function TopNav(props) {
-  const { adminInfo } = props;
+  const { adminInfo, showOption } = props;
   return (
     <div className={styles.header_nav}>
       <Container>

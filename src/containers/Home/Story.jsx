@@ -1,14 +1,14 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
-import {HomeStory} from '../../components';
+import {Story} from 'components/Home';
 
 StoryContainer.propTypes = {
   
 };
 
 function StoryContainer(props) {
-  return <HomeStory />
+  return <Story />
 }
 
 export default StoryContainer;

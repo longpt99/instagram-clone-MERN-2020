@@ -1,5 +1,4 @@
 require('dotenv').config();
-
 const express = require('express');
 
 const app = express();
@@ -10,7 +9,7 @@ const cors = require('cors');
 const passport = require('passport');
 const fileUpload = require('express-fileupload');
 
-const routes = require('./routes')
+const routes = require('./routes');
 
 mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true });
 app.use(passport.initialize());
@@ -22,9 +21,8 @@ app.use(express.static('public'));
 app.use(cors());
 
 app.get('/', (req, res) => {
-  res.send('Server load completely')
+  res.send('Server load completely');
 });
-
 app.use(routes);
 
 app.listen(process.env.PORT, () => {

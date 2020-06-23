@@ -1,13 +1,12 @@
-import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
+import React, { useEffect, useState } from 'react';
+// import PropTypes from 'prop-types';
 import { Container, Row, Col} from "reactstrap";
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouteMatch } from 'react-router-dom';
 
-import {ProfileNavigation, ProfilePost , ProfileUpload, ProfileModalUpload} from '../../components'
-import {InformationContainer } from '../Profile';
-import {actFetchUserProfileRequest} from '../../store/actions'
-import { useState } from 'react';
+import {actFetchUserProfileRequest} from 'store/actions'
+import {Navigation, Post , Upload, ModalUpload} from 'components/Profile'
+import { InformationContainer } from 'containers/Profile';
 
 ProfileContainer.propTypes = {
   
@@ -24,7 +23,7 @@ function ProfileContainer(props) {
   
   useEffect(() => {
     dispatch(actFetchUserProfileRequest(params.nickname));
-  }, [user]);
+  }, [dispatch, params.nickname, user]);
   
   function handleGetValueCaption(e) {
     const {value} = e.target;
@@ -40,21 +39,21 @@ function ProfileContainer(props) {
   }
 
   if (!user) {
-    return <h1>12312312312</h1>
+    return <></>
   }
 
   return (
     <div className='profile-page'>
       {
-        showModal && <ProfileModalUpload
-          caption={caption}
-          handleClickToHideModal={onHandleModal}
-          handleGetValueCaption={handleGetValueCaption}
+        showModal && <ModalUpload
+        caption={caption}
+        handleClickToHideModal={onHandleModal}
+        handleGetValueCaption={handleGetValueCaption}
         />
       }
       <Container>
         <InformationContainer />
-        <ProfileNavigation
+        <Navigation
           subPage={subPage}
           userUrl={params.nickname}
           adminUrl={admin.nickname}
@@ -66,7 +65,7 @@ function ProfileContainer(props) {
               user.images.map((image,index) => {
                 return (
                   <Col xs='4' key={index}>
-                    <ProfilePost image={image}/>
+                    <Post image={image}/>
                   </Col>
                 )
               })
@@ -74,7 +73,7 @@ function ProfileContainer(props) {
           </Row>
         }
         {
-          subPage === 2 && <ProfileUpload onHandleClickToShowModal={onHandleModal}/>
+          subPage === 2 && <Upload onHandleClickToShowModal={onHandleModal}/>
         }
       </Container>
     </div>

@@ -1,16 +1,12 @@
 import React, { useEffect, Suspense } from "react";
-import { Container, Row, Col} from "reactstrap";
 import { useSelector, useDispatch } from 'react-redux';
-import {
-  BrowserRouter,
-  Switch,
-} from "react-router-dom";
+import {BrowserRouter} from "react-router-dom";
 
 import './App.scss'
 
 import Routes from "./routes";
-import { actFetchAdminRequest } from './store/actions';
-import { HeaderContainer } from "containers";
+import { actFetchAdminRequest } from 'store/actions';
+import HeaderContainer from 'containers/Common/Header';
 
 function App(props) {
   const admin = useSelector(state => state.users.admin);
@@ -19,7 +15,7 @@ function App(props) {
 
   useEffect(() => {
     dispatch(actFetchAdminRequest());
-  }, [token]);
+  }, [dispatch, token]);
 
   if (token) {
     if(!admin) {

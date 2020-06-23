@@ -1,0 +1,37 @@
+// .post_wrapper {
+//   position: fixed;
+//   top: 0;
+//   right: 0;
+//   left: 0;
+//   bottom: 0;
+//   z-index: 12;
+
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+
+//   background-color: rgba(0, 0, 0, 0.6);
+
+//   .post_modal {
+//     display: flex;
+//     max-width: 900px;
+
+//     &__image {
+//       max-width: 600px;
+//       display: flex;
+//       align-items: center;
+//       justify-content: center;
+//       background-color: white;
+//     };
+
+//     &__content {
+//       width: 300px;
+//       background-color: white;
+//     };
+
+//     .post__content__scroll_bar {
+//       max-height: 400px;
+//       overflow-y: auto;
+//     }
+//   }
+// }

@@ -8,3 +8,4 @@ export const SUGGESTED_USER = 'SUGGESTED_USER';
 export const LOGIN_ERROR = 'LOGIN_ERROR';
 export const REGISTER_ACCOUNT = 'REGISTER_ACCOUNT';
 export const POST_CONTENT = 'POST_CONTENT';
+export const RESET_ERROR = 'RESET_ERROR'

@@ -1,10 +1,12 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Link, useParams, useRouteMatch } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styles from './styles.module.scss';
 
 Navigation.propTypes = {
-  
+  userUrl: PropTypes.string.isRequired,
+  adminUrl: PropTypes.string.isRequired,
+  subPage: PropTypes.number,
 };
 
 function Navigation(props) {

@@ -1,17 +1,17 @@
-import React, {useState} from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
+// import PropTypes from 'prop-types';
 import { Container, Row, Col} from "reactstrap";
 
-import {HomePost } from '../../components'
-import {FollowerSuggestionCotainer, StoryContainer, PostContainer} from '../Home';
-import { } from '../../store/actions';
+import {FollowerSuggestionContainer, StoryContainer, PostContainer} from 'containers/Home';
+import { useRouteMatch } from 'react-router-dom';
 
 HomeContainer.propTypes = {
   
 };
 
 function HomeContainer(props) {
-  const [isHideModal, setHideModal] = useState(true);
+  const {url} = useRouteMatch();
+  console.log(url)
   return (
     <div className='home-page'>
       <Container>
@@ -29,7 +29,7 @@ function HomeContainer(props) {
             </Row>
           </Col>
           <Col>
-            <FollowerSuggestionCotainer />
+            <FollowerSuggestionContainer />
           </Col>
         </Row>
       </Container>
@@ -37,4 +37,4 @@ function HomeContainer(props) {
   );
 }
 
-export default React.memo(HomeContainer);
+export default HomeContainer;

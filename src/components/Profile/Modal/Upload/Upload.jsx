@@ -7,13 +7,21 @@ import FilePondPluginImagePreview from 'filepond-plugin-image-preview'
 import FilePondPluginImageResize from 'filepond-plugin-image-resize';
 import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css'
 import { FilePond, registerPlugin } from 'react-filepond';
-import * as apis from '../../../../constants/Api';
+import * as apis from 'constants/Api';
 
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview, FilePondPluginImageResize)
 
 Upload.propTypes = {
-  
+  handleClickToHideModal: PropTypes.func,
+  handleGetValueCaption: PropTypes.func,
+  caption: PropTypes.string.isRequired,
 };
+
+Upload.defaultProps = {
+  handleClickToHideModal: null,
+  handleGetValueCaption: null,
+  caption: '',
+}
 
 function Upload(props) {
   const [files, setFiles] = useState([])
@@ -47,7 +55,7 @@ function Upload(props) {
           labelIdle='Kéo hoặc thả ảnh'
         />
       </div>
-      <textarea onChange={props.handleGetValueCaption}>
+      <textarea onChange={props.handleGetValueCaption} placeholder='Type caption here...'>
       </textarea>
     </div>
   );

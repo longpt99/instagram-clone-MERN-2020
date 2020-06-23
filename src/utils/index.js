@@ -1,5 +1,5 @@
-export const getJWT = () => {
-  return;
+export const getBearerJWT = () => {
+  return {Authorization: `Bearer ${JSON.parse(localStorage.getItem('jwt'))}`}
 }
 
 export const checkValueToShowBtn = (data) => {
