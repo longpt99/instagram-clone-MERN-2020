@@ -1,0 +1,51 @@
+.post {
+  &_modal {
+    display: flex;
+    // max-width: 900px;
+  }
+
+  &_wrapper {
+    display: flex;
+    &__image {
+      max-width: 600px;
+      border: thin solid;
+    }
+
+    &__content {
+      width: 350px;
+      border: thin solid;
+
+      .post {
+        &_user__info {
+          display: flex;
+        }
+
+        &_user__avatar {
+          width: 35px;
+          border-radius: 999px;
+        }
+
+        &_comment {
+          height: calc(100vh - 60vh);
+          overflow-y: auto;
+        }
+      }
+    }
+  }
+
+//   &__image {
+//     max-width: 600px;
+
+//   };
+
+//   &__content {
+//     width: 300px;
+//     background-color: white;
+//   };
+
+//   .post__content__scroll_bar {
+//     max-height: 400px;
+//     overflow-y: auto;
+//   }
+// }
+}

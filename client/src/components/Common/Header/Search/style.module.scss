@@ -1,0 +1,38 @@
+.header_search {
+  position: absolute;
+  top: 50px;
+  left: 0;
+  right: 0;
+  border: thin solid #ddd;
+  background-color: var(--white);
+  overflow-y: auto;
+  max-height: 350px;
+  border-radius: 3px;
+  box-shadow: 0 0 5px 1px rgba(var(--jb7,0,0,0),.0975);
+
+  .header {
+    &_info {
+      border-bottom: thin solid #eee;
+      display: flex;
+      align-items: center;
+      padding: 0.5rem;
+
+      &_img {
+        img {
+          border-radius: 999px;
+          height: 40px;
+          margin-right: 1rem;
+        }
+      }
+
+      &_title {
+        font-size: 1rem;
+      }
+
+      &_nickname {
+        font-weight: bold;
+      }
+    }
+  }
+}
+
