@@ -26,11 +26,12 @@ export default function LoginForm(props) {
             <Input
               type="text"
               name="email"
+              autoComplete='username'
               value={info.email}
               onChange={props.onHandleValueInput}
               required
             />
-            <span className='form-label__text'>Số điện thoại, tên người đùng, hoặc email</span>
+            <span className='form-label__text'>Email</span>
           </Label>
         </FormGroup>
         <FormGroup>
@@ -40,6 +41,7 @@ export default function LoginForm(props) {
               name="password"  
               value={info.password}
               onChange={props.onHandleValueInput}
+              autoComplete="current-password"
               required
             />
             <span className='form-label__text'>Mật khẩu</span>

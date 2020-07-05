@@ -1,15 +1,19 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
 import cls from './styles.module.scss';
+import axios from 'utils/axios';
+
+// import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orientation'
+// import FilePondPluginImageResize from 'filepond-plugin-image-resize';
+import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
+import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';
+import FilePondPluginFileValidateSize from 'filepond-plugin-file-validate-size';
 import "filepond/dist/filepond.min.css";
-import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orientation'
-import FilePondPluginImagePreview from 'filepond-plugin-image-preview'
-import FilePondPluginImageResize from 'filepond-plugin-image-resize';
 import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css'
 import { FilePond, registerPlugin } from 'react-filepond';
-import * as apis from 'constants/Api';
-
-registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview, FilePondPluginImageResize)
+import { actSetPostToProfile } from 'store/actions';
+registerPlugin(FilePondPluginImagePreview, FilePondPluginFileValidateType, FilePondPluginFileValidateSize)
 
 Upload.propTypes = {
   handleClickToHideModal: PropTypes.func,
@@ -24,35 +28,46 @@ Upload.defaultProps = {
 }
 
 function Upload(props) {
-  const [files, setFiles] = useState([])
+  const [file, setFile] = useState([])
   const {caption} = props;
-  
+  const dispatch = useDispatch();
+  console.log(file)
   return (
     <div className={cls.modal_upload} onDoubleClick={props.handleClickToHideModal}>
       <div className={cls.modal_file}>
         <FilePond 
-          files={files}
-          onupdatefiles={setFiles}
+          file={file}
+          onupdatefiles={setFile}
           instantUpload={false}
-          name={"file"}
+          name='file'
+          labelIdle='Kéo hoặc thả ảnh'
+          maxFileSize='5MB'
+          labelMaxFileSize={`Maximum file size is 5MB`}
+          acceptedFileTypes={['image/*']}
+          labelFileTypeNotAllowed='File of invalid type'
+
           server = {{
             process: {
-                url: apis.ADMIN_UPLOAD_IMAGE_API,
-                method: 'POST',
-                withCredentials: false,
-                headers: {
-                  Authorization: `Bearer ${JSON.parse(localStorage.getItem('jwt'))}`
-                },
-                onload: null,
-                onerror: null,
-                ondata: (formData) => {
-                  formData.append('caption', caption)
-                  return formData
-                }
-            }
+              url: '/api/posts/upload',
+              method: 'POST',
+              withCredentials: false,
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem('access_token')}`
+              },
+              onload: (response) => {
+                dispatch(actSetPostToProfile(JSON.parse(response)))
+              },
+              ondata: (formData) => {
+                formData.append('caption', caption)
+                return formData
+              },
+              // onprogress: (e) => {
+              //   console.log(e.lengthComputable, e.loaded, e.total);
+              // }
+            },
+
           }
           }
-          labelIdle='Kéo hoặc thả ảnh'
         />
       <textarea className={cls.modal_caption} onChange={props.handleGetValueCaption} placeholder='Type caption here...'>
       </textarea>

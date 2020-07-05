@@ -36,7 +36,7 @@ export default function RegisterForm(props) {
               value={info.email}
               onChange={props.handleValueInput}
             />
-            <span className='form-label__text'>Số di động hoặc email</span>
+            <span className='form-label__text'>Email</span>
           </Label>
         </FormGroup>
         <FormGroup>

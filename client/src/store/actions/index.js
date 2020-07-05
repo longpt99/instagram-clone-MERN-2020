@@ -1,14 +1,13 @@
-import * as types from '../../constants/ActionType';
-import * as apis from '../../constants/Api';
-import callApi from "../../utils/apiCaller";
-import {getBearerJWT} from '../../utils';
+import * as types from 'constants/ActionType';
+import * as apis from 'constants/Api';
+import axios from 'utils/axios';
 
 // CALL API
 export const actFetchTokenRequest = (data) => {
   return dispatch => {
-    return callApi(apis.LOGIN_API, 'POST', data)
+    return axios.post('/auth/login', data)
     .then(res => {
-      dispatch(actFetchToken(res.data));
+      dispatch(actFetchToken(res));
     }).catch(err => {
       dispatch(actSetLoginError(err.response.data))
     });
@@ -17,9 +16,9 @@ export const actFetchTokenRequest = (data) => {
 
 export const actCreateNewAccount = (data) => {
   return dispatch => {
-    return callApi(apis.REGISTER_API, 'POST', data)
+    return axios.post('/auth/register', data)
     .then(res => {
-      dispatch(actFetchToken(res.data));
+      dispatch(actFetchToken(res));
     }).catch(err => {
       dispatch(actSetLoginError(err.response.data))
     });
@@ -28,9 +27,9 @@ export const actCreateNewAccount = (data) => {
 
 export const actFetchUserProfileRequest = (data) => {
   return dispatch => {
-    return callApi(apis.USER_PROFILE_API, 'GET', null, null,{nickname: data})
+    return axios.get(`/accounts/${data}`)
     .then(res => {
-      dispatch(actFetchUser(res.data));
+      dispatch(actFetchUser(res));
     }).catch(err => {
       dispatch(actSetLoginError(err.response.data))
     })
@@ -39,9 +38,9 @@ export const actFetchUserProfileRequest = (data) => {
 
 export const actFetchAdminRequest = () => {
   return dispatch => {
-    return callApi(apis.ADMIN_API, 'GET', null, getBearerJWT())
+    return axios.get('/accounts/admin')
     .then(res => {
-      dispatch(actFetchAdmin(res.data));
+      dispatch(actFetchAdmin(res));
     })
     .catch(err => {
       console.log(err.message)
@@ -51,9 +50,9 @@ export const actFetchAdminRequest = () => {
 
 export const actFetchSuggestedUsersRequest = () => {
   return dispatch => {
-    return callApi(apis.SUGGESTED_USERS, 'GET', null, getBearerJWT())
+    return axios.get(apis.SUGGESTED_USERS)
     .then(res => {
-      dispatch(actFetchSuggestedUsers(res.data));
+      dispatch(actFetchSuggestedUsers(res));
     })
     .catch(err => {
       console.log(err.message)
@@ -61,12 +60,11 @@ export const actFetchSuggestedUsersRequest = () => {
   }
 }
 
-export const actSendFollowUserRequest = (id) => {
+export const actSendFollowerRequest = (id) => {
   return dispatch => {
-    return callApi(apis.SEND_FOLLOW_USER, 'POST', {userId: id}, getBearerJWT())
+    return axios.post('/accounts/admin/followers/request', {userId: id})
     .then(res => {
-      debugger;
-      console.log(res.response.data)
+      dispatch(actFetchNewSuggestedUserList(res))
     })
     .catch(err => {
       console.log(err.message)
@@ -76,9 +74,9 @@ export const actSendFollowUserRequest = (id) => {
 
 export const actFetchFollowingPostsRequest = () => {
   return dispatch => {
-    return callApi(apis.FOLLOWING_POSTS, 'GET', null, getBearerJWT())
+    return axios.get(apis.FOLLOWING_POSTS)
     .then(res => {
-      dispatch(actFetchFollowingPosts(res.data));
+      dispatch(actFetchFollowingPosts(res));
     })
     .catch(err => {
       console.log(err.message)
@@ -88,9 +86,10 @@ export const actFetchFollowingPostsRequest = () => {
 
 export const actPostCommentRequest = (data) => {
   return dispatch => {
-    return callApi(apis.POST_COMMENT, 'POST', data, getBearerJWT())
+    return axios.post(`posts/${data.postId}/comment`, {content: data.content})
     .then(res => {
-      console.log(res.data.status)
+      debugger;
+      dispatch(actSetCommentDataToPost(res.data))
     })
     .catch(err => {
       console.log(err.message)
@@ -100,10 +99,9 @@ export const actPostCommentRequest = (data) => {
 
 export const actFetchSearchResultRequest = (nickname) => {
   return dispatch => {
-    return callApi('users/search', 'GET', null, null, {q: nickname})
+    return axios.get('accounts/search', {params: {q: nickname}})
     .then(res => {
-      dispatch(actFetchSearchUsers(res.data))
-      // console.log(res.data);
+      dispatch(actFetchSearchUsers(res))
     })
     .catch(err => {
       console.log(err.message)
@@ -113,18 +111,18 @@ export const actFetchSearchResultRequest = (nickname) => {
 
 export const actFetchPostRequest = (id) => {
   return dispatch => {
-    return callApi(`${apis.POST_API}/${id}`, 'GET')
+    return axios.get(`/posts/${id}`)
     .then(res => {
-      dispatch(actFetchPost(res.data))
+      dispatch(actFetchPost(res))
     })
   }
 }
 
 export const actReactionPostRequest = (id) => {
   return dispatch => {
-    return callApi(`${apis.POST_API}/${id}/reaction`, 'POST', null,  getBearerJWT())
+    return axios.post(`posts/${id}/reaction`)
     .then(res => {
-      console.log(res.data)
+      dispatch(actSetReactionToPost(id, res.data))
     })
     .catch(err => {
       console.log(err);
@@ -134,9 +132,9 @@ export const actReactionPostRequest = (id) => {
 
 export const actUnlikePostRequest = (id) => {
   return dispatch => {
-    return callApi(`${apis.POST_API}/${id}/reaction`, 'DELETE', null,  getBearerJWT())
+    return axios.delete(`posts/${id}/reaction`)
     .then(res => {
-      console.log(res.data)
+      dispatch(actDeleteReactionToPost(id, res.userId))
     })
     .catch(err => {
       console.log(err);
@@ -155,7 +153,7 @@ export const actSetLoginError = (error) => {
 }
 
 export const actFetchToken = (token) => {
-  localStorage.setItem('jwt', JSON.stringify(token));
+  localStorage.setItem('access_token', token);
   return {
     type: types.SET_TOKEN,
     payload: token,
@@ -163,7 +161,7 @@ export const actFetchToken = (token) => {
 }
 
 export const actDeleteToken = () => {
-  localStorage.removeItem('jwt');
+  localStorage.removeItem('access_token');
   return {
     type: types.DELETE_TOKEN,
   }
@@ -227,5 +225,40 @@ export const actUserLogout = () => {
 export const actResetSearchUsers = () => {
   return {
     type: types.RESET_SEARCH_USERS,
+  }
+}
+
+export const actSetCommentDataToPost = (data) => {
+  return {
+    type: types.SET_COMMENT_DATA_TO_POST,
+    payload: data,
+  }
+}
+
+export const actSetReactionToPost = (postId, data) => {
+  return {
+    type: types.SET_REACTION_DATA_TO_POST,
+    payload: {postId, data},
+  }
+}
+
+export const actDeleteReactionToPost = (postId, userId) => {
+  return {
+    type: types.DELETE_REACTION_DATA_TO_POST,
+    payload: {postId, userId},
+  }
+}
+
+export const actFetchNewSuggestedUserList = (userId) => {
+  return {
+    type: types.GET_NEW_SUGGESTED_USER_LIST,
+    payload: userId,
+  }
+}
+
+export const actSetPostToProfile = (data) => {
+  return {
+    type: types.SET_POST_DATA_TO_PROFILE,
+    payload: data,
   }
 }

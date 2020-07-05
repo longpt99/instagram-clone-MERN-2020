@@ -9,33 +9,24 @@ router.get(
   passport.authenticate('jwt', { session: false }),
   controller.getAdmin
 );
-router.post(
-  '/admin/image',
-  passport.authenticate('jwt', { session: false }),
-  controller.postImage
-);
 router.get(
   '/admin/following/posts',
   passport.authenticate('jwt', { session: false }),
-  controller.getFollowingPosts
+  controller.getFollowingPostList
 );
-router.get('/search', controller.searchNickname);
-router.get('/user/profile', controller.getUserProfile);
+router.get('/search', controller.searchUsername);
 router.get(
-  '/suggested',
+  '/admin/following/suggestion',
   passport.authenticate('jwt', { session: false }),
-  controller.getSuggestedUsers
-);
-router.post(
-  '/user/send-request',
-  passport.authenticate('jwt', { session: false }),
-  controller.sendFollowUser
+  controller.getSuggestedUserList
 );
 
 router.post(
-  '/user/post/comment',
+  '/admin/followers/request',
   passport.authenticate('jwt', { session: false }),
-  controller.postComment
+  controller.sendFollowerRequest
 );
+
+router.get('/:nickname', controller.getUserProfile);
 
 module.exports = router;

@@ -20,7 +20,7 @@ var userReducer = (state = initialState, action) => {
     };
     case types.SUGGESTED_USER: {
       let suggestedUsers = [...state.suggestion];
-      suggestedUsers = [...payload];
+      suggestedUsers = [...payload.users];
       return {...state, suggestion: suggestedUsers}
     };
     case types.SEARCH_USERS: {
@@ -30,6 +30,22 @@ var userReducer = (state = initialState, action) => {
     }
     case types.RESET_SEARCH_USERS: {
       return {...state, search: []};
+    }
+    case types.GET_NEW_SUGGESTED_USER_LIST: {
+      const {userId} = payload;
+      const newData = state.suggestion.filter(user => user._id !== userId);
+      return {...state, suggestion: newData}
+    }
+    case types.SET_POST_DATA_TO_PROFILE: {
+      debugger;
+      const {post} = payload;
+      const newData = [...state.user.images];
+      newData.unshift(post);
+      const cloneUser = {
+        ...state.user,
+        images: newData,
+      }
+      return {...state, user: cloneUser}
     }
     default: return state;
   }

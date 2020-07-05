@@ -18,7 +18,7 @@ function PostContianer(props) {
   
   useEffect(() => {
     dispatch(actFetchFollowingPostsRequest());
-  }, [dispatch, posts])
+  }, [dispatch])
 
   const handleClickLikeImage = (id) => {
     dispatch(actReactionPostRequest(id))

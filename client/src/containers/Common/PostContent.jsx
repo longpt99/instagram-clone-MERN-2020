@@ -14,6 +14,7 @@ PostContentContainer.propTypes = {
 function PostContentContainer(props) {
   const {isModal} = props;
   const post = useSelector(state => state.posts.post);
+  console.log(post)
   const history = useHistory()
   const dispatch = useDispatch();
   let { id } = useParams();

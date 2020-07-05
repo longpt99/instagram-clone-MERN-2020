@@ -37,10 +37,10 @@ const Routes = (props) => {
       <PublicRoute exact path='/register' component={AuthPageContainer} />
       <PrivateRoute exact path='/' component={HomePageContainer} />
       <PrivateRoute exact path='/:nickname' component={ProfilePageContainer} />
-      <PrivateRoute exact path='/post/:id' component={PostContentContainer} isModal={isModal}/>} />
+      <PrivateRoute exact path='/posts/:id' component={PostContentContainer} isModal={isModal}/>} />
     </Switch>
     {isModal
-      ? <Route exact path="/post/:id"><PostContentContainer isModal={isModal}/></Route>
+      ? <Route exact path="/posts/:id"><PostContentContainer isModal={isModal}/></Route>
       : null
     }
     </>

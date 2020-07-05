@@ -1,4 +1,3 @@
-const cloudinary = require('cloudinary').v2;
 const mongoose = require('mongoose');
 
 const Post = require('../models/postModel');
@@ -6,88 +5,49 @@ const User = require('../models/userModel');
 const Comment = require('../models/commentModel');
 const Reaction = require('../models/reactionModel');
 
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_API_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
-});
 
 module.exports.getAdmin = (req, res) => {
   res.json(req.user);
 };
 
-module.exports.searchNickname = async (req, res) => {
+module.exports.searchUsername = async (req, res) => {
   const { q } = req.query;
-  // if (q.length > 0) {
   const users = await User.find({nickname: new RegExp(q, 'i')});
   res.json({users});
-  // }
-  // return res.json({users: []})
 }
 
-module.exports.postImage = async (req) => {
-  const { caption } = req.body;
-  const { file } = req.files;
-
-  await file.mv(`./public/uploads/post/${file.name}`, async () => {
-    await cloudinary.uploader.upload(
-      `./public/uploads/post/${file.name}`,
-      {
-        public_id: `instagram/POST/img_${file.md5}`,
-      },
-      (_error, result) => {
-        const { url } = result;
-        Post.create(
-          {
-            _id: new mongoose.Types.ObjectId(),
-            imageUrl: url,
-            caption,
-            userId: req.user.id,
-          }
-        );
-      }
-    );
-  });
-};
-
 module.exports.getUserProfile = async (req, res) => {
-  const { nickname } = req.query;
+  const { nickname } = req.params;
   const userInfo = await User.findOne({ nickname });
-  const images = await Post.find({ userId: userInfo.id });
+  const images = await Post.find({ userId: userInfo.id }).sort('-createdAt');
   res.json({ images, userInfo });
 };
 
-module.exports.getSuggestedUsers = async (req, res) => {
+module.exports.getSuggestedUserList = async (req, res) => {
   const { followingId, id } = req.user;
-  await User.find((_err, result) => {
-    const filterUsers = result.filter((user) => {
-      if (!followingId.includes(user.id) && id !== user.id) return user;
-    });
-    res.json(filterUsers);
+  const users = await User.find()
+  const getUsers = users.filter((user) => {
+    if (!followingId.includes(user.id) && id !== user.id) return user;
   });
+  res.json({users: getUsers});
 };
 
-module.exports.sendFollowUser = async (req) => {
+module.exports.sendFollowerRequest = async (req, res) => {
   const { userId } = req.body;
   const { id } = req.user;
-  const arrsId = [...req.user.followingId];
-  arrsId.push(userId);
-  await User.findByIdAndUpdate(
-    id,
-    {
-      followingId: arrsId,
-    }
-  );
+  const followingId = [...req.user.followingId];
+  followingId.push(userId);
+  await User.findByIdAndUpdate(id,{followingId});
+
   const user = await User.findById(userId);
-  const arrFollowersId = [...user.followersId];
-  debugger;
-  arrFollowersId.push(id);
-  await User.findByIdAndUpdate(userId, {
-    followersId: arrFollowersId,
-  })
+  const followersId = [...user.followersId];
+  followersId.push(id);
+  await User.findByIdAndUpdate(userId, {followersId});
+
+  res.json({userId})
 };
 
-module.exports.getFollowingPosts = async (req, res) => {
+module.exports.getFollowingPostList = async (req, res) => {
   const { followingId, id } = req.user;
   const getPosts = await Post.find();
   const posts = getPosts.filter((post) => {
@@ -119,24 +79,10 @@ module.exports.getFollowingPosts = async (req, res) => {
       );
       newPost.reactions = reactions;
       newPost.userInfo = userInfo;
-      newPost.comments = addCommentInfo.reverse();
+      newPost.comments = addCommentInfo;
       return newPost;
     })
   );
 
   res.json({ posts: addPostInfo.reverse() });
-};
-
-module.exports.postComment = async (req, res) => {
-  debugger;
-  await Comment.create(
-    {
-      _id: mongoose.Types.ObjectId(),
-      ...req.body,
-      userId: req.user.id,
-    },
-    () => {
-      res.json({ status: 'Add comment successfully' });
-    }
-  );
 };

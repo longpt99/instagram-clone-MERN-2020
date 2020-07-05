@@ -11,7 +11,7 @@ function Post(props) {
   const {image} = props;
   return (
     <div className={styles.profile_post}>
-      <Link to={{pathname:`/post/${image._id}`, state: { modal: true }}}>
+      <Link to={{pathname:`/posts/${image._id}`, state: { modal: true }}}>
         <img className='img-fluid' src={image.imageUrl} alt='img-post'/>
       </Link>
     </div>

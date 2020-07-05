@@ -1,6 +1,6 @@
 import * as types from '../../constants/ActionType';
 
-const getToken = JSON.parse(localStorage.getItem('jwt'));
+const getToken = localStorage.getItem('access_token');
 let initialState = getToken ? getToken : null;
 
 const tokenReducer = (state = initialState, action) => {

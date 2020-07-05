@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 // import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 
-import {actFetchSuggestedUsersRequest, actSendFollowUserRequest} from 'store/actions'
+import {actFetchSuggestedUsersRequest, actSendFollowerRequest, actFetchFollowingPostsRequest} from 'store/actions'
 import { FollowerSuggestion } from 'components/Home';
 
 FollowerSuggestionContainer.propTypes = {
@@ -16,10 +16,11 @@ function FollowerSuggestionContainer(props) {
 
   useEffect(() => {
     dispatch(actFetchSuggestedUsersRequest());
-  }, [dispatch, suggestion])
+  }, [dispatch])
 
   function handleClickFollowButton(id) {
-    dispatch(actSendFollowUserRequest(id));
+    dispatch(actSendFollowerRequest(id));
+    dispatch(actFetchFollowingPostsRequest());
   }
 
   return <FollowerSuggestion

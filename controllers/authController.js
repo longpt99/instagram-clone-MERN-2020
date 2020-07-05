@@ -20,8 +20,12 @@ module.exports.postLogin = async (req, res) => {
     return;
   }
 
-  const payload = { id: user.id };
-  const token = jwt.sign(payload, process.env.SECRET_OR_KEY);
+  const payload = { 
+    sub: user.id ,
+    iat: Date.now(),
+    exp: Date.now() + 2*24*60*60*1000  
+  };
+  const token = jwt.sign(payload,process.env.SECRET_OR_KEY);
   res.json(token);
 };
 
@@ -40,9 +44,9 @@ module.exports.postRegister = async (req, res) => {
     return;
   }
 
-  await bcrypt.hash(password, 10, async (err, hash) => {
+  bcrypt.hash(password, 10, async (err, hash) => {
     const userId = new mongoose.Types.ObjectId();
-    await User.create(
+    User.create(
       {
         _id: userId,
         name,
@@ -52,8 +56,12 @@ module.exports.postRegister = async (req, res) => {
         profilePictureUrl: `https://api.adorable.io/avatars/200/${userId}`,
       },
       () => {
-        const payload = { id: userId };
-        const token = jwt.sign(payload, process.env.SECRET_OR_KEY);
+        const payload = { 
+          sub: user.id ,
+          iat: Date.now(),
+          exp: Date.now() + 2*24*60*60*1000  
+        };
+        const token = jwt.sign(payload, process.env.SECRET_OR_KEY, {expiresIn: '2 days'});
         res.json(token);
       }
     );

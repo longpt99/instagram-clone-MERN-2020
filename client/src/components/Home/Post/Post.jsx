@@ -81,8 +81,8 @@ function Post(props) {
                 {
                   post.comments.length >= 4 
                   ? <div>
-                      <Link to={{pathname:`/post/${post._id}`, state: { modal: true }}}>Xem tất cả</Link>
-                      {post.comments.slice(0,3).reverse().map((comment,i) => (
+                      <Link to={{pathname:`/posts/${post._id}`, state: { modal: true }}}>Xem tất cả</Link>
+                      {post.comments.slice(post.comments.length - 3).map((comment,i) => (
                           <div className='post-cmt' key={i}>
                             <a href={`/${comment.userInfo.nickname}`}>
                               <span>{comment.userInfo.nickname}</span>
@@ -92,7 +92,7 @@ function Post(props) {
                         ))
                       } 
                     </div>
-                  : post.comments.slice(0,4).reverse().map((comment, i) => (
+                  : post.comments.map((comment, i) => (
                     <div className='post-cmt' key={i}>
                       <a href={`/${comment.userInfo.nickname}`}>
                         <span>{comment.userInfo.nickname}</span>

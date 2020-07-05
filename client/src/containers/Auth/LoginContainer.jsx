@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { LoginForm } from 'components/Auth';
 import { checkValueToShowBtn } from 'utils';
-import { actFetchTokenRequest, actResetErr } from 'store/actions';
+import { actFetchTokenRequest, actResetErr, actUserLogout } from 'store/actions';
 import { useEffect } from 'react';
 
 LoginContainer.propTypes = {
@@ -31,6 +31,10 @@ function LoginContainer(props) {
       clearTimeout(resetErr)
     }
   }, [dispatch, error])
+
+  useEffect(() => {
+    dispatch(actUserLogout())
+  })
 
   function onHandleValueInput(e) {
     const tempInfo = {...info}

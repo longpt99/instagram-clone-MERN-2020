@@ -1,11 +1,10 @@
-import React, {useState} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 // import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
-import { useRouteMatch, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 import { Header } from 'components/Common';
 import { actDeleteToken, actFetchSearchResultRequest, actUserLogout, actResetSearchUsers } from 'store/actions';
-import { useEffect } from 'react';
 
 HeaderContainer.propTypes = {
   
@@ -14,13 +13,12 @@ HeaderContainer.propTypes = {
 function HeaderContainer(props) {
   const admin = useSelector(state => state.users.admin);
   const searchUsers = useSelector(state => state.users.search);
-  const {url} = useRouteMatch();
   const {pathname} = useLocation();
   const dispatch = useDispatch();
+  const typingTimeoutRef = useRef(null);
   const [textInput, setTextInput] = useState('');
   const [isFocus, setFocus] = useState(false);
 
-  
   useEffect(() => {
     setFocus(false);
     setTextInput('')
@@ -28,12 +26,12 @@ function HeaderContainer(props) {
   }, [dispatch, pathname])
 
   const handleLogoutClick = () => {
-    dispatch(actUserLogout());
     dispatch(actDeleteToken());
+    dispatch(actUserLogout());
   }
 
   const handleBackToHomePage = () => {
-    if (url === '/') {
+    if (pathname === '/') {
       window.scrollTo(0, 0);
     }
   }
@@ -53,9 +51,14 @@ function HeaderContainer(props) {
   const handleChangeTextInput = (e) => {
     const {value} = e.target;
     setTextInput(value)
-    if (value.length > 0) {
-      dispatch(actFetchSearchResultRequest(value));
+
+    if (typingTimeoutRef.current) {
+      clearTimeout(typingTimeoutRef.current)
     }
+
+    typingTimeoutRef.current = setTimeout(() => {
+      dispatch(actFetchSearchResultRequest(value));
+    }, 300)
   }
 
   const handleClearSearchInput = () => {
