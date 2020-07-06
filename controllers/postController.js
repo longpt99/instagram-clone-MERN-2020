@@ -1,5 +1,6 @@
 const cloudinary = require('cloudinary').v2;
 const mongoose = require('mongoose');
+const fs = require('fs');
 
 const User = require('../models/userModel');
 const Post = require('../models/postModel');
@@ -69,30 +70,26 @@ module.exports.postComment = async (req, res) => {
   res.json({data})
 };
 
-module.exports.uploadImage = (req, res) => {
+module.exports.uploadImage = async (req, res) => {
   const {id} = req.user
   const { caption } = req.body;
-  const { file } = req.files;
+  const { path, originalname } = req.file;
   const idPost = new mongoose.Types.ObjectId();
 
-  file.mv(`./public/uploads/posts/${file.name}`, () => {
-    cloudinary.uploader.upload(
-      `./public/uploads/posts/${file.name}`,
-      {
-        public_id: `instagram/posts/${id}/img_${file.md5}`,
-      },
-      async (_error, result) => {
-        const { url } = result;
-        const post = await Post.create(
-          {
-            _id: idPost,
-            imageUrl: url,
-            caption,
-            userId: req.user.id,
-          }
-        );
+  try {
+    const img = await cloudinary.uploader.upload(`${path}`,{public_id: `instagram/posts/${id}/${originalname}`})
+    if (img) {
+      const post = await Post.create({
+          _id: idPost,
+          imageUrl: img.url,
+          caption,
+          userId: req.user.id,
+        }
+      );
+      fs.unlinkSync(`${path}`)
       res.json({post})
-      }
-    );
-  });
+    }
+  } catch (err) {
+    console.log(err)
+  }
 };

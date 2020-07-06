@@ -9,7 +9,6 @@ const cookieParser = require('cookie-parser');
 const helmet = require("helmet");
 const cors = require('cors');
 const passport = require('passport');
-const fileUpload = require('express-fileupload');
 
 const routes = require('./routes');
 
@@ -19,8 +18,8 @@ app.use(passport.initialize());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser(process.env.COOKIE_SECRET));
-app.use(fileUpload());
-app.use(cors());app.use(helmet());
+app.use(cors());
+app.use(helmet());
 app.use(express.static('public'));
 
 if(process.env.NODE_ENV === 'production') {

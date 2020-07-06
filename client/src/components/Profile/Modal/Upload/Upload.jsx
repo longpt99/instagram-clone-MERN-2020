@@ -31,7 +31,6 @@ function Upload(props) {
   const [file, setFile] = useState([])
   const {caption} = props;
   const dispatch = useDispatch();
-  console.log(file)
   return (
     <div className={cls.modal_upload} onDoubleClick={props.handleClickToHideModal}>
       <div className={cls.modal_file}>
@@ -39,7 +38,7 @@ function Upload(props) {
           file={file}
           onupdatefiles={setFile}
           instantUpload={false}
-          name='file'
+          name='image'
           labelIdle='Kéo hoặc thả ảnh'
           maxFileSize='5MB'
           labelMaxFileSize={`Maximum file size is 5MB`}
