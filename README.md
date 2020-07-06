@@ -31,5 +31,6 @@ password: long123
   - Explore accounts
   - Setting account
 
-[Client](https://github.com/longpt99/instagram-clone-MERN-2020/tree/master/client)
-[Demo](https://instagram-mern-2020.herokuapp.com/)
+**Link**
+  - [Client](https://github.com/longpt99/instagram-clone-MERN-2020/tree/master/client)
+  - [Demo](https://instagram-mern-2020.herokuapp.com/)
