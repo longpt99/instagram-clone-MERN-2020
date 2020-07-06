@@ -9,9 +9,13 @@ const cookieParser = require('cookie-parser');
 const helmet = require("helmet");
 const cors = require('cors');
 const passport = require('passport');
+const { AwakeHeroku } = require('awake-heroku');
 
 const routes = require('./routes');
 
+AwakeHeroku.add({
+  url: 'https://instagram-mern-2020.herokuapp.com/'
+})
 mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true });
 
 app.use(passport.initialize());

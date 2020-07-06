@@ -5,16 +5,7 @@ const router = express.Router();
 const controller = require('../controllers/postController');
 const passport = require('../middlewares/passportMiddleware');
 
-// var storage = multer.diskStorage({
-//   destination: function (req, file, cb) {
-//     cb(null, "public/postImages")
-//   },
-//   filename: function (req, file, cb) {
-//     cb(null, Date.now() + '-' + file.originalname)
-//   }
-// })
-
-var upload = multer({ dest: "tmp/uploads/postImages" })
+const upload = multer({ dest: process.env.NODE_ENV === 'production' ? "tmp/uploads/postImages" : "public/uploads/postImages" })
 
 router.get('/:id', controller.getPostContent);
 

@@ -1,7 +1,7 @@
 import * as types from '../../constants/ActionType';
 
 var initialState = {
-  admin: null,
+  admin: {},
   user: null,
   list: [],
   suggestion: [],

@@ -34,7 +34,7 @@ function LoginContainer(props) {
 
   useEffect(() => {
     dispatch(actUserLogout())
-  })
+  }, [])
 
   function onHandleValueInput(e) {
     const tempInfo = {...info}

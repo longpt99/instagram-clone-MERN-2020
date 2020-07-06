@@ -5,7 +5,7 @@ import './App.scss';
 
 import Routes from 'routes';
 import HeaderContainer from 'containers/Common/Header';
-import { actFetchAdminRequest } from 'store/actions';
+import { actFetchAdminRequest, actResetErr } from 'store/actions';
 
 function App(props) {
   const admin = useSelector(state => state.users.admin);
@@ -14,15 +14,10 @@ function App(props) {
 
   useEffect(() => {
     if (token) {
+      dispatch(actResetErr())
       dispatch(actFetchAdminRequest());
     }
   }, [dispatch, token]);
-
-  if (token) {
-    if(!admin) {
-      return <></>
-    }
-  }
   
   return (
     <Suspense fallback={<div>Loading...</div>}>

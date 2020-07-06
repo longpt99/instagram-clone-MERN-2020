@@ -7,9 +7,12 @@ export const actFetchTokenRequest = (data) => {
   return dispatch => {
     return axios.post('/auth/login', data)
     .then(res => {
+      debugger
       dispatch(actFetchToken(res));
+      dispatch(actFetchAdminRequest());
     }).catch(err => {
-      dispatch(actSetLoginError(err.response.data))
+      debugger;
+      dispatch(actSetLoginError(err))
     });
   };
 }
@@ -20,7 +23,7 @@ export const actCreateNewAccount = (data) => {
     .then(res => {
       dispatch(actFetchToken(res));
     }).catch(err => {
-      dispatch(actSetLoginError(err.response.data))
+      dispatch(actSetLoginError(err))
     });
   };
 }

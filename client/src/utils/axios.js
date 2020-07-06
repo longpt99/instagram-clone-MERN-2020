@@ -21,10 +21,12 @@ instance.interceptors.response.use((response) => {
   }
   return response;
   }, (error) => {
+    // debugger;
   if (error.response.status === 401) {
     localStorage.removeItem('access_token');
     return window.location.href = '/login';
   }
+  return Promise.reject(error.response.data);
 });
 
 export default instance;
