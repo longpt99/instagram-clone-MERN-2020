@@ -1,5 +1,4 @@
 import * as types from '../../constants/ActionType';
-const getToken = localStorage.getItem('access_token');
 
 let initialState = {
   accessToken: null

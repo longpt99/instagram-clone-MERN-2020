@@ -11,17 +11,16 @@ const opts = {
   secretOrKey: process.env.SECRET_OR_KEY,
 };
 
-const strategy = new JwtStrategy(opts, async (jwt_payload, next) => {
-  const isExpired = (jwt_payload.exp - Date.now());
+const strategy = new JwtStrategy(opts, async (jwtPayload, next) => {
+  const isExpired = jwtPayload.exp - Date.now();
   if (isExpired < 0) {
-    return next(false, {msg: 'Token Expired'});
+    return next(false, { msg: 'Token Expired' });
   }
-  const user = await User.findById(jwt_payload.sub);
+  const user = await User.findById(jwtPayload.sub);
   if (user) {
     return next(null, user);
-  } else {
-    return next(null, false);
   }
+  return next(null, false);
 });
 
 passport.use(strategy);

@@ -6,27 +6,24 @@ const User = require('../models/userModel');
 
 module.exports.postLogin = async (req, res) => {
   const { email, password } = req.body;
-  const user = await User.findOne({ email });
 
+  const user = await User.findOne({ email });
   if (!user) {
-    res.status(404).json('User not found');
-    return;
+    return res.status(404).json({ msg: 'User not found' });
   }
 
   const valid = await bcrypt.compare(password, user.password);
-
   if (!valid) {
-    res.status(404).json('Wrong password');
-    return;
+    return res.status(404).json({ msg: 'Wrong password' });
   }
 
-  const payload = { 
-    sub: user.id ,
+  const payload = {
+    sub: user.id,
     iat: Date.now(),
-    exp: Date.now() + 2*24*60*60*1000  
+    exp: Date.now() + 2 * 24 * 60 * 60 * 1000,
   };
-  const token = jwt.sign(payload,process.env.SECRET_OR_KEY);
-  res.json(token);
+  const token = jwt.sign(payload, process.env.SECRET_OR_KEY);
+  return res.json({ token });
 };
 
 module.exports.postRegister = async (req, res) => {
@@ -34,36 +31,30 @@ module.exports.postRegister = async (req, res) => {
 
   const validUserEmail = await User.findOne({ email });
   if (validUserEmail) {
-    res.status(404).json('Email has existed');
-    return;
+    return res.status(404).json({ msg: 'Email has existed' });
   }
 
   const validUserNickname = await User.findOne({ nickname });
   if (validUserNickname) {
-    res.status(404).json('Nickname has existed');
-    return;
+    return res.status(404).json({ msg: 'Nickname has existed' });
   }
 
-  bcrypt.hash(password, 10, async (err, hash) => {
+  return bcrypt.hash(password, 10, async (err, hash) => {
     const userId = new mongoose.Types.ObjectId();
-    User.create(
-      {
-        _id: userId,
-        name,
-        email,
-        nickname,
-        password: hash,
-        profilePictureUrl: `https://api.adorable.io/avatars/200/${userId}`,
-      },
-      () => {
-        const payload = { 
-          sub: user.id ,
-          iat: Date.now(),
-          exp: Date.now() + 2*24*60*60*1000  
-        };
-        const token = jwt.sign(payload, process.env.SECRET_OR_KEY, {expiresIn: '2 days'});
-        res.json(token);
-      }
-    );
+    const user = User.create({
+      _id: userId,
+      name,
+      email,
+      nickname,
+      password: hash,
+      profilePictureUrl: `https://api.adorable.io/avatars/200/${userId}`,
+    });
+    const payload = {
+      sub: user.id,
+      iat: Date.now(),
+      exp: Date.now() + 2 * 24 * 60 * 60 * 1000,
+    };
+    const token = jwt.sign(payload, process.env.SECRET_OR_KEY);
+    res.json({ token });
   });
 };

@@ -1,10 +1,7 @@
-const mongoose = require('mongoose');
-
 const Post = require('../models/postModel');
 const User = require('../models/userModel');
 const Comment = require('../models/commentModel');
 const Reaction = require('../models/reactionModel');
-
 
 module.exports.getAdmin = (req, res) => {
   res.json(req.user);
@@ -12,9 +9,9 @@ module.exports.getAdmin = (req, res) => {
 
 module.exports.searchUsername = async (req, res) => {
   const { q } = req.query;
-  const users = await User.find({nickname: new RegExp(q, 'i')});
-  res.json({users});
-}
+  const users = await User.find({ nickname: new RegExp(q, 'i') });
+  res.json({ users });
+};
 
 module.exports.getUserProfile = async (req, res) => {
   const { nickname } = req.params;
@@ -25,11 +22,11 @@ module.exports.getUserProfile = async (req, res) => {
 
 module.exports.getSuggestedUserList = async (req, res) => {
   const { followingId, id } = req.user;
-  const users = await User.find()
-  const getUsers = users.filter((user) => {
-    if (!followingId.includes(user.id) && id !== user.id) return user;
-  });
-  res.json({users: getUsers});
+  const users = await User.find();
+  const getUsers = users.filter(
+    (user) => !followingId.includes(user.id) && id !== user.id
+  );
+  res.json({ users: getUsers });
 };
 
 module.exports.sendFollowerRequest = async (req, res) => {
@@ -37,33 +34,30 @@ module.exports.sendFollowerRequest = async (req, res) => {
   const { id } = req.user;
   const followingId = [...req.user.followingId];
   followingId.push(userId);
-  await User.findByIdAndUpdate(id,{followingId});
 
   const user = await User.findById(userId);
   const followersId = [...user.followersId];
   followersId.push(id);
-  await User.findByIdAndUpdate(userId, {followersId});
 
-  res.json({userId})
+  await User.findByIdAndUpdate(id, { followingId });
+  await User.findByIdAndUpdate(userId, { followersId });
+  res.json({ userId });
 };
 
 module.exports.getFollowingPostList = async (req, res) => {
   const { followingId, id } = req.user;
   const getPosts = await Post.find();
-  const posts = getPosts.filter((post) => {
-    if (followingId.includes(post.userId)) {
-      return post;
-    }
-    if (id === post.userId.toString()) {
-      return post;
-    }
-  });
+  const posts = getPosts.filter((post) =>
+    followingId.includes(post.userId) || id === post.userId.toString()
+      ? post
+      : false
+  );
   const addPostInfo = await Promise.all(
     posts.map(async (post) => {
       const newPost = { ...post._doc };
       const user = await User.findById(post.userId);
       const comments = await Comment.find({ postId: newPost._id });
-      const reactions = await Reaction.find({postId: newPost._id});
+      const reactions = await Reaction.find({ postId: newPost._id });
       const userInfo = {
         nickname: user.nickname,
         profilePictureUrl: user.profilePictureUrl,

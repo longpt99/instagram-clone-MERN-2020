@@ -14,7 +14,6 @@ cloudinary.config({
 });
 
 module.exports.getPostContent = async (req, res) => {
-  debugger;
   const { id } = req.params;
   const post = await Post.findById(id);
   const newPost = { ...post._doc };
@@ -45,18 +44,18 @@ module.exports.postLikePhoto = async (req, res) => {
     _id: mongoose.Types.ObjectId(),
     postId: req.params.id,
     userId: req.user.id,
-  })
-  const data = {...react._doc};
+  });
+  const data = { ...react._doc };
   data.userInfo = req.user;
-  res.json({data})
+  res.json({ data });
 };
 
 module.exports.deleteLikePhoto = (req, res) => {
-  const {id} = req.user;
-  Reaction.findOneAndDelete({userId: id, postId: req.params.id}, () => {
-    res.json({userId: id})
-  })
-}
+  const { id } = req.user;
+  Reaction.findOneAndDelete({ userId: id, postId: req.params.id }, () => {
+    res.json({ userId: id });
+  });
+};
 
 module.exports.postComment = async (req, res) => {
   const cmt = await Comment.create({
@@ -65,31 +64,32 @@ module.exports.postComment = async (req, res) => {
     postId: req.params.id,
     userId: req.user.id,
   });
-  const data = {...cmt._doc};
+  const data = { ...cmt._doc };
   data.userInfo = req.user;
-  res.json({data})
+  res.json({ data });
 };
 
 module.exports.uploadImage = async (req, res) => {
-  const {id} = req.user
+  const { id } = req.user;
   const { caption } = req.body;
   const { path, originalname } = req.file;
   const idPost = new mongoose.Types.ObjectId();
 
   try {
-    const img = await cloudinary.uploader.upload(`${path}`,{public_id: `instagram/posts/${id}/${originalname}`})
+    const img = await cloudinary.uploader.upload(`${path}`, {
+      public_id: `instagram/posts/${id}/${originalname}`,
+    });
     if (img) {
       const post = await Post.create({
-          _id: idPost,
-          imageUrl: img.url,
-          caption,
-          userId: req.user.id,
-        }
-      );
-      fs.unlinkSync(`${path}`)
-      res.json({post})
+        _id: idPost,
+        imageUrl: img.url,
+        caption,
+        userId: req.user.id,
+      });
+      fs.unlinkSync(`${path}`);
+      res.json({ post });
     }
   } catch (err) {
-    console.log(err)
+    console.log(err);
   }
 };
