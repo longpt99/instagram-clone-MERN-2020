@@ -5,11 +5,11 @@ import './App.scss';
 
 import Routes from 'routes';
 import HeaderContainer from 'containers/Common/Header';
-import { actFetchAdminRequest, actResetErr } from 'store/actions';
+import { actFetchAdminRequest, actResetErr, actFetchToken } from 'store/actions';
+import { getToken } from "utils";
 
 function App(props) {
-  const admin = useSelector(state => state.users.admin);
-  const token = useSelector(state => state.token);
+  const token = useSelector(state => state.token.accessToken);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -18,6 +18,13 @@ function App(props) {
       dispatch(actFetchAdminRequest());
     }
   }, [dispatch, token]);
+
+  useEffect(() => {
+    const accessToken = getToken();
+    if (accessToken) {
+      dispatch(actFetchToken(accessToken))
+    }
+  }, [dispatch])
   
   return (
     <Suspense fallback={<div>Loading...</div>}>

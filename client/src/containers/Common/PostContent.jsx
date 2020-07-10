@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { actFetchPostRequest } from 'store/actions';
 import PostContent from 'components/Common/PostContent';
-import Modal from 'components/Common/Modal/Modal';
+import Modal from 'components/Common/Modal';
 
 PostContentContainer.propTypes = {
   
@@ -14,7 +14,6 @@ PostContentContainer.propTypes = {
 function PostContentContainer(props) {
   const {isModal} = props;
   const post = useSelector(state => state.posts.post);
-  console.log(post)
   const history = useHistory()
   const dispatch = useDispatch();
   let { id } = useParams();

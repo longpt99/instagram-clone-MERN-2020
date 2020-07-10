@@ -3,14 +3,13 @@ import { Route, Redirect } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 const PublicRoute = ({component: Component, ...rest}) => {
-  const token = useSelector(state => state.token)
+  const token = useSelector(state => state.token.accessToken)
   return (
     <Route {...rest} render={props => 
-        !token
-        ? <Component {...props}/>
-        : <Redirect to='/' />
-      }
-    />
+      !token
+      ? <Component {...props}/>
+      : <Redirect to='/' />
+    }/>
   )
 };
 

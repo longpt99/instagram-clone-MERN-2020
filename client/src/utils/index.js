@@ -7,3 +7,7 @@ export const checkValueToShowBtn = (data) => {
   }
   return true;
 }
+
+export const getToken = () => {
+  return localStorage.getItem('access_token');
+}

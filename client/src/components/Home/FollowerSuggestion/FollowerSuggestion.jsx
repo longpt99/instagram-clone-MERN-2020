@@ -29,7 +29,7 @@ function Follow(props) {
       <div className='follow-content'>
         <div className='follow-title'>
           <span>Gợi ý cho bạn</span>
-          <Link to='/explore/people/'>Xem tất cả</Link>
+          <Link to='/explore/people/suggestion'>Xem tất cả</Link>
         </div>
         {
           suggestedUsers.map((user, i) => (

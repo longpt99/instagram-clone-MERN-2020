@@ -1,0 +1,36 @@
+@mixin d-flex {
+  display: flex;
+  align-items: center;
+}
+
+.wrapper {
+  margin: 7rem auto;
+  max-width: 500px;
+  background-color: white;
+  .content {
+    @include d-flex;
+    justify-content: space-between;
+    padding: 1rem;
+
+    &_group {
+      @include d-flex;
+    }
+
+    &_img {
+      img {
+        height: 50px;
+        width: 50px;
+        border-radius: 999px;
+      }
+    }
+
+    &_info {
+      font-size: 1rem;
+      margin-left: 1rem;
+      &_nickname {
+        display: block;
+        font-weight: 500;
+      }
+    }
+  }
+}

@@ -7,12 +7,12 @@ export const actFetchTokenRequest = (data) => {
   return dispatch => {
     return axios.post('/auth/login', data)
     .then(res => {
-      debugger
-      dispatch(actFetchToken(res));
+      debugger;
+      dispatch(actFetchToken(res.token));
       dispatch(actFetchAdminRequest());
     }).catch(err => {
       debugger;
-      dispatch(actSetLoginError(err))
+      dispatch(actSetLoginError(err.msg))
     });
   };
 }
@@ -21,9 +21,9 @@ export const actCreateNewAccount = (data) => {
   return dispatch => {
     return axios.post('/auth/register', data)
     .then(res => {
-      dispatch(actFetchToken(res));
+      dispatch(actFetchToken(res.token));
     }).catch(err => {
-      dispatch(actSetLoginError(err))
+      dispatch(actSetLoginError(err.msg))
     });
   };
 }
@@ -91,7 +91,6 @@ export const actPostCommentRequest = (data) => {
   return dispatch => {
     return axios.post(`posts/${data.postId}/comment`, {content: data.content})
     .then(res => {
-      debugger;
       dispatch(actSetCommentDataToPost(res.data))
     })
     .catch(err => {
@@ -163,13 +162,6 @@ export const actFetchToken = (token) => {
   }
 }
 
-export const actDeleteToken = () => {
-  localStorage.removeItem('access_token');
-  return {
-    type: types.DELETE_TOKEN,
-  }
-}
-
 export const actFetchSuggestedUsers = (data) => {
   return {
     type: types.SUGGESTED_USER,
@@ -220,6 +212,8 @@ export const actFetchSearchUsers = (data) => {
 }
 
 export const actUserLogout = () => {
+  localStorage.removeItem('access_token');
+  debugger;
   return {
     type: types.USER_LOGOUT,
   }

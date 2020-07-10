@@ -5,11 +5,11 @@ import {actFetchFollowingPostsRequest, actPostCommentRequest, actReactionPostReq
 import { useDispatch, useSelector } from 'react-redux';
 import { Post } from 'components/Home';
 
-PostContianer.propTypes = {
+PostContainer.propTypes = {
   
 };
 
-function PostContianer(props) {
+function PostContainer() {
   const dispatch = useDispatch();
   const adminId = useSelector(state => state.users.admin._id);
   const posts = useSelector(state => state.posts.followingPost);
@@ -68,4 +68,4 @@ function PostContianer(props) {
   />
 }
 
-export default React.memo(PostContianer);
+export default PostContainer;

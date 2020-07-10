@@ -1,16 +1,11 @@
 import React, {useState, useRef, useEffect} from 'react';
-// import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 
 import { Header } from 'components/Common';
-import { actDeleteToken, actFetchSearchResultRequest, actUserLogout, actResetSearchUsers } from 'store/actions';
+import { actFetchSearchResultRequest, actResetSearchUsers, actUserLogout } from 'store/actions';
 
-HeaderContainer.propTypes = {
-  
-};
-
-function HeaderContainer(props) {
+function HeaderContainer() {
   const admin = useSelector(state => state.users.admin);
   const searchUsers = useSelector(state => state.users.search);
   const {pathname} = useLocation();
@@ -26,7 +21,6 @@ function HeaderContainer(props) {
   }, [dispatch, pathname])
 
   const handleLogoutClick = () => {
-    dispatch(actDeleteToken());
     dispatch(actUserLogout());
   }
 
@@ -45,9 +39,9 @@ function HeaderContainer(props) {
       setFocus(false)
       return;
     }
-    // dispatch(actResetSearchUsers())
   }
 
+  
   const handleChangeTextInput = (e) => {
     const {value} = e.target;
     setTextInput(value)
@@ -58,7 +52,7 @@ function HeaderContainer(props) {
 
     typingTimeoutRef.current = setTimeout(() => {
       dispatch(actFetchSearchResultRequest(value));
-    }, 300)
+    }, 300);
   }
 
   const handleClearSearchInput = () => {

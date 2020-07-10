@@ -19,10 +19,9 @@ instance.interceptors.response.use((response) => {
   if (response && response.data) {
     return response.data;
   }
-  return response;
+    return response;
   }, (error) => {
-    // debugger;
-  if (error.response.status === 401) {
+  if (error.response.data.msg === 'Token Expired') {
     localStorage.removeItem('access_token');
     return window.location.href = '/login';
   }

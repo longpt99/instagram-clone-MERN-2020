@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-// import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { LoginForm } from 'components/Auth';
@@ -7,12 +6,9 @@ import { checkValueToShowBtn } from 'utils';
 import { actFetchTokenRequest, actResetErr, actUserLogout } from 'store/actions';
 import { useEffect } from 'react';
 
-LoginContainer.propTypes = {
-  
-};
-
-function LoginContainer(props) {
-  const error = useSelector(state => state.error)
+function LoginContainer() {
+  const error = useSelector(state => state.error);
+  const token = useSelector(state => state.token.accessToken);
   const dispatch = useDispatch();
 
   const initInfo = {
@@ -24,17 +20,19 @@ function LoginContainer(props) {
   const [info, setInfo] = useState(initInfo);
 
   useEffect(() => {
-    const resetErr = setTimeout(() => {
-      dispatch(actResetErr())
-    }, 5000)
-    return () => {
-      clearTimeout(resetErr)
-    }
+      const resetErr = setTimeout(() => {
+        dispatch(actResetErr())
+      }, 5000)
+      return () => {
+        clearTimeout(resetErr)
+      }
   }, [dispatch, error])
 
   useEffect(() => {
-    dispatch(actUserLogout())
-  }, [])
+    if (!token) {
+      dispatch(actUserLogout())
+    }
+  }, [dispatch, token])
 
   function onHandleValueInput(e) {
     const tempInfo = {...info}

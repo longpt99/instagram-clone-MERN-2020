@@ -14,7 +14,7 @@ const appReducers = combineReducers({
 
 const rootReducers = (state, action) => {
   switch(action.type) {
-    case 'USER_LOGOUT': return state = undefined;
+    case 'USER_LOGOUT': return appReducers(undefined, action);
     default: return appReducers(state, action);
   }
 }

@@ -1,12 +1,11 @@
 import React, {useState, useEffect} from 'react';
-// import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { RegisterForm } from 'components/Auth';
 import { checkValueToShowBtn } from 'utils';
 import { actCreateNewAccount, actResetErr } from 'store/actions';
 
-function RegisterContainer(props) {
+function RegisterContainer() {
   const initInfo = {
     name: '',
     email: '',
@@ -26,7 +25,7 @@ function RegisterContainer(props) {
       clearTimeout(resetErr)
     }
   }, [dispatch, error])
-  
+
   function handleValueInput(e) {
     const tempInfo = {...info}
     const {name, value} = e.target;

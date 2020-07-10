@@ -9,7 +9,7 @@ Information.propTypes = {
 
 function Information(props) {
   const {userInfo, countPost} = props;
-  console.log(userInfo)
+
   return (
     <header className={styles.profile_header}>
       <div className={styles.profile_avatar}>
@@ -41,7 +41,6 @@ function Information(props) {
             Phương Thành Long
             just be a good person/>
             –––
-            {/* ✉️ phuongthanhlong.99@gmail.com */}
           </span>
         </div>
       </div>

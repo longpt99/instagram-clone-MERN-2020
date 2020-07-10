@@ -2,10 +2,7 @@ import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import cls from './styles.module.scss';
-import axios from 'utils/axios';
 
-// import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orientation'
-// import FilePondPluginImageResize from 'filepond-plugin-image-resize';
 import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
 import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';
 import FilePondPluginFileValidateSize from 'filepond-plugin-file-validate-size';
@@ -60,13 +57,8 @@ function Upload(props) {
                 formData.append('caption', caption)
                 return formData
               },
-              // onprogress: (e) => {
-              //   console.log(e.lengthComputable, e.loaded, e.total);
-              // }
-            },
-
-          }
-          }
+            }
+          }}
         />
       <textarea className={cls.modal_caption} onChange={props.handleGetValueCaption} placeholder='Type caption here...'>
       </textarea>
