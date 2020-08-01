@@ -1,0 +1,15 @@
+.c-btn__config {
+  background: transparent;
+  color: black;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  border-radius: unset;
+  outline: none !important;
+}
+
+.c-btn__logout {
+  @extend .c-btn__config;
+  border-top: thin solid #eee;
+  text-align: inherit;
+}

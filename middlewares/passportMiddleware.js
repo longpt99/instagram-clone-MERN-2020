@@ -12,6 +12,7 @@ const opts = {
 };
 
 const strategy = new JwtStrategy(opts, async (jwtPayload, next) => {
+  debugger;
   const isExpired = jwtPayload.exp - Date.now();
   if (isExpired < 0) {
     return next(false, { msg: 'Token Expired' });

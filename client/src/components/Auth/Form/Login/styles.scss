@@ -1,0 +1,86 @@
+.c-form {
+  margin-top: 2rem;
+  padding: 1rem 2rem;
+  border: thin solid #ddd;
+  width: 350px;
+  max-width: 100%;
+
+  .alert {
+    transition: visibility 0s, opacity 0.5s linear;
+  }
+
+  h1 {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  &__item {
+    position: relative;
+    width: 100%;
+  }
+
+  &__input {
+    width: 100%;
+    border: thin solid lightgrey;
+    padding: 5px 20px;
+    border-radius: 5px;
+    outline-color: #2525251f;
+
+    &:focus, &:valid {
+      padding-bottom: 0;
+      padding-top: 10px;
+    }
+  }
+
+  &__text {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #888;
+    transition: 200ms ease;
+
+    &Item {
+      all: unset;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #9c9a9a;
+      margin: 10px 0;
+
+      &::before, &::after {
+        content: "";
+        width: 100px;
+        border-top: thin solid;
+      }
+    }
+
+    
+  }
+
+  &__input:focus + &__text, &__input:valid + &__text {
+    font-size: 0.7rem;
+    top: 25%;
+  }
+
+  &__resetPassword {
+    display: block;
+    text-align: center;
+    font-size: 0.8rem;
+    margin-top: 10px;
+    color: #385185;
+  }
+}
+
+.c-button__eyes {
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.c-button--w {
+  display: block;
+  width: 100%;
+  padding: 0.2rem;
+}

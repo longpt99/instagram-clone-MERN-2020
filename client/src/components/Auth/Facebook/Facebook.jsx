@@ -9,7 +9,6 @@ Facebook.defaultProps = {};
 
 function Facebook(props) {
   const {registerForm} = props;
-
   function componentClicked() {
     // props.handelLoginState(true);
     console.log("clicked");

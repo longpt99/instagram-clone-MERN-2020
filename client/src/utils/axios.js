@@ -1,5 +1,6 @@
 import axios from 'axios';
 import queryString from 'query-string';
+import { getToken } from 'utils';
   
 const instance = axios.create({
   baseURL: '/api',
@@ -10,13 +11,13 @@ const instance = axios.create({
 });
 
 instance.interceptors.request.use((config) => {
-  const token = localStorage.getItem('access_token');
+  const token = getToken()
   config.headers.Authorization =  token ? `Bearer ${token}` : '';
   return config;
 })
 
 instance.interceptors.response.use((response) => {
-  if (response && response.data) {
+  if (response?.data) {
     return response.data;
   }
     return response;

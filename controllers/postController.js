@@ -16,27 +16,33 @@ cloudinary.config({
 module.exports.getPostContent = async (req, res) => {
   const { id } = req.params;
   const post = await Post.findById(id);
-  const newPost = { ...post._doc };
-  const user = await User.findById(post.userId);
-  const comments = await Comment.find({ postId: newPost._id });
+  const getPost = { ...post._doc };
+  const userPromise = User.findById(post.userId);
+  const commentsPromise = Comment.find({ postId: getPost._id });
+  const user = await userPromise;
+  const comments = await commentsPromise;
+
   const userInfo = {
     nickname: user.nickname,
     profilePictureUrl: user.profilePictureUrl,
   };
-  const addCommenterInFo = await Promise.all(
+
+  const addCommenterInfo = await Promise.all(
     comments.map(async (comment) => {
       const newComment = { ...comment._doc };
       const user = await User.findById(comment.userId);
       const userInfo = { nickname: user.nickname };
       newComment.userInfo = userInfo;
+      delete newComment.userId;
       return newComment;
     })
   );
-  newPost.userInfo = userInfo;
-  newPost.userNickname = userInfo.nickname;
-  newPost.userProfileUrl = userInfo.profilePictureUrl;
-  newPost.comments = addCommenterInFo.reverse();
-  res.json({ post: newPost });
+
+  getPost.userInfo = userInfo;
+  getPost.userNickname = userInfo.nickname;
+  getPost.userProfileUrl = userInfo.profilePictureUrl;
+  getPost.comments = addCommenterInfo.reverse();
+  res.json({ post: getPost });
 };
 
 module.exports.postLikePhoto = async (req, res) => {

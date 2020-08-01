@@ -9,12 +9,12 @@ module.exports.postLogin = async (req, res) => {
 
   const user = await User.findOne({ email });
   if (!user) {
-    return res.status(404).json({ msg: 'User not found' });
+    return res.status(404).json({ email: { msg: 'User not found' } });
   }
 
   const valid = await bcrypt.compare(password, user.password);
   if (!valid) {
-    return res.status(404).json({ msg: 'Wrong password' });
+    return res.status(404).json({ password: { msg: 'Wrong password' } });
   }
 
   const payload = {
@@ -23,25 +23,25 @@ module.exports.postLogin = async (req, res) => {
     exp: Date.now() + 2 * 24 * 60 * 60 * 1000,
   };
   const token = jwt.sign(payload, process.env.SECRET_OR_KEY);
+  debugger;
   return res.json({ token });
 };
 
 module.exports.postRegister = async (req, res) => {
   const { email, password, name, nickname } = req.body;
-
   const validUserEmail = await User.findOne({ email });
   if (validUserEmail) {
-    return res.status(404).json({ msg: 'Email has existed' });
+    return res.status(404).json({ email: { msg: 'Email has existed' } });
   }
 
   const validUserNickname = await User.findOne({ nickname });
   if (validUserNickname) {
-    return res.status(404).json({ msg: 'Nickname has existed' });
+    return res.status(404).json({ nickname: { msg: 'Nickname has existed' } });
   }
 
   return bcrypt.hash(password, 10, async (err, hash) => {
-    const userId = new mongoose.Types.ObjectId();
-    const user = User.create({
+    const userId = mongoose.Types.ObjectId();
+    const user = await User.create({
       _id: userId,
       name,
       email,

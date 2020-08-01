@@ -1,20 +1,24 @@
-import React, { useEffect, Suspense } from "react";
+import React, { useEffect, Suspense } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import {BrowserRouter} from "react-router-dom";
+import { BrowserRouter } from 'react-router-dom';
 import './App.scss';
 
 import Routes from 'routes';
-import HeaderContainer from 'containers/Common/Header';
-import { actFetchAdminRequest, actResetErr, actFetchToken } from 'store/actions';
-import { getToken } from "utils";
+import {
+  actFetchAdminRequest,
+  actResetErr,
+  actFetchToken,
+} from 'store/actions';
+import { getToken } from 'utils';
+import { Header } from 'components';
 
-function App(props) {
-  const token = useSelector(state => state.token.accessToken);
+function App() {
+  const token = useSelector((state) => state.token.accessToken);
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (token) {
-      dispatch(actResetErr())
+      dispatch(actResetErr());
       dispatch(actFetchAdminRequest());
     }
   }, [dispatch, token]);
@@ -22,14 +26,14 @@ function App(props) {
   useEffect(() => {
     const accessToken = getToken();
     if (accessToken) {
-      dispatch(actFetchToken(accessToken))
+      dispatch(actFetchToken(accessToken));
     }
-  }, [dispatch])
-  
+  }, [dispatch]);
+
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <BrowserRouter>
-        {token && <HeaderContainer />}
+        {token && <Header />}
         <Routes />
       </BrowserRouter>
     </Suspense>
