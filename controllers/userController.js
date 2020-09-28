@@ -10,7 +10,7 @@ module.exports.getAdmin = (req, res) => {
 module.exports.searchUsername = async (req, res) => {
   const { q } = req.query;
   const users = await User.find({ nickname: new RegExp(q, 'i') });
-  res.json({ users });
+  return res.json({ users });
 };
 
 module.exports.getUserProfile = async (req, res) => {

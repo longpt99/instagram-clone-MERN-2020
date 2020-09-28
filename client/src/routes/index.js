@@ -1,4 +1,4 @@
-import React, { lazy, useRef, useEffect, useState } from 'react';
+import React, { lazy, useRef, useEffect, useState, Fragment } from 'react';
 import { Switch, Route, useLocation } from 'react-router-dom';
 
 import PublicRoute from './PublicRoute';
@@ -30,7 +30,7 @@ const Routes = () => {
     location.state && location.state.modal && prevLocation !== location;
 
   return (
-    <>
+    <Fragment>
       <Switch location={isModal ? prevLocation : location}>
         <PublicRoute exact path="/login" component={AuthPage} />
         <PublicRoute exact path="/register" component={AuthPage} />
@@ -54,7 +54,7 @@ const Routes = () => {
           <PostContentContainer isModal={isModal} />
         </Route>
       ) : null}
-    </>
+    </Fragment>
   );
 };
 

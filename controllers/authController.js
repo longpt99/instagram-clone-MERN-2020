@@ -5,8 +5,8 @@ const mongoose = require('mongoose');
 const User = require('../models/userModel');
 
 module.exports.postLogin = async (req, res) => {
+  debugger;
   const { email, password } = req.body;
-
   const user = await User.findOne({ email });
   if (!user) {
     return res.status(404).json({ email: { msg: 'User not found' } });

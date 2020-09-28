@@ -16,7 +16,10 @@ const routes = require('./routes');
 AwakeHeroku.add({
   url: 'https://instagram-mern-2020.herokuapp.com/',
 });
-mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true });
+mongoose.connect(process.env.MONGO_URL, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
 app.use(passport.initialize());
 app.use(bodyParser.json());

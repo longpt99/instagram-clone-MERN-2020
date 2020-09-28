@@ -8,6 +8,7 @@ export const actFetchTokenRequest = (data) => {
     return axios
       .post('/auth/login', data)
       .then((res) => {
+        debugger;
         dispatch(actFetchToken(res.token));
       })
       .catch((err) => {
